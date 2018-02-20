@@ -1,0 +1,363 @@
+\documentclass[11pt, oneside]{article}
+
+\usepackage{geometry}
+\geometry{letterpaper}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\usepackage{commath}
+
+\usepackage{fuzz}
+
+% real numbers
+\newcommand{\R}{{\mathbb{R}}}
+
+\newcommand{\Rzero}{0}
+\newcommand{\Rone}{1}
+
+\newcommand{\Rneg}{-}
+
+\newcommand{\Radd}{\mathbin{+}}
+\newcommand{\Rsub}{\mathbin{-}}
+%%inop \Radd \Rsub 3
+
+\newcommand{\Rmul}{\mathbin{*}}
+\newcommand{\Rdiv}{\mathbin{/}}
+%%inop \Rmul \Rdiv 4
+
+\newcommand{\Rlt}{\mathrel{<}}
+\newcommand{\Rle}{\mathrel{\leq}}
+\newcommand{\Rgt}{\mathrel{>}}
+\newcommand{\Rge}{\mathrel{\geq}}
+%%inrel \Rlt \Rle \Rgt \Rge
+
+\DeclareMathOperator{\absR}{abs}
+\DeclareMathOperator{\sqrtR}{sqrt}
+\DeclareMathOperator{\openR}{open}
+\DeclareMathOperator{\neighR}{neigh}
+\DeclareMathOperator{\limR}{lim}
+
+% real vector spaces
+\newcommand{\Rinf}{\R^\infty}
+\newcommand{\Rtuples}{\R}
+
+\newcommand{\scalarMulRinf}{\mathbin{*}}
+%%inop \scalarMulRinf 4
+
+\newcommand{\vectorAddRinf}{\mathbin{+}}
+\newcommand{\vectorSubRinf}{\mathbin{-}}
+%%inop \vectorAddRinf \vectorSubRinf 3
+
+\newcommand{\dotRinf}{\mathbin{\cdot}}
+%%inop \dotRinf 4
+
+\DeclareMathOperator{\normRinf}{norm}
+
+\newcommand{\Rthree}{\R^3}
+
+\title{Proof that $S^2$ is curved}
+\author{Arthur Ryman, {\tt arthur.ryman@gmail.com}}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Leonard Susskind asks his class to prove that $S^2$ is curved as an exercise in Lecture 3 of his
+Stanford University course on General Relativity.
+This article attempts to do so.
+The approach taken here is to precisely formalize every concept involved in the proof.
+\end{abstract}
+
+\section{Introduction}
+
+The 2-sphere, $S^2$, is an extremely important example of a Riemannian manifold.
+It appears in many interesting contexts. 
+It is a compact submanifold of $\R^3$ and can therefore be clearly visualized.
+These attributes make $S^2$ an ideal concrete example for illustrating the concepts of 
+abstract Riemannian geometry.
+
+In Lecture 3 of his Stanford University course on General Relativity,
+Susskind challenges his class to prove that $S^2$ is curved.
+He does this before defining curvature.
+The class is simply challenged to show that there is no coordinate system in which the components
+of the metric tensor become those of flat space.
+
+The goal of this article is to prove that $S^2$ is curved.
+In doing so, I will precisely formalize all definitions using Z Notation and will validate
+this document using the \fuzz\ type checker.
+
+\section{Real Analysis}
+
+The integers are built-in to Z Notation.
+In principle, I could build up rational numbers from the integers,
+and real numbers from the rational numbers, but that would take a lot of time and not really
+accomplish much.
+I'll assume that the real numbers are sufficiently simple and need no formalization.
+I therefore define real numbers as a given set and then declare the usual constants and operations of real arithmetic.
+
+Note that although the integers and reals are distinct types in the sense of typed set theory and Z Notation, mathematicians regard the integers as a subset of the reals.
+I will therefore use the same symbols for real numbers and operations as for their integer counterparts even though
+they are defined as distinct Z Notation variables.
+For example, the integer $0$ looks the same typographically as the real number $\Rzero$ 
+but the appropriate Z Notation variable will be used to make all formal text type check correctly.
+
+\subsection{The Real Numbers}
+
+Let $\R$ be the given set of real numbers.
+\begin{zed}
+	[\R]
+\end{zed}
+
+Let $\Rzero$ and $\Rone$ be the usual constants.
+\begin{axdef}
+	\Rzero: \R \\
+	\Rone: \R
+\end{axdef}
+
+The usual negative operator has the following signature.
+\begin{axdef}
+	\Rneg: \R \fun \R
+\end{axdef}
+
+The usual arithmetic operators have the following signatures.
+\begin{axdef}
+	\_ \Radd \_: \R \cross \R \fun \R \\
+	\_ \Rsub \_: \R \cross \R \fun \R \\
+	\_ \Rmul \_: \R \cross \R \fun \R \\
+	\_ \Rdiv \_: \R \cross \R \pfun \R
+\where
+	\dom(\_ \Rdiv \_) = \{~x, y: \R | y \neq \Rzero~\}
+\end{axdef}
+
+The usual comparison relations have the following signatures.
+\begin{axdef}
+	\_ \Rlt \_: \R \rel \R \\
+	\_ \Rle \_: \R \rel \R \\
+	\_ \Rgt \_: \R \rel \R \\
+	\_ \Rge \_: \R \rel \R
+\end{axdef}
+
+Let $\absR{x}$ be the absolute value of the real number $x$.
+\begin{axdef}
+	\absR: \R \fun \R
+\where
+	\forall x: \R @ \absR(x) = \IF x \Rge \Rzero \THEN x \ELSE \Rneg~x
+\end{axdef}
+
+Let $\sqrtR{x}$ be the non-negative square root of the non-negative real number $x$.
+\begin{axdef}
+	\sqrtR: \R \pfun \R
+\where
+	\sqrtR = \{~ y: \R | y \Rge \Rzero @ y \Rmul y \mapsto y ~\}
+\end{axdef}
+
+\subsection{Open Intervals}
+
+Let $a$ and $b$ be real numbers.
+The open interval $\openR(a,b)$ defined by $a$ and $b$ is the set of all real numbers between them.
+Clearly, this set is empty unless $a \Rlt b$.
+
+\begin{axdef}
+	\openR: \R \cross \R \fun \power \R
+\where
+	\forall a, b: \R @ \\
+	\t1	\openR(a,b) = \{~ x: \R | a \Rlt x \Rlt b ~\}
+\end{axdef}
+
+\subsection{Neighbourhoods}
+
+Any open interval that contains a real number $x$ is called a neighbourhood of it.
+Clearly, every real number has an infinity of neighbourhoods.
+
+\begin{axdef}
+	\neighR: \R \fun \power (\power \R)
+\where
+	\forall x: \R @ \\
+	\t1	\neighR(x) = \{~ a, b: \R | a \Rlt x \Rlt b @ \openR(a,b) ~\}
+\end{axdef}
+
+\subsection{Limits}
+
+Let $U$ be a neighbourhood of the real number $c$.
+Suppose that $f$ is a real-valued function defined everywhere on $U$ except possibly at $c$.
+Then $f$ is said to approach the limit $L$ at $c$, $\lim_{x \to c}{f(x)} = L$,
+if $f(x)$ gets
+arbitrarily close to $L$ (within $\epsilon$ of $L$ for any specified $\epsilon > 0$)
+for points $x$ sufficiently close to $c$ (within $\delta$ of $c$ for some $\delta > 0$) .
+
+\begin{schema}{Limit}
+	f: \R \pfun \R \\
+	c, L: \R \\
+	U: \power_1 \R
+\where
+	U \in \neighR(c)
+\also
+	U \setminus \{c\} \subseteq \dom f
+\also
+	\forall \epsilon: \R | \epsilon \Rgt \Rzero @ \\
+	\t1	\exists \delta: \R | \delta \Rgt \Rzero @ \\
+	\t2		\forall x: \dom f | \Rzero \Rlt \absR(x \Rsub c) \Rlt \delta @ \\
+	\t3			\absR(f(x) \Rsub L) \Rlt \epsilon
+\end{schema}
+Clearly, if $f$ approaches a limit at $c$ then the limit is unique.
+Let $\limR(c,L)$ be the set of all functions $f$ that approach the limit $L$ at $c$.
+
+\begin{axdef}
+	\limR: \R \cross \R \fun \power(\R \pfun \R)
+\where
+	\forall c, L: \R @ \\
+	\t1	\limR(c,L) = \{f: \R \pfun \R; U: \neighR(c) | Limit @ f ~\}
+\end{axdef}
+
+\subsection{Continuity}
+
+\subsection{Differentiability}
+
+Let $f$ be a real-valued function on the real numbers and let $x$ be a real number.
+The function $f$ is differentiable at $x$ if there exists a real number $f'(x)$ such that the following limit holds.
+$$
+\lim_{h \to 0} \frac{f(x+h) - f(x)}{h} = f'(x)
+$$
+
+The intuition behind this definition is that $f$ is approximately a linear function very near $x$.
+$$
+f(x + h) \approx f(x) + f'(x) h \quad \text{when} \quad \abs{h} \approx 0
+$$
+
+\section{Real Vector Spaces}
+
+Since $S^2$ is a submanifold of $\R^3$, I need to start by defining $\R^3$ and the usual concepts 
+associated with real vector spaces.
+
+\subsection{Real $n$-tuples}
+
+A finite sequence of $n \ge 0$ real numbers is called a real $n$-tuple.
+Let $\Rinf$ be the set of all real $n$-tuples for any $n$.
+\begin{zed}
+	\Rinf == \seq \R
+\end{zed}
+
+Let $\Rtuples(n)$ be the set of all $n$-tuples for a given $n$.
+
+\begin{axdef}
+	\Rtuples: \nat \fun \power \Rinf
+\where
+	\forall n: \nat @ \\
+	\t1	\Rtuples(n) = \{~ v: \Rinf | \# v = n ~\}
+\end{axdef}
+
+The real numbers that comprise an $n$-tuple are called its components.
+The real number $v(i)$ is the $i$-th component of the $n$-tuple $v$ where
+$1 \le i \le n$.
+Let $\pi(i)$ be the projection function that maps an $n$-tuple $v$ to its $i$-th component $v(i)$.
+
+\begin{axdef}
+	\pi: \nat_1 \fun \Rinf \pfun \R
+\where
+	\forall i: \nat_1 @ \\
+	\t1	\pi(i) = (\lambda v: \Rinf | i \in \dom v @ v(i))
+\end{axdef}
+
+\subsection{Scalar Multiplication}
+
+Let $v$ be an $n$-tuple and let $c$ be a real number.
+Scalar multiplication of $v$ by $c$ is the $n$-tuple $c \scalarMulRinf v$ defined by component-wise multiplication.
+
+\begin{axdef}
+	\_ \scalarMulRinf \_ : \R \cross \Rinf \fun \Rinf 
+\where
+	\forall c: \R @ \\
+	\t1	c \scalarMulRinf \langle \rangle = \langle \rangle
+\also
+	\forall n: \nat_1 @ \\
+	\t1	\forall c: \R; v: \Rtuples(n); i: 1 \upto n @ \\
+	\t2		(c \scalarMulRinf v)(i) = c \Rmul v(i)
+\end{axdef}
+
+\subsection{Vector Addition and Subtraction}
+
+Let $v$ and $w$ be $n$-tuples.
+Vector addition of $v$ and $w$ is the $n$-tuple $v \vectorAddRinf w$ defined by component-wise addition.
+
+\begin{axdef}
+	\_ \vectorAddRinf \_: \Rinf \cross \Rinf \pfun \Rinf
+\where
+	\dom(\_ \vectorAddRinf \_) = \{~ v, w: \Rinf | \# v = \# w ~\}
+\also
+	\langle \rangle \vectorAddRinf \langle \rangle = \langle \rangle
+\also
+	\forall n: \nat_1 @ \\
+	\t1	\forall v, w: \Rtuples(n); i: 1 \upto n @ \\
+	\t2		(v \vectorAddRinf w)(i) = v(i) \Radd w(i)
+\end{axdef}
+
+Vector subtraction is defined similarly.
+
+\begin{axdef}
+	\_ \vectorSubRinf \_: \Rinf \cross \Rinf \pfun \Rinf
+\where
+	\dom(\_ \vectorSubRinf \_) = \{~ v, w: \Rinf | \# v = \# w ~\}
+\also
+	\langle \rangle \vectorSubRinf \langle \rangle = \langle \rangle
+\also
+	\forall n: \nat_1 @ \\
+	\t1	\forall v, w: \Rtuples(n); i: 1 \upto n @ \\
+	\t2		(v \vectorSubRinf w)(i) = v(i) \Rsub w(i)
+\end{axdef}
+
+Each $\Rtuples(n)$ is a real vector space under the operations of scalar multiplication and vector addition
+defined above. 
+
+\subsection{The Dot Product}
+
+The inner or dot product of $n$-tuples $v$ and $w$ is the real number $v \dotRinf w$ defined by the sum of the component-wise products.
+
+\begin{axdef}
+	\_ \dotRinf \_ : \Rinf \cross \Rinf \pfun \R
+\where
+	\dom(\_ \dotRinf \_) = \{~ v, w: \Rinf | \# v = \# w ~\}
+\also
+	\langle \rangle \dotRinf \langle \rangle = \Rzero
+\also
+	\forall x, y: \R; v, w: \Rinf | \# v = \# w @ \\
+	\t1	(\langle x \rangle \cat v) \dotRinf (\langle y \rangle \cat w) = x \Rmul y \Radd v \dotRinf w
+\end{axdef}
+
+Each $\Rtuples(n)$ is a real inner product space under the operation of dot product defined above.
+
+\subsection{The Norm}
+
+The norm $\norm{v}$ of an $n$-tuple $v$ is the positive square root of its dot product with itself.
+$$
+	\norm{v} = \sqrt{v \dotRinf v}
+$$
+
+\begin{axdef}
+	\normRinf: \Rinf \fun \R
+\where
+	\forall v: \Rinf @ \\
+	\t1	\normRinf(v) = \sqrtR(v \dotRinf v)
+\end{axdef}
+
+\subsection{Differentiability}
+
+The concept of differentiability extends to functions between vector spaces that have norms.
+Let $f: \R^n \fun \R^m$ and let $x \in \R^n$.
+Then $f$ is differentiable at $x$ if there exists a linear transformation $(Df)(x): \R^n \fun \R^m$
+such that $f$ is approximately linear very near $x$.
+$$
+f(x + h) \approx f(x) + ((Df)(x))(h) \quad \text{when} \quad \norm{h} \approx 0
+$$ 
+
+\section{The 2-sphere as a Riemannian Manifold}
+
+Consider the vector space of 3-tuples, $\Rthree$.
+\begin{zed}
+	\Rthree == \Rtuples(3)
+\end{zed}
+
+\end{document}
