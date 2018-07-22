@@ -1,2 +1,3 @@
 #!/usr/bin/env bash
-fuzz 2-sphere-curvature
+cat fuzzlib newcommands.tex > prelude.tex
+fuzz -p prelude.tex 2-sphere-curvature
