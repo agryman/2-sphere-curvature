@@ -41,8 +41,8 @@ sorting=ynt
 \maketitle
 
 \begin{abstract}
-Leonard Susskind asks his class to prove that $\Stwo$ is curved as an exercise in Lecture 3 of his
-Stanford University course on General Relativity.
+Leonard Susskind,  in Lecture 3 of his Stanford University course on General Relativity,
+asks his class to prove, as an exercise, that $\Stwo$ is curved.
 This article attempts to do so.
 The approach taken here is to precisely formalize every concept involved in the proof.
 \end{abstract}
@@ -51,7 +51,7 @@ The approach taken here is to precisely formalize every concept involved in the 
 
 The 2-sphere, $\Stwo$, is an extremely ubiquitous and illuminating example of a Riemannian manifold.
 It appears in many interesting contexts including complex analysis, special relativity, electromagnetism, and quantum mechanics.
-It is a compact submanifold of $\Rthree$ and so can be clearly visualized unlike its higher-dimensional cousins.
+It is a compact submanifold of $\Rthree$ and so can be clearly visualized, unlike its higher-dimensional versions.
 These attributes make $\Stwo$ an ideal concrete example for illustrating the concepts of 
 abstract Riemannian geometry.
 
@@ -62,8 +62,24 @@ The class is simply challenged to show that there is no coordinate system in whi
 of the metric tensor become those of flat space.
 The goal of this article is to prove that $\Stwo$ is curved.
 
-I can imagine two possible routes to the proof, namely either showing that no suitable coordinate system exists, 
+I can imagine two possible coordinate-based routes to the proof, 
+namely either showing that no suitable coordinate system exists, 
 or that some tensorial quantity related to curvature doesn't vanish.
+
+\subsection{A Topological Approach}
+
+Before proceeding with the coordinate approach, it is illuminating to discuss a purely topological one.
+If $\Stwo$ is flat then its tangent bundle is trivial and so has a non-zero cross section.
+But a cross section of the tangent bundle is a vector field on $\Stwo$.
+A vector field on $\Stwo$ defines a diffeomorphism of $\Stwo$ that is homotopic to the identity map.
+If the vector field never vanishes then this diffeomorphism has no fixed points.
+The Lefschetz fixed-point theorem tells us that any space $M$ that has such a diffeomorphism must have a vanishing Euler characteristic
+$\chi(M) = 0$. But $\chi(\Stwo) = 2$. Therefore $\Stwo$ cannot be flat.
+
+While this proof answers the question, it doesn't provide much insight into curvature in general.
+For example, the 3-sphere $\Sthree$ must surely also be curved, but $\chi(\Sthree) = 0$.
+Curvature is a local, geometric property, not a global, topological one.
+A coordinate proof for $\Stwo$ should generalize to all higher-dimensional spheres and to other submanifolds of $\R^n$.
 
 \subsection{The Coordinate System Approach}
  
@@ -79,7 +95,13 @@ For example, suppose one is given two functions $f(x,y)$ and $g(x,y)$, and one i
 \end{align}
 If $F$ exists then $f$ and $g$ must satisfy the following integrability condition
 \begin{equation}
-	\frac{\partial f}{\partial y} = \frac{\partial g}{\partial x}
+\begin{split}
+	\frac{\partial f}{\partial y} 	& = \frac{\partial}{\partial y} \left( \frac{\partial F}{\partial x} \right) \\
+						& = \frac{\partial^2 F}{\partial y \partial x} \\
+						& = \frac{\partial^2 F}{\partial x \partial y} \\
+						& = \frac{\partial}{\partial x} \left( \frac{\partial F}{\partial y} \right) \\
+						& = \frac{\partial g}{\partial x}
+	\end{split}
 \end{equation}
 
 \subsection{The Curvature Tensor Approach}
@@ -110,6 +132,25 @@ on the area element $X \wedge Y$, or
 The tricky bit here is to define parallel transport.
 It probably boils down to geodesic movement.
 
+Parallel transport has an intuitive, physical meaning.
+Suppose we have a massive, rigid body at rest at the point $p$.
+By this I mean that the centre of mass of the body coincides with $p$.
+Such a body defines a frame of reference at $p$.
+We take $p$ to be the origin and pick several reference points on the body such that their displacements from $p$ define a set of basis vectors.
+We give the body a slight push in some direction $V$, being careful not induce any rotation.
+We achieve this by apply the same force in the direction $V$ at several points on the body, balancing them about the body's centre of mass.
+We then let the body move a small distance in the direction defined by $V$ to some new point $p'$.
+The new positions of the reference points define a new set of basis vectors.
+For small movements the new basis vector will be defined by a linear transformation of the old basis vectors.
+
+We can determine the equations of motion by defining a Hamiltonian.
+It is natural to use the metric tensor as defining the kinetic energy of the system.
+Solving the Hamiltonian equations of motion should yield a geodesic through $p$ in the direction of $V$ and the linear transformation of
+the frame of reference.
+
+Dirac, in his book on General Relativity, defined parallel transport for submanifolds of  $\R^n$ as the projections onto the submanifold of
+straight line motion in $\R^n$.
+
 \section{Manifolds}
 
 Manifolds can be defined in several ways.
@@ -129,7 +170,7 @@ A chart gives every point $p \in U$ in its domain of definition a tuple of $n$ r
 \subsection{Transition Functions}
 Let $U, V, W$ be open subsets of $M$ with $W = U \cap V$.
 Let $\phi: U \inj \R^n$ and $\psi: V \inj \R^n$ be charts.
-Every points $p \in W$ is therefore given two, typically distinct, tuples of coordinates.
+Every point $p \in W$ is therefore given two, typically distinct, tuples of coordinates.
 The mapping from one coordinate tuple to the other is called the transition function defined by the pair of charts.
 Let $t_{\phi,\psi}$ denote that transition function that maps the $\phi$ coordinates to the $\psi$ coordinates.
 \begin{equation}
@@ -162,7 +203,7 @@ Mappings from one smooth manifold to another are called smooth when they are smo
 A smooth mapping that has a smooth inverse is called a diffeomorphism.
 
 \subsection{Tangent Vectors}
-At tangent vector $X$ at the point $p \in M$ is a mapping from the set of smooth functions at $p$ to $\R$ that satisfies the following 
+A tangent vector $X$ at the point $p \in M$ is a mapping from the set of smooth functions at $p$ to $\R$ that satisfies the following 
 for all $c \in \R$ and $f,g \in C^{\infty}(M,p)$
 \begin{align}
 	X(cf) &= cX(f) \\
@@ -718,7 +759,6 @@ Define $\normR(v)$ to be $\norm{v}$.
 
 The concepts of continuity, limits, and differentiability extend to functions between normed vector spaces such as $\R^n$.
 
-
 \subsection{Differentiability}
 
 Let $f: \R^n \fun \R^m$ and let $x \in \R^n$.
@@ -746,11 +786,33 @@ $$
 	\Stwo = \{~ v: \Rthree | \normR(v) = \oneR ~\}
 \end{axdef}
 
-\section{Differentiable Manifolds}
+\subsection{Coordinates on $\Rthree$}
 
-A differentiable manifold is a topological space that has a distinguished set of continuous, real-valued functions referred to as smooth functions.
-The vector spaces $\Rtuples{n}$ become differentiable manifolds when we take the set of all infinitely differentiable functions of the component
-functions $\pi(i)$.
+Let $x, y, z$ be the usual Cartesian coordinate functions on $\Rthree$.
+\begin{equation}
+\forall p : \Rthree @ p = \langle x(p), y(p), z(p) \rangle
+\end{equation}
+
+Let $\langle e_1, e_2, e_3 \rangle$ be the usual orthonormal basis of $\Rthree$.
+\begin{align}
+e_1 & = \langle 1, 0, 0 \rangle \\
+e_2 & = \langle 0, 1, 0 \rangle \\
+e_3 & = \langle 0, 0, 1 \rangle
+\end{align}
+
+We have
+\begin{equation}
+\forall p : \Rthree @ p = x(p) e_1 + y(p) e_2 + z(p) e_3
+\end{equation}
+
+The Cartesian coordinate functions define the vector fields $\frac{\partial}{\partial x}, \frac{\partial}{\partial y}, \frac{\partial}{\partial z}$
+on $\Rthree$ as follows. 
+For $p \in \Rthree$ and $f \in \smoothPR(\Rthree)$, we define
+\begin{align}
+\left(\frac{\partial}{\partial x}\right)_p f = \left. \frac{d}{dt} f(p + t e_1) \right|_{t = 0} \\
+\left(\frac{\partial}{\partial y}\right)_p f = \left. \frac{d}{dt} f(p + t e_2) \right|_{t = 0} \\
+\left(\frac{\partial}{\partial z}\right)_p f = \left. \frac{d}{dt} f(p + t e_3) \right|_{t = 0}
+\end{align}
 
 \printbibliography
 
