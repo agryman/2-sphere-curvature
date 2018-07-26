@@ -1,0 +1,444 @@
+\documentclass[11pt, oneside]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+\usepackage{geometry}
+\geometry{letterpaper}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+\usepackage{commath}
+
+\usepackage[autostyle]{csquotes}
+
+\usepackage{hyperref}
+
+\usepackage[
+backend=biber,
+style=alphabetic,
+sorting=ynt
+]{biblatex}
+\addbibresource{../shared/references.bib}
+
+% put fuzz last because it redefines \t
+\usepackage{fuzz}
+
+\input{newcommands}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem*{remark}{Remark}
+
+\title{Real Numbers}
+\author{Arthur Ryman, {\tt arthur.ryman@gmail.com}}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This article contains Z Notation type declarations for the real numbers, $\R$, and some related objects.
+It has been type checked by \fuzz.
+\end{abstract}
+
+\section{Introduction}
+
+The real numbers, $\R$, are foundational to many many mathematical objects such as vector spaces and manifolds,
+but are not built-in to Z Notation.
+The article provides type declarations for $\R$ and related objects so that they can be used and type checked in formal Z specifications.
+
+No attempt has been made to provide axiomatic definitions of these objects since they would only be a use for proof checking.
+Although proof checking is highly desirable, it is beyond the scope of this article.
+The type declarations given here are intended to provide a basis for future axiomatization.
+
+\section{The Real Numbers}
+
+Let $\R$ denote the given set of real numbers.
+\begin{zed}
+	[\R]
+\end{zed}
+
+Let $\zeroR$ and $\oneR$ denote the zero and unit elements of the real numbers.
+\begin{axdef}
+	\zeroR: \R \\
+	\oneR: \R
+\end{axdef}
+
+Define $\Rnz$ to be the set of non-zero real numbers, 
+also referred to as the punctured real number line.
+\begin{zed}
+	\Rnz == \R \setminus \{ \zeroR \}
+\end{zed}
+
+The usual comparison relations have the following signatures.
+\begin{axdef}
+	\_ \ltR \_: \R \rel \R \\
+	\_ \leR \_: \R \rel \R \\
+	\_ \gtR \_: \R \rel \R \\
+	\_ \geR \_: \R \rel \R
+\end{axdef}
+
+Define $\Rpos$ to be the set of positive real numbers.
+\begin{zed}
+	\Rpos == \{~ x: \R | x \gtR \zeroR ~\}
+\end{zed}
+
+The usual negative operator has the following signature.
+\begin{axdef}
+	\negR: \R \fun \R
+\end{axdef}
+
+Define $\absR{x}$ to be $\abs{x}$, the absolute value of the real number $x$.
+\begin{axdef}
+	\absR: \R \fun \R
+\where
+	\forall x: \R @ \absR(x) = \IF x \geR \zeroR \THEN x \ELSE \negR~x
+\end{axdef}
+
+The usual arithmetic operators have the following signatures.
+\begin{axdef}
+	\_ \addR \_: \R \cross \R \fun \R \\
+	\_ \subR \_: \R \cross \R \fun \R \\
+	\_ \mulR \_: \R \cross \R \fun \R \\
+	\_ \divR \_: \R \cross \Rnz \fun \R
+\end{axdef}
+
+Define $\sqrtR{x}$ to be $\sqrt{x}$, the non-negative square root of the non-negative real number $x$.
+\begin{axdef}
+	\sqrtR: \R \pfun \R
+\where
+	\sqrtR = \{~ x: \R | x \geR \zeroR @ x \mulR x \mapsto x ~\}
+\end{axdef}
+
+\section{Open Intervals}
+
+Let $a$ and $b$ be real numbers.
+The open interval bounded by $a$ and $b$ is the set of all real numbers between $a$ and $b$.
+Define $\intervalRR(a,b)$ to be $(a,b)$, the open interval bounded by $a$ and $b$. 
+
+\begin{axdef}
+	\intervalRR: \R \cross \R \fun \power \R
+\where
+	\forall a, b: \R @ \\
+	\t1	\intervalRR(a,b) = \{~ x: \R | a \ltR x \ltR b ~\}
+\end{axdef}
+Clearly, $\intervalRR(a,b)$ is empty if $a \geR b$.
+
+\section{Open Balls}
+Let $x$ be a real number and let $r$ be a strictly positive real number.
+Define $\ballRR(x,r)$ to the the open interval that contains all points within distance $r$ of $x$.
+\begin{axdef}
+	\ballRR: \R \cross \Rpos \fun \power \R
+\where
+	\forall x: \R; r: \Rpos @ \\
+	\t1	\ballRR(x,r) = \{~ x': \R | \absR(x' \subR x) \ltR r ~\}
+\end{axdef}
+\begin{remark}
+$\ballRR(x,r) = \intervalRR(x-r, x+r)$
+\end{remark}
+
+\section{Neighbourhoods}
+
+Let $x$ be a real number.
+Any open ball centred at $x$ is called a neighbourhood of it.
+Define $\neighR(x)$ to be the set of all neighbourhoods of $x$.
+
+\begin{axdef}
+	\neighR: \R \fun \power (\power \R)
+\where
+	\forall x: \R @ \\
+	\t1	\neighR(x) = \{~ r: \Rpos @ \ballRR(x,r) ~\}
+\end{axdef}
+Clearly, every real number has an infinity of neighbourhoods.
+
+\section{Functions}
+
+Our next goal is to define continuity, limits, and differentiability.
+These are {\it local} properties of functions
+in the sense that they only depend on the values that the function takes in an arbitrarily small neighbourhood of a given point.
+We therefore restrict our attention to functions that are defined in some neighbourhood of each point in their domains.
+Let $x$ be a real number. 
+Define $\FunR(x)$ to be the set of all real-valued functions that are defined in some neighbourhood of $x$.
+\begin{axdef}
+	\FunR: \R \fun \power(\R \pfun \R)
+\where
+	\forall x: \R @ \\
+	\t1	\FunR(x) = \{~ f: \R \pfun \R | \exists U: \neighR(x) @ U \subseteq \dom f ~\}
+\end{axdef}
+
+Let $U$ be a subset of $\R$.
+Define $\FunPR(U)$ to be the set of a real-valued functions on $U$ that are defined in some neighbourhood of every point of $U$.
+\begin{axdef}
+	\FunPR: \power \R \fun \power (\R \pfun \R)
+\where
+	\forall U: \power \R @ \\
+	\t1	\FunPR(U) = \{~ f: U \fun \R | \forall x: U @ f \in \FunR(x) ~\}
+\end{axdef}
+
+\section{Continuity}
+
+Let $f$ be a real-valued function and 
+let $x$ be a real number.
+The function $f$ is said to be continuous at $x$ if 
+the domain of $f$ contains some neighbourhood $U$ of $x$ such that
+for any $\epsilon > 0$ there is some $\delta > 0$ for which 
+$f(x')$ is always within $\epsilon$ of $f(x)$
+when $x' \in U$ is within $\delta$ of $x$.
+\begin{argue}
+\forall \epsilon > 0 @ \exists \delta > 0 @ \forall x' \in U @ \\
+\t1	\abs{x' - x} < \delta \implies \abs{f(x') - f(x)} < \epsilon
+\end{argue}
+
+\begin{schema}{Continuous}
+	f: \R \pfun \R \\
+	x: \R
+\where
+	f \in \FunR(x)
+\also
+	\forall \epsilon: \Rpos @ \exists \delta: \Rpos@ \forall x': \dom f @ \\
+	\t1	\absR(x' \subR x) \ltR \delta \implies \absR(f(x') \subR f(x)) \ltR \epsilon
+\end{schema}
+
+Define $\CzeroR(x)$ to be the set of all functions that are continuous at $x$.
+\begin{axdef}
+	\CzeroR: \R \fun \power(\R \pfun \R)
+\where
+	\forall x: \R @ \\
+	\t1	\CzeroR(x) = \{~ f: \R \pfun \R | Continuous ~\}
+\end{axdef}
+
+Let $U$ be any subset of $\R$. 
+Define $\CzeroPR(U)$ to be the set of all functions on $U$ that are continuous at each point in $U$.
+\begin{axdef}
+	\CzeroPR: \power \R \fun \power (\R \pfun \R)
+\where
+	\forall U: \power \R @ \\
+	\t1	\CzeroPR(U) = \{~ f: \FunPR(U) | \forall x: U @ f \in   \CzeroR(x) ~\}
+\end{axdef}
+
+\begin{remark}
+If $f \in \CzeroPR(U)$ then $U$ is a, possibly infinite, union of neighbourhoods.
+\end{remark}
+
+\section{Limits}
+
+Let $x$ and $l$ be real numbers and
+let $f$ be a real-valued function that is defined everywhere in some
+neighbourhood $U$ of $x$, except possibly at $x$.
+The function $f$ is said to approach the limit $l$ at $x$ if $f \oplus \{ x \mapsto l \}$ is continuous at $x$.
+$$
+	\lim_{x' \to x}{f(x')} = l
+$$
+
+\begin{schema}{Limit}
+	f: \R \pfun \R \\
+	x, l: \R
+\where
+	f \oplus \{x \mapsto l\} \in \CzeroR(x)
+\end{schema}
+
+Let $\limRR(x,l)$ be the set of all functions that approach the limit $l$ at $x$.
+\begin{axdef}
+	\limRR: \R \cross \R \fun \power(\R \pfun \R)
+\where
+	\forall x, l: \R @ \\
+	\t1	\limRR(x,l) = \{~ f: \R \pfun \R | Limit ~\}
+\end{axdef}
+
+\begin{theorem}
+If a function $f$ approaches some limit at $x$ then that limit is unique.
+\begin{zed}
+	\forall x, l, l': \R @ \\
+	\t1	\forall f : \limRR(x,l) \cap \limRR(x,l') @ \\
+	\t2		l = l'
+\end{zed}
+\end{theorem}
+
+\begin{proof}
+Suppose we are given real numbers
+\begin{argue}
+	x, l, l' \in \R 
+\end{argue}
+and a function
+\begin{argue}
+	f \in \limRR(x,l) \cap \limRR(x,l')
+\end{argue}
+Let $\epsilon$ be any positive real number
+\begin{argue}
+	\epsilon > 0
+\end{argue}
+Since $f$ approaches limits $l$ and $l'$ at $x$ there exists a real number $\delta > 0$ such that
+\begin{argue}
+	\forall x' \in \R |  \\
+	\t1	\zeroR \ltR \abs{x' \subR x}< \delta @ \\
+	\t2		 \abs{f(x') - l} < \epsilon \land \abs{f(x') - l'} < \epsilon
+\end{argue}
+For any such real number $x'$ we have
+\begin{argue}
+	\abs{l' - l} \\
+	\t1	= \abs{(f(x') - l) - (f(x') - l')} 		& add and subtract $f(x')$ \\
+	\t1	\leq \abs{f(x') - l} + \abs{f(x') - l'} 	& triangle inequality \\
+	\t1	= 2\epsilon					& definition of limits
+\end{argue}
+Since the above holds for any $\epsilon > 0$ we must have
+\begin{argue}
+	l = l'
+\end{argue}
+
+\end{proof}
+
+If $f$ approaches the limit $l$ at $x$ then define $\limFR(f,x) = l$.
+By the preceding theorem, $\limFR(f,x)$ is well-defined when it exists.
+\begin{axdef}
+	\limFR: (\R \pfun \R) \cross \R \pfun \R
+\where
+	\limFR = \{~ Limit @ (f, x) \mapsto l ~\}
+\end{axdef}
+
+\section{Differentiability}
+
+Let $f$ be a real-valued function on the real numbers, let $x$ be a real number,
+and let $f$ be defined on some neighbourhood $U$ of $x$.
+
+The function $f$ is said to be differentiable at $x$ if the following limit holds for some number $f'(x)$.
+$$
+\lim_{h \to 0} \frac{f(x+h) - f(x)}{h} = f'(x)
+$$
+
+\begin{remark}
+If $f$ is differentiable at $x$ then $f$ is continuous at $x$.
+\end{remark}
+
+The geometric intuition behind the concept of differentiability is that $f$ is differentiable at $x$
+when, very near $x$, the function $f$ is approximately a straight line with slope $f'(x)$.
+$$
+f(x + h) \approx f(x) + f'(x) h \quad \text{when} \quad \abs{h} \approx 0
+$$
+The slope $f'(x)$ is called the derivative of $f$ at $x$.
+
+We can read this definition as saying that the approximate slope function $m(h)$ defined for 
+small enough, non-zero values of $h$ by
+$$
+	m(h) = \frac{f(x + h) - f(x)}{h}
+$$
+approaches the limit $l = f'(x)$ as $h \to 0$.
+$$
+	\lim_{h\to 0}{m(h)} = l = f'(x)
+$$
+
+\begin{schema}{Differentiable}
+	f: \R \pfun \R \\
+	x, l: \R
+\where
+	f \in \CzeroR(x)
+\also
+	\LET m == (\lambda h: \Rnz | x \addR h \in \dom f @ (f(x \addR h) \subR f(x)) \divR h) @ \\
+	\t1	\limFR(m, \zeroR) = l
+\end{schema}
+\begin{remark}
+If $f$ is differentiable at $x$ then $L$ is unique.
+\end{remark}
+
+Define $\diffRR(x,L)$ to be the set of all functions $f$ that are differentiable at $x$ with $l = f'(x)$.
+\begin{axdef}
+	\diffRR: \R \cross \R \fun \power(\R \pfun \R)
+\where
+	\forall x, l: \R @ \\
+	\t1	\diffRR(x, l) = \{~ f: \R \pfun \R | Differentiable ~\}
+\end{axdef}
+
+Define $\diffR(x)$ to be the set of all functions that are differentiable at $x$.
+\begin{axdef}
+	\diffR: \R \fun \power(\R \pfun \R)
+\where
+	\forall x: \R @ \\
+	\t1	\diffR(x) = \bigcup \{~ l: \R @ \diffRR(x,l) ~\}
+\end{axdef}
+
+Let $U$ be any subset of $\R$. 
+Define $\diffPR(U)$ to be the set of all functions on $U$
+that are differentiable at each point of $U$.
+\begin{axdef}
+	\diffPR: \power \R \fun \power(\R \pfun \R)
+\where
+	\forall U: \power \R @ \\
+	\t1	\diffPR(U) = \{~ f: \CzeroPR(U) | \forall x: U @ f \in \diffR(x) ~\}
+\end{axdef}
+
+\section{Derivatives}
+
+The function $f'$ is called the derived function or the derivative of $f$.
+Define $\derivFR(f,x)$ to be $f'(x)$.
+\begin{axdef}
+	\derivFR: (\R \pfun \R) \cross \R \pfun \R
+\where
+	\derivFR = \{~ Differentiable @ (f,x) \mapsto l ~\}
+\end{axdef}
+
+Define $\derivF(f)$ to be the derived function $f'$.
+\begin{axdef}
+	\derivF: (\R \pfun \R) \fun (\R \pfun \R)
+\where
+	\forall f: \R \pfun \R @ \\
+		\t1	\derivF f = (\lambda x: \R | f \in \diffR(x) @ \derivFR(f,x)) 
+\end{axdef}
+
+\begin{remark}
+If $f$ is differentiable on $U$ then $f'$ is not necessarily continuous on $U$.
+Counterexamples exist.
+If $f$ is uniformly differentiable then $f'$ is continuous, but I won't discuss uniform differentiability further.
+\end{remark}
+
+\section{Higher Order Derivatives}
+
+Let $n$ be a natural number and let $x$ be a real number.
+In differential geometry we normally deal with $C^n(x)$, the set of functions
+that possess continuous derivatives of order $0, \ldots, n$ at $x$.
+Define $\CnR(n,x)$ to be the set of all functions that have continuous derivatives of order $0, \ldots, n$ at $x$.
+\begin{axdef}
+	\CnR: \nat \cross \R \fun \power(\R \pfun \R)
+\where
+	\forall x: \R @ \\
+	\t1	\CnR(0,x) = \CzeroR(x)
+\also
+	\forall n: \nat; x: \R @ \\
+	\t1	\CnR(n + 1, x) = \{~ f: \CzeroR(x) | \derivF f \in \CnR(n,x) ~\}
+\end{axdef}
+
+Let $n$ be a natural number and let $U$ be a subset of $\R$.
+Define $\CnPR(n,U)$ to be the set of all functions on $U$ that have continuous derivatives of order $0, \ldots, n$
+at every point of $U$.
+\begin{axdef}
+	\CnPR: \nat \cross \power \R \fun \power(\R \pfun \R)
+\where
+	\forall n: \nat; U: \power \R @ \\
+	\t1	\CnPR(n,U) = \{~ f: \FunPR(U) | \forall x: U @ f \in \CnR(n,x) ~\}
+\end{axdef}
+
+\section{Smoothness}
+
+A function is said to be smooth if it possesses continuous derivatives of all orders.
+Let $x$ be a real number.
+Define $\smoothR(x)$ to be the set of all functions that are smooth at $x$.
+\begin{axdef}
+	\smoothR: \R \fun \power(\R \pfun \R)
+\where
+	\forall x: \R @ \\
+	\t1	\smoothR(x) = \{~ f: \FunR(x) | \forall n: \nat @ f \in \CnR(n, x) ~\}
+\end{axdef}
+
+Define $\smoothPR(U)$ to be the set of all functions on $U$ that are smooth at every point of $U$.
+\begin{axdef}
+	\smoothPR: \power \R \fun \power (\R \pfun \R)
+\where
+	\forall U: \power \R @ \\
+	\t1	\smoothPR(U) = \{~ f: \FunPR(U) | \forall x: U @ f \in \smoothR(x) ~\}
+\end{axdef}
+
+\printbibliography
+
+\end{document}

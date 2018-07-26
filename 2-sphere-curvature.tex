@@ -22,7 +22,7 @@ backend=biber,
 style=alphabetic,
 sorting=ynt
 ]{biblatex}
-\addbibresource{references.bib}
+\addbibresource{shared/references.bib}
 
 % put fuzz last because it redefines \t
 \usepackage{fuzz}
@@ -605,12 +605,12 @@ Define $\smoothR(x)$ to be the set of all functions that are smooth at $x$.
 	\smoothR: \R \fun \power(\R \pfun \R)
 \where
 	\forall x: \R @ \\
-	\t1	\smoothR(x) = \{~ f: \FunR(x) | \forall n: \nat @ f \in \CnR(n, U)
+	\t1	\smoothR(x) = \{~ f: \FunR(x) | \forall n: \nat @ f \in \CnR(n, x) ~\}
 \end{axdef}
 
 Define $\smoothPR(U)$ to be the set of all functions on $U$ that are smooth at every point of $U$.
 \begin{axdef}
-	\smoothPR: \power \R \fun (\power \R \pfun \R)
+	\smoothPR: \power \R \fun \power (\R \pfun \R)
 \where
 	\forall U: \power \R @ \\
 	\t1	\smoothPR(U) = \{~ f: \FunPR(U) | \forall x: U @ f \in \smoothR(x) ~\}
