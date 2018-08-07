@@ -220,32 +220,66 @@
 %%tame \plus \cat head last tail front rev \filter \dcat
 %%tame first second \mapsto \dom \ran \dres \rres \ndres \nrres 
 %%tame \inv \limg\rimg \oplus \comp \circ
-% real numbers
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{real-numbers}[2018/08/05 Z Notation for real numbers package]
+
+\RequirePackage{amssymb}
+
+% the set of real numbers
 \newcommand{\R}{\mathbb{R}}
+
+% the set of positive real numbers
 \newcommand{\Rpos}{\R_{+}}
+
+% the set of non-zero real numbers
 \newcommand{\Rnz}{\R_{*}}
 
-
+% the real number 0
 \newcommand{\zeroR}{0}
+
+% the real number 1
 \newcommand{\oneR}{1}
 
+% the negation prefix operator -x
 \newcommand{\negR}{-}
 
+% the addition infix operator x + y
 \newcommand{\addR}{\mathbin{+}}
+
+% the subtraction infix operator
 \newcommand{\subR}{\mathbin{-}}
+
 %%inop \addR \subR 3
 
+% the multiplication infix operator x * y
 \newcommand{\mulR}{\mathbin{*}}
+
+% the division infix operator x / y
 \newcommand{\divR}{\mathbin{/}}
+
 %%inop \mulR \divR 4
 
+% the less then infix relation x < y
 \newcommand{\ltR}{\mathrel{<}}
+
+% the less than or equal to infix relation x <= y
 \newcommand{\leR}{\mathrel{\leq}}
+
+% the greater than infix relation x > y
 \newcommand{\gtR}{\mathrel{>}}
+
+% the greater than or equal to infix relation x > y
 \newcommand{\geR}{\mathrel{\geq}}
+
 %%inrel \ltR \leR \gtR \geR
 
+% the set of all open sets of real numbers
+\newcommand{\openR}{\mathsf{open}}
+
+% the absolute value function abs(x) = |x|
 \DeclareMathOperator{\absR}{abs}
+
+% the positive square root function sqrt(x)
 \DeclareMathOperator{\sqrtR}{sqrt}
 
 \DeclareMathOperator{\intervalRR}{interval}
@@ -274,30 +308,3 @@
 
 \DeclareMathOperator{\derivFR}{deriv}
 \DeclareMathOperator{\derivF}{D}
-
-% real vector spaces
-\newcommand{\Rinf}{\R^\infty}
-\newcommand{\Rtuples}{\R}
-
-\newcommand{\smulR}{\mathbin{*}}
-%%inop \smulR 4
-
-\newcommand{\vaddR}{\mathbin{+}}
-\newcommand{\vsubR}{\mathbin{-}}
-%%inop \vaddR \vsubR 3
-
-\newcommand{\dotR}{\mathbin{\cdot}}
-%%inop \dotR 4
-
-\DeclareMathOperator{\normR}{norm}
-
-\DeclareMathOperator{\linR}{lin}
-
-
-\newcommand{\Rtwo}{\R^2}
-\newcommand{\Rthree}{\R^3}
-
-\newcommand{\Stwo}{S^2}
-\newcommand{\Sthree}{S^3}
-\newcommand{\Sn}{S^n}
-

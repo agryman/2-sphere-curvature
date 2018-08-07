@@ -1,0 +1,176 @@
+\documentclass[11pt, oneside]{article}
+
+\usepackage{../shared/preamble}
+\addbibresource{../shared/references.bib}
+
+\usepackage{../real-numbers/real-numbers}
+\usepackage{vector-spaces}
+
+\title{Vector Spaces}
+\author{Arthur Ryman, {\tt arthur.ryman@gmail.com}}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This article contains Z Notation type declarations for vector spaces and some related objects.
+It has been type checked by \fuzz.
+\end{abstract}
+
+\section{Introduction}
+
+Real vector spaces are multidimensional generalizations of real numbers.
+They are the objects studied in linear algebra and are foundational to differential geometry.
+
+\section{Real $n$-tuples}
+
+Let $n$ be a natural number.
+A finite sequence of $n$ real numbers is called a real $n$-tuple.
+Define $\Rinf$ to be the set of all real $n$-tuples for any $n$.
+\begin{zed}
+	\Rinf == \seq \R
+\end{zed}
+
+Define $\Rtuples(n)$ to be $\R^n$, the set of all $n$-tuples.
+\begin{axdef}
+	\Rtuples: \nat \fun \power \Rinf
+\where
+	\forall n: \nat @ \\
+	\t1	\Rtuples(n) = \{~ v: \Rinf | \# v = n ~\}
+\end{axdef}
+
+The real numbers that comprise an $n$-tuple are called its components.
+The real number $v(i)$ is the $i$-th component of the $n$-tuple $v$ where
+$1 \le i \le n$.
+Let $\pi(i)$ be the projection function that maps an $n$-tuple $v$ to its $i$-th component $v(i)$.
+
+\begin{axdef}
+	\pi: \nat_1 \fun \Rinf \pfun \R
+\where
+	\forall i: \nat_1 @ \\
+	\t1	\pi(i) = (\lambda v: \Rinf | i \in \dom v @ v(i))
+\end{axdef}
+
+\section{Scalar Multiplication}
+
+Let $v$ be an $n$-tuple and let $c$ be a real number.
+Scalar multiplication of $v$ by $c$ is the $n$-tuple $c \smulR v$ defined by component-wise multiplication.
+
+\begin{axdef}
+	\_ \smulR \_ : \R \cross \Rinf \fun \Rinf 
+\where
+	\forall c: \R @ \\
+	\t1	c \smulR \langle \rangle = \langle \rangle
+\also
+	\forall c: \R; n: \nat_1 @ \\
+	\t1	\forall v: \Rtuples(n); i: 1 \upto n @ \\
+	\t2		(c \smulR v)(i) = c \mulR v(i)
+\end{axdef}
+
+\section{Vector Addition and Subtraction}
+
+Let $v$ and $w$ be $n$-tuples.
+Vector addition of $v$ and $w$ is the $n$-tuple $v \vaddR w$ defined by component-wise addition.
+
+\begin{axdef}
+	\_ \vaddR \_: \Rinf \cross \Rinf \pfun \Rinf
+\where
+	\dom(\_ \vaddR \_) = \{~ v, w: \Rinf | \# v = \# w ~\}
+\also
+	\langle \rangle \vaddR \langle \rangle = \langle \rangle
+\also
+	\forall n: \nat_1 @ \\
+	\t1	\forall v, w: \Rtuples(n); i: 1 \upto n @ \\
+	\t2		(v \vaddR w)(i) = v(i) \addR w(i)
+\end{axdef}
+
+Vector subtraction is defined similarly.
+
+\begin{axdef}
+	\_ \vsubR \_: \Rinf \cross \Rinf \pfun \Rinf
+\where
+	\dom(\_ \vsubR \_) = \{~ v, w: \Rinf | \# v = \# w ~\}
+\also
+	\langle \rangle \vsubR \langle \rangle = \langle \rangle
+\also
+	\forall n: \nat_1 @ \\
+	\t1	\forall v, w: \Rtuples(n); i: 1 \upto n @ \\
+	\t2		(v \vsubR w)(i) = v(i) \subR w(i)
+\end{axdef}
+
+Each $\Rtuples(n)$ is a real vector space under the operations of scalar multiplication and vector addition
+defined above. 
+
+\section{Linear Transformations}
+
+Let $n$ and $m$ be natural numbers.
+A mapping $L$ from $\R^n$ to $\R^m$ is said to be a linear transformation if it preserves scalar multiplication and vector addition.
+\begin{schema}{Linear}
+	n, m: \nat \\
+	L: \Rinf \pfun \Rinf
+\where
+	L \in \Rtuples(n) \fun \Rtuples(m)
+\also
+	\forall c: \R; v: \Rtuples(n) @ \\
+	\t1	L(c \smulR v) = c \smulR L(v)
+\also
+	\forall v, w: \Rtuples(n) @ \\
+	\t1	L(v \vaddR w) = L(v) \vaddR L(w)
+\end{schema}
+
+Define $\linR(n,m)$ to be the set of all linear transformations from $\R^n$ to $\R^m$.
+\begin{axdef}
+	\linR: \nat \cross \nat \fun \power(\Rinf \pfun \Rinf)
+\where
+	\forall n,m: \nat @ \\
+	\t1	\linR(n,m) = \{~ L: \Rinf \pfun \Rinf | Linear ~\}
+\end{axdef}
+
+\section{The Dot Product}
+
+The inner or dot product of $n$-tuples $v$ and $w$ is the real number $v \dotR w$ defined by the sum of the component-wise products.
+
+\begin{axdef}
+	\_ \dotR \_ : \Rinf \cross \Rinf \pfun \R
+\where
+	\dom(\_ \dotR \_) = \{~ v, w: \Rinf | \# v = \# w ~\}
+\also
+	\langle \rangle \dotR \langle \rangle = \zeroR
+\also
+	\forall x, y: \R; v, w: \Rinf | \# v = \# w @ \\
+	\t1	(\langle x \rangle \cat v) \dotR (\langle y \rangle \cat w) = x \mulR y \addR v \dotR w
+\end{axdef}
+
+Each $\Rtuples(n)$ is a real inner product space under the operation of dot product defined above.
+
+\section{The Norm}
+
+The norm $\norm{v}$ of the $n$-tuple $v$ is the positive square root of its dot product with itself.
+$$
+	\norm{v} = \sqrt{v \dotR v}
+$$
+
+Define $\normR(v)$ to be $\norm{v}$.
+\begin{axdef}
+	\normR: \Rinf \fun \R
+\where
+	\forall v: \Rinf @ \\
+	\t1	\normR(v) = \sqrtR(v \dotR v)
+\end{axdef}
+
+The concepts of continuity, limits, and differentiability extend to functions between normed vector spaces such as $\R^n$.
+
+\section{Differentiability}
+
+Let $f: \R^n \fun \R^m$ and let $x \in \R^n$.
+Then $f$ is differentiable at $x$ if there exists a linear transformation $L: \R^n \fun \R^m$
+such that $f$ is approximately linear very near $x$.
+$$
+f(x + h) \approx f(x) + L(h) \quad \text{when} \quad \norm{h} \approx 0
+$$ 
+
+\printbibliography
+
+\end{document}

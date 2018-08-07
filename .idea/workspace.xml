@@ -2,20 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="82c0bf44-ae61-4473-a000-ce8a864ba31d" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/real-numbers/newcommands.tex" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/real-numbers/real-numbers.tex" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/real-numbers/typecheck.sh" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/formal-specification-and-z-notation.pdf" afterPath="$PROJECT_DIR$/formal-specification-and-z-notation/formal-specification-and-z-notation.pdf" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/formal-specification-and-z-notation.tex" afterPath="$PROJECT_DIR$/formal-specification-and-z-notation/formal-specification-and-z-notation.tex" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/fuzzlib" afterPath="$PROJECT_DIR$/shared/fuzzlib" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/references.bib" afterPath="$PROJECT_DIR$/shared/references.bib" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/manifolds/manifolds.tex" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/real-numbers/real-numbers.sh" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/shared/preamble.sty" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vector-spaces/vector-spaces.sh" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vector-spaces/vector-spaces.sty" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/prelude.tex" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/real-numbers/prelude.tex" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/real-numbers/typecheck.sh" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/newcommands.tex" afterPath="$PROJECT_DIR$/2-sphere-curvature.sty" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/real-numbers/newcommands.tex" afterPath="$PROJECT_DIR$/real-numbers/real-numbers.sty" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/typecheck.sh" afterPath="$PROJECT_DIR$/2-sphere-curvature.sh" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/2-sphere-curvature.pdf" afterPath="$PROJECT_DIR$/2-sphere-curvature.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/real-numbers/real-numbers.pdf" afterPath="$PROJECT_DIR$/real-numbers/real-numbers.pdf" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/2-sphere-curvature.tex" afterPath="$PROJECT_DIR$/2-sphere-curvature.tex" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/prelude.tex" afterPath="$PROJECT_DIR$/prelude.tex" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/typecheck.sh" afterPath="$PROJECT_DIR$/typecheck.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/real-numbers/real-numbers.tex" afterPath="$PROJECT_DIR$/real-numbers/real-numbers.tex" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -26,16 +28,76 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/README.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-            <state split_layout="FIRST">
-              <first_editor relative-caret-position="120">
-                <caret line="8" column="4" lean-forward="false" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
-                <folding />
-              </first_editor>
-              <second_editor />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="real-numbers.sh" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/real-numbers/real-numbers.sh">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="30">
+              <caret line="2" column="41" lean-forward="false" selection-start-line="2" selection-start-column="41" selection-end-line="2" selection-end-column="41" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="2-sphere-curvature.sh" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/2-sphere-curvature.sh">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="105">
+              <caret line="7" column="37" lean-forward="true" selection-start-line="7" selection-start-column="37" selection-end-line="7" selection-end-column="37" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="vector-spaces.sty" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vector-spaces/vector-spaces.sty">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="17" column="0" lean-forward="true" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="vector-spaces.sh" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vector-spaces/vector-spaces.sh">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="6" column="43" lean-forward="true" selection-start-line="6" selection-start-column="43" selection-end-line="6" selection-end-column="43" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="real-numbers.tex" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/real-numbers/real-numbers.tex">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="585">
+              <caret line="452" column="0" lean-forward="true" selection-start-line="451" selection-start-column="0" selection-end-line="452" selection-end-column="0" />
+              <folding>
+                <element signature="e#40#71#2" expanded="true" />
+                <element signature="e#115#140#2" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="2-sphere-curvature.prelude" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/2-sphere-curvature.prelude">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-3172">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="2-sphere-curvature.sty" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/2-sphere-curvature.sty">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -60,9 +122,22 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/real-numbers/typecheck.sh" />
         <option value="$PROJECT_DIR$/typecheck.sh" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/real-numbers/prelude.tex" />
+        <option value="$PROJECT_DIR$/real-numbers/newcommands.tex" />
+        <option value="$PROJECT_DIR$/real-numbers/real-numbers.tex" />
+        <option value="$PROJECT_DIR$/real-numbers/typecheck.sh" />
+        <option value="$PROJECT_DIR$/real-numbers/real-numbers.prelude.tex" />
+        <option value="$PROJECT_DIR$/real-numbers/real-numbers.typecheck.sh" />
+        <option value="$PROJECT_DIR$/real-numbers/real-numbers.sty" />
+        <option value="$PROJECT_DIR$/shared/common.sty" />
+        <option value="$PROJECT_DIR$/shared/preamble.sty" />
+        <option value="$PROJECT_DIR$/manifolds/manifolds.tex" />
+        <option value="$PROJECT_DIR$/2-sphere-curvature.sty" />
+        <option value="$PROJECT_DIR$/vector-spaces/vector-spaces.sty" />
+        <option value="$PROJECT_DIR$/vector-spaces/vector-spaces.sh" />
+        <option value="$PROJECT_DIR$/2-sphere-curvature.sh" />
       </list>
     </option>
   </component>
@@ -80,8 +155,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="769" />
-    <option name="y" value="23" />
+    <option name="x" value="1255" />
+    <option name="y" value="80" />
     <option name="width" value="1305" />
     <option name="height" value="1222" />
   </component>
@@ -128,6 +203,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -135,13 +212,16 @@
               <item name="2-sphere-curvature" type="b2602c69:ProjectViewProjectNode" />
               <item name="2-sphere-curvature" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="2-sphere-curvature" type="b2602c69:ProjectViewProjectNode" />
+              <item name="2-sphere-curvature" type="462c0819:PsiDirectoryNode" />
+              <item name="vector-spaces" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
       <pane id="PackagesPane" />
-      <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -173,7 +253,17 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Bash.typecheck.sh (1)">
+  <component name="RunManager" selected="Bash.2-sphere-curvature.sh">
+    <configuration name="2-sphere-curvature.sh" type="BashConfigurationType" factoryName="Bash" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="bash" />
+      <option name="INTERPRETER_PATH" value="/usr/bin/env" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/2-sphere-curvature.sh" />
+      <option name="PARAMETERS" value="" />
+      <module name="2-sphere-curvature" />
+      <envs />
+    </configuration>
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="WIDTH" value="400" />
       <option name="HEIGHT" value="300" />
@@ -254,6 +344,26 @@
       <properties />
       <listeners />
     </configuration>
+    <configuration name="real-numbers.sh" type="BashConfigurationType" factoryName="Bash" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="bash" />
+      <option name="INTERPRETER_PATH" value="/usr/bin/env" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/real-numbers" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/real-numbers/real-numbers.sh" />
+      <option name="PARAMETERS" value="" />
+      <module name="2-sphere-curvature" />
+      <envs />
+    </configuration>
+    <configuration name="real-numbers.typecheck.sh" type="BashConfigurationType" factoryName="Bash" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="bash" />
+      <option name="INTERPRETER_PATH" value="/usr/bin/env" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/real-numbers" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/real-numbers/real-numbers.typecheck.sh" />
+      <option name="PARAMETERS" value="" />
+      <module name="2-sphere-curvature" />
+      <envs />
+    </configuration>
     <configuration name="typecheck.sh (1)" type="BashConfigurationType" factoryName="Bash" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="bash" />
       <option name="INTERPRETER_PATH" value="/usr/bin/env" />
@@ -264,24 +374,30 @@
       <module name="2-sphere-curvature" />
       <envs />
     </configuration>
-    <configuration name="typecheck.sh" type="BashConfigurationType" factoryName="Bash" temporary="true">
+    <configuration name="vector-spaces.sh" type="BashConfigurationType" factoryName="Bash" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="bash" />
       <option name="INTERPRETER_PATH" value="/usr/bin/env" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/vector-spaces" />
       <option name="PARENT_ENVS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/typecheck.sh" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/vector-spaces/vector-spaces.sh" />
       <option name="PARAMETERS" value="" />
       <module name="2-sphere-curvature" />
       <envs />
     </configuration>
-    <list size="2">
-      <item index="0" class="java.lang.String" itemvalue="Bash.typecheck.sh" />
-      <item index="1" class="java.lang.String" itemvalue="Bash.typecheck.sh (1)" />
+    <list size="5">
+      <item index="0" class="java.lang.String" itemvalue="Bash.typecheck.sh (1)" />
+      <item index="1" class="java.lang.String" itemvalue="Bash.real-numbers.typecheck.sh" />
+      <item index="2" class="java.lang.String" itemvalue="Bash.real-numbers.sh" />
+      <item index="3" class="java.lang.String" itemvalue="Bash.2-sphere-curvature.sh" />
+      <item index="4" class="java.lang.String" itemvalue="Bash.vector-spaces.sh" />
     </list>
     <recent_temporary>
-      <list size="2">
-        <item index="0" class="java.lang.String" itemvalue="Bash.typecheck.sh (1)" />
-        <item index="1" class="java.lang.String" itemvalue="Bash.typecheck.sh" />
+      <list size="5">
+        <item index="0" class="java.lang.String" itemvalue="Bash.2-sphere-curvature.sh" />
+        <item index="1" class="java.lang.String" itemvalue="Bash.vector-spaces.sh" />
+        <item index="2" class="java.lang.String" itemvalue="Bash.real-numbers.sh" />
+        <item index="3" class="java.lang.String" itemvalue="Bash.real-numbers.typecheck.sh" />
+        <item index="4" class="java.lang.String" itemvalue="Bash.typecheck.sh (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -303,32 +419,34 @@
       <workItem from="1532602062602" duration="101000" />
       <workItem from="1532602230113" duration="40000" />
       <workItem from="1532602272553" duration="2023000" />
+      <workItem from="1533484608267" duration="2817000" />
+      <workItem from="1533492364911" duration="5289000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3576000" />
+    <option name="totallyTimeSpent" value="11682000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="769" y="23" width="1305" height="1222" extended-state="0" />
+    <frame x="1255" y="80" width="1305" height="1222" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32971016" sideWeight="0.51227236" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32971016" sideWeight="0.5217736" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32971016" sideWeight="0.47822645" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32971016" sideWeight="0.48772764" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39746636" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4101346" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -351,7 +469,36 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/typecheck.sh">
+    <entry file="file://$PROJECT_DIR$/real-numbers/real-numbers.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="41" lean-forward="true" selection-start-line="2" selection-start-column="41" selection-end-line="2" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/real-numbers/real-numbers.sty">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="0" lean-forward="true" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+          <folding>
+            <element signature="e#105#129#2" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="0">
+            <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/2-sphere-curvature.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -359,7 +506,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/typecheck.sh">
+    <entry file="file://$PROJECT_DIR$/2-sphere-curvature.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -367,7 +514,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/typecheck.sh">
+    <entry file="file://$PROJECT_DIR$/2-sphere-curvature.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -375,7 +522,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/typecheck.sh">
+    <entry file="file://$PROJECT_DIR$/2-sphere-curvature.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -383,7 +530,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/typecheck.sh">
+    <entry file="file://$PROJECT_DIR$/2-sphere-curvature.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -405,38 +552,123 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/real-numbers/prelude.tex">
+    <entry file="file://$PROJECT_DIR$/prelude.tex">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="22" column="33" lean-forward="true" selection-start-line="22" selection-start-column="33" selection-end-line="22" selection-end-column="33" />
+        <state relative-caret-position="192">
+          <caret line="225" column="25" lean-forward="true" selection-start-line="225" selection-start-column="25" selection-end-line="225" selection-end-column="25" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/typecheck.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="38" lean-forward="true" selection-start-line="2" selection-start-column="38" selection-end-line="2" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/real-numbers/typecheck.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="32" lean-forward="false" selection-start-line="2" selection-start-column="32" selection-end-line="2" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/real-numbers/prelude.tex" />
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="FIRST">
+        <state split_layout="SPLIT">
           <first_editor relative-caret-position="120">
             <caret line="8" column="4" lean-forward="false" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
             <folding />
           </first_editor>
           <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/real-numbers/real-numbers.prelude.tex" />
+    <entry file="file://$PROJECT_DIR$/shared/preamble.sty">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="26" column="17" lean-forward="true" selection-start-line="26" selection-start-column="17" selection-end-line="26" selection-end-column="17" />
+          <folding>
+            <element signature="e#26#53#2" expanded="true" />
+            <element signature="e#83#104#2" expanded="true" />
+            <element signature="e#129#149#2" expanded="true" />
+            <element signature="e#214#234#2" expanded="true" />
+            <element signature="e#236#268#2" expanded="true" />
+            <element signature="e#270#291#2" expanded="true" />
+            <element signature="e#293#362#2" expanded="true" />
+            <element signature="e#404#421#2" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/real-numbers/real-numbers.sty">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+          <folding>
+            <element signature="e#105#129#2" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/2-sphere-curvature.prelude">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3172">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/real-numbers/real-numbers.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="41" lean-forward="false" selection-start-line="2" selection-start-column="41" selection-end-line="2" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/real-numbers/real-numbers.tex">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="585">
+          <caret line="452" column="0" lean-forward="true" selection-start-line="451" selection-start-column="0" selection-end-line="452" selection-end-column="0" />
+          <folding>
+            <element signature="e#40#71#2" expanded="true" />
+            <element signature="e#115#140#2" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/manifolds/manifolds.tex">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="585">
+          <caret line="92" column="0" lean-forward="true" selection-start-line="92" selection-start-column="0" selection-end-line="92" selection-end-column="0" />
+          <folding>
+            <element signature="e#40#71#2" expanded="true" />
+            <element signature="e#1730#1734#3" expanded="true" />
+            <element signature="e#4289#4292#2" expanded="true" />
+            <element signature="e#4307#4310#2" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/2-sphere-curvature.sty">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vector-spaces/vector-spaces.sty">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" column="0" lean-forward="true" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vector-spaces/vector-spaces.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="43" lean-forward="true" selection-start-line="6" selection-start-column="43" selection-end-line="6" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/2-sphere-curvature.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="37" lean-forward="true" selection-start-line="7" selection-start-column="37" selection-end-line="7" selection-end-column="37" />
+          <folding />
         </state>
       </provider>
     </entry>
