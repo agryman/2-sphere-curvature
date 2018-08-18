@@ -30,25 +30,36 @@ The type declarations given here are intended to provide a basis for future axio
 
 \section{The Real Numbers}
 
+\subsection{$\R$ \cmd{R}}
+
 Let $\R$ denote the set of all real numbers.
 \begin{zed}
 	[\R]
 \end{zed}
 
+\subsection{$\zeroR$ \cmd{zeroR} and $\oneR$ \cmd{oneR}}
+
 Let $\zeroR$ and $\oneR$ denote the zero and unit elements of the real numbers.
+
 \begin{axdef}
 	\zeroR: \R \\
 	\oneR: \R
 \end{axdef}
 
+\subsection{$\Rnz$ \cmd{Rnz}}
+
 Let $\Rnz$ denote the set of non-zero real numbers, 
 also referred to as the {\it punctured} real number line.
+
 \begin{zed}
 	\Rnz == \R \setminus \{ \zeroR \}
 \end{zed}
 
+\subsection{$\addR$ \cmd{addR}, $\subR$ \cmd{subR}, $\mulR$ \cmd{mulR}, and $\divR$ \cmd{divR}}
+
 Let $x \addR y$, $x \subR y$, $x \mulR y$, and $x \divR y$ denote the usual arithmetic operations of
 addition, subtraction, multiplication, and division.
+
 \begin{axdef}
 	\_ \addR \_: \R \cross \R \fun \R \\
 	\_ \subR \_: \R \cross \R \fun \R \\
@@ -56,14 +67,21 @@ addition, subtraction, multiplication, and division.
 	\_ \divR \_: \R \cross \Rnz \fun \R
 \end{axdef}
 
+\subsection{$\negR$ \cmd{negR}}
+
 Let $\negR~x$ denote the negative of $x$.
+
 \begin{axdef}
 	\negR: \R \fun \R
 \where
-	\forall x : \R @ \negR~x = \zeroR \subR x
+	\forall x : \R @ \\
+	\t1	\negR~x = \zeroR \subR x
 \end{axdef}
 
+\subsection{$\ltR$ \cmd{ltR}, $\leR$ \cmd{leR}, $\gtR$ \cmd{gtR}, and $\geR$ \cmd{geR}}
+
 Let $x \ltR y$, $x \leR y$, $x \gtR y$, and $x \geR y$ denote the usual comparison relations.
+
 \begin{axdef}
 	\_ \ltR \_: \R \rel \R \\
 	\_ \leR \_: \R \rel \R \\
@@ -71,19 +89,29 @@ Let $x \ltR y$, $x \leR y$, $x \gtR y$, and $x \geR y$ denote the usual comparis
 	\_ \geR \_: \R \rel \R
 \end{axdef}
 
+\subsection{$\absR$ \cmd{absR}}
+
 Let $\absR(x)$ denote $\abs{x}$, the absolute value of $x$.
+
 \begin{axdef}
 	\absR: \R \fun \R
 \where
-	\forall x: \R @ \absR(x) = \IF x \geR \zeroR \THEN x \ELSE \negR~x
+	\forall x: \R @ \\
+	\t1	\absR(x) = \IF x \geR \zeroR \THEN x \ELSE \negR~x
 \end{axdef}
 
+\subsection{$\Rpos$ \cmd{Rpos}}
+
 Let $\Rpos$ denote the set of positive real numbers.
+
 \begin{zed}
 	\Rpos == \{~ x: \R | x \gtR \zeroR ~\}
 \end{zed}
 
+\subsection{$\sqrtR$ \cmd{sqrtR}}
+
 For non-negative $x$, let $\sqrtR(x)$ denote $\sqrt{x}$, the non-negative square root of $x$.
+
 \begin{axdef}
 	\sqrtR: \R \pfun \R
 \where
@@ -92,58 +120,75 @@ For non-negative $x$, let $\sqrtR(x)$ denote $\sqrt{x}$, the non-negative square
 
 \section{Open Intervals}
 
-For any real numbers $a$ and $b$, let $\intervalRR(a,b)$ denote the open interval bounded by $a$ and $b$,
-typically written as $(a,b)$.
+\subsection{$\intervalRR$ \cmd{intervalRR}}
+
+For any real numbers $a$ and $b$, let $\intervalRR(a,b)$ denote $(a,b)$, the open interval bounded by $a$ and $b$.
+
 \begin{axdef}
 	\intervalRR: \R \cross \R \fun \power \R
 \where
 	\forall a, b: \R @ \\
 	\t1	\intervalRR(a,b) = \{~ x: \R | a \ltR x \ltR b ~\}
 \end{axdef}
+
 \begin{remark}
 If $a \geR b$ then $\intervalRR(a,b) = \emptyset$.
 \end{remark}
 
 \section{Open Balls}
+
+\subsection{$\ballRR$ \cmd{ballRR}}
+
 For any real numbers $x$ and $r$, let $\ballRR(x,r)$ denote the set of all real numbers within distance $r$ of $x$.
+
 \begin{axdef}
 	\ballRR: \R \cross \R \fun \power \R
 \where
 	\forall x, r: \R @ \\
 	\t1	\ballRR(x,r) = \{~ x': \R | \absR(x' \subR x) \ltR r ~\}
 \end{axdef}
+
 \begin{remark}
 If $r \gtR 0$ then $x \in \ballRR(x, r)$. 
 \end{remark}
+
 \begin{remark}
 If $r \leR 0$ then $\ballRR(x,r) = \emptyset$.
 \end{remark}
+
 \begin{remark}
 $\ballRR(x,r) = \intervalRR(x-r, x+r)$
 \end{remark}
 
 \section{Open Sets}
-Any subset of $\R$ that can be formed by taking finite intersections and arbitrary unions of open balls
-is said to be {\it open}.
+
+\subsection{$\openR$ \cmd{openR}}
+
+A subset $U$ of $\R$ is said to be {\it open} if for every point $x \in U$ there is some $r > 0$ such that $\ballRR(x,r) \subset U$.
 Let $\openR$ denote the set of all open subsets of $\R$.
-The definition of $\openR$ can be stated using concepts from topology but
-that is beyond the scope of this article.
-The set of all open balls is said to {\it generate} $\openR$.
-This article simply declares the type of $\openR$.
+
 \begin{axdef}
 	\openR: \power (\power \R)
+\where
+	\openR = \{~ U:  \power \R | \forall x: U @ \\
+	\t1	\exists r: \Rpos @ \ballRR(x,r) \subset U ~\}
 \end{axdef}
+
 \begin{remark}
 $\ballRR(x,r) \in \openR$
 \end{remark}
+
 \begin{remark}
 $\emptyset \in \openR$
 \end{remark}
+
 \begin{remark}
 $\R \in \openR$
 \end{remark}
 
 \section{Neighbourhoods}
+
+\subsection{$\neighR$ \cmd{neighR}}
 
 Let $x$ be a real number.
 Any open set that contains $x$ is called a {\it neighbourhood} of it.
@@ -155,22 +200,26 @@ Let $\neighR(x)$ denote the set of all neighbourhoods of $x$.
 	\forall x: \R @ \\
 	\t1	\neighR(x) = \{~ U: \openR | x \in U~\}
 \end{axdef}
+
 Clearly, every real number has an infinity of neighbourhoods.
+
 \begin{remark}
 If $r \gtR 0$ then $\ballRR(x, r) \in \neighR(x)$.
 \end{remark}
 
 \section{Functions}
 
-The following sections define continuity, limits, and differentiability.
-These are {\it local} properties of functions
-in the sense that they only depend on the values that the function takes in an arbitrarily small 
-neighbourhood of any given point in their domains.
+The following sections define continuity, limits, and differentiability, which are properties of functions.
+These properties are {\it local} in the sense that they only depend on the values that the function takes in 
+an arbitrarily small neighbourhood of any given point in their domains.
 It is therefore useful to first introduce the set of {\it locally defined} functions, 
 namely those functions that are defined in some neighbourhood of each point of  their domains.
 
+\subsection{$\FunR$ \cmd{FunR}}
+
 For $x$ a real number,
 let $\FunR(x)$ denote the set of all real-valued functions that are locally defined at $x$.
+
 \begin{axdef}
 	\FunR: \R \fun \power(\R \pfun \R)
 \where
@@ -178,14 +227,18 @@ let $\FunR(x)$ denote the set of all real-valued functions that are locally defi
 	\t1	\FunR(x) = \{~ f: \R \pfun \R | \exists U: \neighR(x) @ U \subseteq \dom f ~\}
 \end{axdef}
 
+\subsection{$\FunPR$ \cmd{FunPR}}
+
 For $U$ a subset of $\R$,
 let $\FunPR(U)$ denote the set of all real-valued functions on $U$ that are locally defined at each point of $U$.
+
 \begin{axdef}
 	\FunPR: \power \R \fun \power (\R \pfun \R)
 \where
 	\forall U: \power \R @ \\
 	\t1	\FunPR(U) = \{~ f: U \fun \R | \forall x: U @ f \in \FunR(x) ~\}
 \end{axdef}
+
 \begin{remark}
 If $f \in \FunPR(U)$ then $U \in \openR$.
 \end{remark}
@@ -213,7 +266,9 @@ when $x' \in U$ is within $\delta$ of $x$.
 	\t1	\absR(x' \subR x) \ltR \delta \implies \absR(f(x') \subR f(x)) \ltR \epsilon
 \end{schema}
 
-Define $\CzeroR(x)$ to be the set of all functions that are continuous at $x$.
+\subsection{$\CzeroR$ \cmd{CzeroR}}
+
+Let $\CzeroR(x)$ denote the set of all functions that are continuous at $x$.
 \begin{axdef}
 	\CzeroR: \R \fun \power(\R \pfun \R)
 \where
@@ -221,8 +276,11 @@ Define $\CzeroR(x)$ to be the set of all functions that are continuous at $x$.
 	\t1	\CzeroR(x) = \{~ f: \R \pfun \R | Continuous ~\}
 \end{axdef}
 
+\subsection{$\CzeroPR$ \cmd{CzeroPR}}
+
 Let $U$ be any subset of $\R$. 
 Define $\CzeroPR(U)$ to be the set of all functions on $U$ that are continuous at each point in $U$.
+
 \begin{axdef}
 	\CzeroPR: \power \R \fun \power (\R \pfun \R)
 \where
@@ -251,7 +309,10 @@ $$
 	f \oplus \{x \mapsto l\} \in \CzeroR(x)
 \end{schema}
 
-Let $\limRR(x,l)$ be the set of all functions that approach the limit $l$ at $x$.
+\subsection{$\limRR$ \cmd{limRR}}
+
+Let $\limRR(x,l)$ denote the set of all functions that approach the limit $l$ at $x$.
+
 \begin{axdef}
 	\limRR: \R \cross \R \fun \power(\R \pfun \R)
 \where
@@ -290,7 +351,7 @@ Since $f$ approaches limits $l$ and $l'$ at $x$ there exists a real number $\del
 For any such real number $x'$ we have
 \begin{argue}
 	\abs{l' - l} \\
-	\t1	= \abs{(f(x') - l) - (f(x') - l')} 		& add and subtract $f(x')$ \\
+	\t1	= \abs{(f(x') - l) - (f(x') - l')} 			& add and subtract $f(x')$ \\
 	\t1	\leq \abs{f(x') - l} + \abs{f(x') - l'} 	& triangle inequality \\
 	\t1	= 2\epsilon					& definition of limits
 \end{argue}
@@ -301,8 +362,11 @@ Since the above holds for any $\epsilon > 0$ we must have
 
 \end{proof}
 
-If $f$ approaches the limit $l$ at $x$ then define $\limFR(f,x) = l$.
+\subsection{$\limFR$ \cmd{limFR}}
+
+If $f$ approaches the limit $l$ at $x$ then let $\limFR(f,x)$ denote $l$.
 By the preceding theorem, $\limFR(f,x)$ is well-defined when it exists.
+
 \begin{axdef}
 	\limFR: (\R \pfun \R) \cross \R \pfun \R
 \where
@@ -349,11 +413,15 @@ $$
 	\LET m == (\lambda h: \Rnz | x \addR h \in \dom f @ (f(x \addR h) \subR f(x)) \divR h) @ \\
 	\t1	\limFR(m, \zeroR) = l
 \end{schema}
+
 \begin{remark}
 If $f$ is differentiable at $x$ then $L$ is unique.
 \end{remark}
 
-Define $\diffRR(x,L)$ to be the set of all functions $f$ that are differentiable at $x$ with $l = f'(x)$.
+\subsection{$\diffRR$ \cmd{diffRR}}
+
+Let $\diffRR(x,l)$ denote the set of all functions $f$ that are differentiable at $x$ with $f'(x) = l$.
+
 \begin{axdef}
 	\diffRR: \R \cross \R \fun \power(\R \pfun \R)
 \where
@@ -361,7 +429,10 @@ Define $\diffRR(x,L)$ to be the set of all functions $f$ that are differentiable
 	\t1	\diffRR(x, l) = \{~ f: \R \pfun \R | Differentiable ~\}
 \end{axdef}
 
-Define $\diffR(x)$ to be the set of all functions that are differentiable at $x$.
+\subsection{$\diffR$ \cmd{diffR}}
+
+Let $\diffR(x)$ denote the set of all functions that are differentiable at $x$.
+
 \begin{axdef}
 	\diffR: \R \fun \power(\R \pfun \R)
 \where
@@ -369,9 +440,12 @@ Define $\diffR(x)$ to be the set of all functions that are differentiable at $x$
 	\t1	\diffR(x) = \bigcup \{~ l: \R @ \diffRR(x,l) ~\}
 \end{axdef}
 
+\subsection{$\diffPR$ \cmd{diffPR}}
+
 Let $U$ be any subset of $\R$. 
-Define $\diffPR(U)$ to be the set of all functions on $U$
+Let $\diffPR(U)$ denote the set of all functions on $U$
 that are differentiable at each point of $U$.
+
 \begin{axdef}
 	\diffPR: \power \R \fun \power(\R \pfun \R)
 \where
@@ -381,15 +455,21 @@ that are differentiable at each point of $U$.
 
 \section{Derivatives}
 
-The function $f'$ is called the {\it derived} function or the {\it derivative} of $f$.
-Define $\derivFR(f,x)$ to be $f'(x)$.
+\subsection{$\derivFR$ \cmd{derivFR}}
+
+The function $f'$ is called the {\it derived function} or the {\it derivative} of $f$.
+Let $\derivFR(f,x)$ denote $f'(x)$, the derivative of $f$ at $x$.
+
 \begin{axdef}
 	\derivFR: (\R \pfun \R) \cross \R \pfun \R
 \where
 	\derivFR = \{~ Differentiable @ (f,x) \mapsto l ~\}
 \end{axdef}
 
-Define $\derivF(f)$ to be the derived function $f'$.
+\subsection{$\derivF$ \cmd{derivF}}
+
+Let $\derivF(f)$ denote $f'$, the derived function.
+
 \begin{axdef}
 	\derivF: (\R \pfun \R) \fun (\R \pfun \R)
 \where
@@ -400,7 +480,11 @@ Define $\derivF(f)$ to be the derived function $f'$.
 \begin{remark}
 If $f$ is differentiable on $U$ then $f'$ is not necessarily continuous on $U$.
 Counterexamples exist.
-If $f$ is uniformly differentiable then $f'$ is continuous, but I won't discuss uniform differentiability further.
+\end{remark}
+
+\begin{remark}
+If $f$ is uniformly differentiable on $U$ then $f'$ is continuous on $U$.
+A further discussion of uniform differentiability is beyond the scope of this article.
 \end{remark}
 
 \section{Higher Order Derivatives}
@@ -408,7 +492,11 @@ If $f$ is uniformly differentiable then $f'$ is continuous, but I won't discuss 
 Let $n$ be a natural number and let $x$ be a real number.
 In differential geometry we normally deal with $C^n(x)$, the set of functions
 that possess continuous derivatives of order $0, \ldots, n$ at $x$.
-Define $\CnR(n,x)$ to be the set of all functions that have continuous derivatives of order $0, \ldots, n$ at $x$.
+
+\subsection{$\CnR$ \cmd{CnR}}
+
+Let $\CnR(n,x)$ denote the set of all functions that have continuous derivatives of order $0, \ldots, n$ at $x$.
+
 \begin{axdef}
 	\CnR: \nat \cross \R \fun \power(\R \pfun \R)
 \where
@@ -416,12 +504,15 @@ Define $\CnR(n,x)$ to be the set of all functions that have continuous derivativ
 	\t1	\CnR(0,x) = \CzeroR(x)
 \also
 	\forall n: \nat; x: \R @ \\
-	\t1	\CnR(n + 1, x) = \{~ f: \CzeroR(x) | \derivF f \in \CnR(n,x) ~\}
+	\t1	\CnR(n + 1, x) = \{~ f: \diffR(x) | \derivF f \in \CnR(n,x) ~\}
 \end{axdef}
 
+\subsection{$\CnPR$ \cmd{CnPR}}
+
 Let $n$ be a natural number and let $U$ be a subset of $\R$.
-Define $\CnPR(n,U)$ to be the set of all functions on $U$ that have continuous derivatives of order $0, \ldots, n$
+Let $\CnPR(n,U)$ denote the set of all functions on $U$ that have continuous derivatives of order $0, \ldots, n$
 at every point of $U$.
+
 \begin{axdef}
 	\CnPR: \nat \cross \power \R \fun \power(\R \pfun \R)
 \where
@@ -431,9 +522,12 @@ at every point of $U$.
 
 \section{Smoothness}
 
+\subsection{$\smoothR$ \cmd{smoothR}}
+
 A function is said to be smooth if it possesses continuous derivatives of all orders.
 Let $x$ be a real number.
-Define $\smoothR(x)$ to be the set of all functions that are smooth at $x$.
+Let $\smoothR(x)$ denote the set of all functions that are smooth at $x$.
+
 \begin{axdef}
 	\smoothR: \R \fun \power(\R \pfun \R)
 \where
@@ -441,7 +535,10 @@ Define $\smoothR(x)$ to be the set of all functions that are smooth at $x$.
 	\t1	\smoothR(x) = \{~ f: \FunR(x) | \forall n: \nat @ f \in \CnR(n, x) ~\}
 \end{axdef}
 
-Define $\smoothPR(U)$ to be the set of all functions on $U$ that are smooth at every point of $U$.
+\subsection{$\smoothPR$ \cmd{smoothPR}}
+
+Let $\smoothPR(U)$ denote the set of all functions on $U$ that are smooth at every point of $U$.
+
 \begin{axdef}
 	\smoothPR: \power \R \fun \power (\R \pfun \R)
 \where

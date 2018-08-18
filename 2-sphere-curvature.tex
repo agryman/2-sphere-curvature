@@ -132,15 +132,15 @@ A coordinate proof for $\Stwo$ should generalize to all higher-dimensional spher
 
 \section{The 2-sphere as a Riemannian Manifold}
 
-Consider the vector space of 3-tuples, $\Rthree$.
+Let $\Rthree$ denote the vector space of 3-tuples.
 \begin{zed}
 	\Rthree == \Rtuples(3)
 \end{zed}
 
-The 2-sphere, $\Stwo$ is the set of unit vectors in $\Rthree$.
-$$
+Let $\Stwo$ denote the 2-sphere of unit vectors in $\Rthree$.
+\begin{equation}
 	\Stwo = \{~ v: \Rthree | \norm{v} = 1 ~\}
-$$
+\end{equation}
 
 \begin{axdef}
 	\Stwo: \power \Rthree
@@ -150,22 +150,34 @@ $$
 
 \subsection{Coordinates on $\Rthree$}
 
-Let $x, y, z$ be the usual Cartesian coordinate functions on $\Rthree$.
-\begin{equation}
-\forall p : \Rthree @ p = \langle x(p), y(p), z(p) \rangle
-\end{equation}
-
-Let $\langle e_1, e_2, e_3 \rangle$ be the usual orthonormal basis of $\Rthree$.
+Let $\langle e_1, e_2, e_3 \rangle$ denote the standard orthonormal basis of $\Rthree$.
 \begin{align}
-e_1 & = \langle 1, 0, 0 \rangle \\
+e_1 & = \langle1, 0, 0 \rangle \\
 e_2 & = \langle 0, 1, 0 \rangle \\
 e_3 & = \langle 0, 0, 1 \rangle
 \end{align}
+\begin{axdef}
+	e_1, e_2, e_3: \Rthree
+\where
+	e_1 = \langle~ \oneR, \zeroR, \zeroR ~\rangle \\
+	e_2 = \langle~ \zeroR, \oneR, \zeroR ~\rangle \\
+	e_3 = \langle~ \zeroR, \zeroR, \oneR ~\rangle
+\end{axdef}
 
-We have
+Let $x, y, z$ denote the standard Cartesian coordinate functions on $\Rthree$.
 \begin{equation}
-\forall p : \Rthree @ p = x(p) e_1 + y(p) e_2 + z(p) e_3
+\forall p : \Rthree @ p = \langle x(p), y(p), z(p) \rangle
 \end{equation}
+\begin{axdef}
+	x, y, z: \Rthree \fun \R
+\where
+	x = (\lambda p: \Rthree @ e_1 \dotR p) \\
+	y = (\lambda p: \Rthree @ e_2 \dotR p) \\
+	z = (\lambda p: \Rthree @ e_3 \dotR p)
+\end{axdef}
+\begin{remark}
+We have $p = x(p) e_1 + y(p) e_2 + z(p) e_3$.
+\end{remark}
 
 The Cartesian coordinate functions define the vector fields $\frac{\partial}{\partial x}, \frac{\partial}{\partial y}, \frac{\partial}{\partial z}$
 on $\Rthree$ as follows. 
@@ -175,6 +187,19 @@ For $p \in \Rthree$ and $f \in \smoothPR(\Rthree)$, we define
 \left(\frac{\partial}{\partial y}\right)_p f = \left. \frac{d}{dt} f(p + t e_2) \right|_{t = 0} \\
 \left(\frac{\partial}{\partial z}\right)_p f = \left. \frac{d}{dt} f(p + t e_3) \right|_{t = 0}
 \end{align}
+
+Let $\gamma$ be a smooth curve in $\Rthree$ and let $\gamma(0) = p$.
+Let $\gamma'$ be the tangent vector at $p$ defined by $\gamma$.
+
+Let $\gamma(p,v)$ denote the curve through the point $p \in \Rthree$ in the direction $v \in \Rthree$.
+\begin{axdef}
+	\gamma: \Rthree \cross \Rthree \fun (\R \fun \Rthree)
+\where
+	\forall p, v: \Rthree; t: \R @ \\
+	\t1	\gamma(p,v)(t) = p \vaddR t \smulR v
+\end{axdef}
+
+Let $X, Y, Z$ denote the vector fields
 
 \printbibliography
 

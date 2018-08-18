@@ -433,15 +433,13 @@ $\ballRR(x,r) = \intervalRR(x-r, x+r)$
 \end{remark}
 
 \section{Open Sets}
-Any subset of $\R$ that can be formed by taking finite intersections and arbitrary unions of open balls
-is said to be {\it open}.
+A subset $U$ of $\R$ is said to be {\it open} if for every point $x \in U$ there is some $r > 0$ such that $\ballRR(x,r) \subset U$.
 Let $\openR$ denote the set of all open subsets of $\R$.
-The definition of $\openR$ can be stated using concepts from topology but
-that is beyond the scope of this article.
-The set of all open balls is said to {\it generate} $\openR$.
-This article simply declares the type of $\openR$.
 \begin{axdef}
 	\openR: \power (\power \R)
+\where
+	\openR = \{~ U:  \power \R | \forall x: U @ \\
+	\t1	\exists r: \Rpos @ \ballRR(x,r) \subset U ~\}
 \end{axdef}
 \begin{remark}
 $\ballRR(x,r) \in \openR$
