@@ -30,14 +30,14 @@ The type declarations given here are intended to provide a basis for future axio
 
 \section{The Real Numbers}
 
-\subsection{$\R$ \cmd{R}}
+\subsection{\zcmd{R}}
 
 Let $\R$ denote the set of all real numbers.
 \begin{zed}
 	[\R]
 \end{zed}
 
-\subsection{$\zeroR$ \cmd{zeroR} and $\oneR$ \cmd{oneR}}
+\subsection{\zcmd{zeroR} and \zcmd{oneR}}
 
 Let $\zeroR$ and $\oneR$ denote the zero and unit elements of the real numbers.
 
@@ -46,7 +46,7 @@ Let $\zeroR$ and $\oneR$ denote the zero and unit elements of the real numbers.
 	\oneR: \R
 \end{axdef}
 
-\subsection{$\Rnz$ \cmd{Rnz}}
+\subsection{\zcmd{Rnz}}
 
 Let $\Rnz$ denote the set of non-zero real numbers, 
 also referred to as the {\it punctured} real number line.
@@ -55,7 +55,7 @@ also referred to as the {\it punctured} real number line.
 	\Rnz == \R \setminus \{ \zeroR \}
 \end{zed}
 
-\subsection{$\addR$ \cmd{addR}, $\subR$ \cmd{subR}, $\mulR$ \cmd{mulR}, and $\divR$ \cmd{divR}}
+\subsection{\zcmd{addR}, \zcmd{subR}, \zcmd{mulR}, and \zcmd{divR}}
 
 Let $x \addR y$, $x \subR y$, $x \mulR y$, and $x \divR y$ denote the usual arithmetic operations of
 addition, subtraction, multiplication, and division.
@@ -67,7 +67,7 @@ addition, subtraction, multiplication, and division.
 	\_ \divR \_: \R \cross \Rnz \fun \R
 \end{axdef}
 
-\subsection{$\negR$ \cmd{negR}}
+\subsection{\zcmd{negR}}
 
 Let $\negR~x$ denote the negative of $x$.
 
@@ -78,7 +78,7 @@ Let $\negR~x$ denote the negative of $x$.
 	\t1	\negR~x = \zeroR \subR x
 \end{axdef}
 
-\subsection{$\ltR$ \cmd{ltR}, $\leR$ \cmd{leR}, $\gtR$ \cmd{gtR}, and $\geR$ \cmd{geR}}
+\subsection{\zcmd{ltR}, \zcmd{leR}, \zcmd{gtR}, and \zcmd{geR}}
 
 Let $x \ltR y$, $x \leR y$, $x \gtR y$, and $x \geR y$ denote the usual comparison relations.
 
@@ -89,7 +89,7 @@ Let $x \ltR y$, $x \leR y$, $x \gtR y$, and $x \geR y$ denote the usual comparis
 	\_ \geR \_: \R \rel \R
 \end{axdef}
 
-\subsection{$\absR$ \cmd{absR}}
+\subsection{\zcmd{absR}}
 
 Let $\absR(x)$ denote $\abs{x}$, the absolute value of $x$.
 
@@ -100,7 +100,7 @@ Let $\absR(x)$ denote $\abs{x}$, the absolute value of $x$.
 	\t1	\absR(x) = \IF x \geR \zeroR \THEN x \ELSE \negR~x
 \end{axdef}
 
-\subsection{$\Rpos$ \cmd{Rpos}}
+\subsection{\zcmd{Rpos}}
 
 Let $\Rpos$ denote the set of positive real numbers.
 
@@ -108,7 +108,7 @@ Let $\Rpos$ denote the set of positive real numbers.
 	\Rpos == \{~ x: \R | x \gtR \zeroR ~\}
 \end{zed}
 
-\subsection{$\sqrtR$ \cmd{sqrtR}}
+\subsection{\zcmd{sqrtR}}
 
 For non-negative $x$, let $\sqrtR(x)$ denote $\sqrt{x}$, the non-negative square root of $x$.
 
@@ -118,9 +118,9 @@ For non-negative $x$, let $\sqrtR(x)$ denote $\sqrt{x}$, the non-negative square
 	\sqrtR = \{~ x: \R | x \geR \zeroR @ x \mulR x \mapsto x ~\}
 \end{axdef}
 
-\section{Open Intervals}
+\section{Open Sets}
 
-\subsection{$\intervalRR$ \cmd{intervalRR}}
+\subsection{\zcmd{intervalRR}}
 
 For any real numbers $a$ and $b$, let $\intervalRR(a,b)$ denote $(a,b)$, the open interval bounded by $a$ and $b$.
 
@@ -135,9 +135,169 @@ For any real numbers $a$ and $b$, let $\intervalRR(a,b)$ denote $(a,b)$, the ope
 If $a \geR b$ then $\intervalRR(a,b) = \emptyset$.
 \end{remark}
 
-\section{Open Balls}
+\subsubsection{Digression on Simulating Standard Mathematical Notation in Z}
 
-\subsection{$\ballRR$ \cmd{ballRR}}
+The expression $(a,b)$ usually denotes an ordered pair in mathematical writing.
+Sometimes the writer asks us to interpret $(a,b)$ as an open interval.
+In this case we recognize that the symbols used in the expression $(a,b)$ do not have their usual meanings
+and we interpret them accordingly.
+The notation $(a,b)$ for denoting an open interval of the real number line is
+arguably very compact, convenient, and easy to understand. 
+In contrast, the Z notation function application $\intervalRR(a,b)$ defined above may strike the reader as
+precise but somewhat verbose and clumsy.
+
+There is a way to achieve some of the compactness of standard mathematical notation while
+preserving the precision of type-correct Z.
+The approach is to take advantage of the \fuzz\ type checker's ability to define infix and postfix 
+operator symbols. 
+In the grammar used by \fuzz\ postfix operators have higher precedence than prefix operators,
+and prefix operators have higher precedence than infix operators.
+Infix operators are assigned numerical priorities of 1 through 6 with higher priorities taking precedence 
+over lower ones.
+We can use these relative precedences to define operators that allow us to construct expressions 
+that resemble usual mathematical writing.
+
+\subsubsection{\zcmd{lowerBound}, \zcmd{upperBound}, and \zcmd{intersect}}
+
+First, we use \LaTeX\ bold styling to provide a visual cue that helps the reader
+distinguish the interval $\lowerBound a \intersect b \upperBound$ from the
+usual ordered pair $(a,b)$.
+Next, we interpret the symbols as prefix, infix, and postfix operators.
+The symbol $\lowerBound$ is a prefix operator that maps $a$ to $\lowerBound a$, 
+the open interval bounded below by $a$.
+Similarly, $\upperBound$ is a postfix operator that maps $b$ to $b \upperBound$, 
+the open interval bounded above by $b$.
+Finally, we interpret the symbol $\intersect$ as an infix operator that forms the intersection of the two intervals.
+
+\begin{axdef}
+	\lowerBound: \R \fun \power \R \\
+	\_ \upperBound: \R \fun \power \R \\
+	\_ \intersect \_ : \power \R \cross \power \R \fun \power \R
+\where
+	\forall a: \R @ \lowerBound a = \{~ x: \R | a \ltR x ~\}
+\also
+	\forall b: \R @ b \upperBound = \{~ x: \R | x \ltR b ~\}
+\also
+	\forall a, b: \R @ \lowerBound a \intersect b \upperBound = \{~ x: \R | a \ltR x \ltR b ~\}
+\end{axdef}
+
+This design is a step in the right direction, but it doesn't prevent the writer from abusing the notation.
+For example, the following paragraph looks odd but makes perfect sense to \fuzz.
+
+\begin{zed}
+	\forall a, b: \R @ \lowerBound a \intersect b \upperBound = b \upperBound \intersect \lowerBound a 
+\end{zed}
+
+When we are asked to interpret $(a,b)$ as an interval, we are, in a sense, being asked to parse a sentence
+in a new mathematical mini-language that defines intervals.
+If we want to enforce the usual syntax for intervals,
+we can introduce new types to represent fragments of the expression so that the operators can only be applied to
+fragments in some prescribed order.
+
+To illustrate this point, let's expand the example to include closed intervals $[a,b]$ as well as semi-closed intervals
+$(a,b]$ and $[a,b)$.
+Regard $(a$ and $[a$ as open and closed right half lines, and $b)$ and $b]$ as open and closed left half lines.
+Only allow a right half line to be combined with a left half line.
+
+\subsubsection{Right Half Lines, \zcmd{openLowerBound}, and \zcmd{closedLowerBound}}
+
+Let $RightHalfLine$ denote the type of syntactic fragments that define open and closed right half-lines.
+
+\begin{zed}
+	RightHalfLine ::= \openLowerBound \ldata \R \rdata | \closedLowerBound \ldata \R \rdata
+\end{zed}
+
+For example
+
+\begin{zed}
+	\openLowerBound \zeroR \in RightHalfLine
+\also
+	\closedLowerBound \oneR \in RightHalfLine
+\end{zed}
+
+Let $rightSet(R)$ denote the set of real numbers that the right half-line syntactic fragment $R$ represents.
+
+\begin{axdef}
+	rightSet: RightHalfLine \fun \power \R
+\where
+	\forall a : \R @ rightSet(\openLowerBound a) = \{~ x: \R | a \ltR x ~\}
+\also
+	\forall a : \R @ rightSet(\closedLowerBound a) = \{~ x: \R | a \leR x ~\}
+\end{axdef}
+
+For example
+
+\begin{zed}
+	\zeroR \notin rightSet(\openLowerBound \zeroR)
+\also
+	\oneR \in rightSet(\closedLowerBound \oneR)
+\end{zed}
+
+\subsubsection{Left Half Lines, \zcmd{openUpperBound}, and \zcmd{closedUpperBound}}
+
+Let $LeftHalfLine$ denote the type of syntactic fragments that define open and closed left half-lines.
+
+\begin{zed}
+	LeftHalfLine ::= (\_ \openUpperBound)  \ldata \R \rdata | (\_ \closedUpperBound)  \ldata \R \rdata
+\end{zed}
+
+For example
+
+\begin{zed}
+	\zeroR \openUpperBound \in LeftHalfLine
+\also
+	\oneR \closedUpperBound \in LeftHalfLine
+\end{zed}
+
+Let $leftSet(L)$ denote the set of real numbers that the left half-line syntactic fragment $L$ represents.
+
+\begin{axdef}
+	leftSet: LeftHalfLine \fun \power \R
+\where
+	\forall b : \R @ leftSet(b \openUpperBound) = \{~ x: \R | x \ltR b ~\}
+\also
+	\forall b : \R @ leftSet(b \closedUpperBound) = \{~ x: \R | x \leR b ~\}
+\end{axdef}
+
+For example
+
+\begin{zed}
+	\zeroR \notin leftSet(\zeroR \openUpperBound)
+\also
+	\oneR \in leftSet(\oneR \closedUpperBound)
+\end{zed}
+
+\subsubsection{\zcmd{intersectRightLeft}}
+
+Let $R \intersectRightLeft L$ denote the set of real numbers in the intersection of the sets represented by
+the half-line syntactic fragments $R$ and $L$.
+
+\begin{axdef}
+	\_ \intersectRightLeft \_ : RightHalfLine \cross LeftHalfLine \fun \power \R
+\where
+	\forall R: RightHalfLine; L: LeftHalfLine @ \\
+	\t1	R \intersectRightLeft L = rightSet~R \cap leftSet~L
+\end{axdef}
+
+For example
+
+\begin{zed}
+	\zeroR \in \closedLowerBound \zeroR \intersectRightLeft \oneR \openUpperBound
+\end{zed}
+
+\subsubsection{Conclusion and End of Digression}
+
+A lot of standard mathematical notation can be written directly using the built-in capabilities of Z notation and \fuzz.
+However, mathematics contains many specialized notations including those for intervals, probability, and quantum mechanics (Dirac bra-ket notation).
+One can view these specialized notations as mathematical mini-languages.
+As demonstrated above for the case of intervals, it is possible to simulate these notations in Z by introducing new syntactic types along with infix and postfix operators that construct, combine, and reduce fragments of this syntax.
+The general pattern is for the opening and closing symbols to correspond to prefix and postfix operators that
+construct fragments, and for internal symbols to correspond to infix operators that combine and then finally 
+reduce fragments.
+Reduction occurs when the final infix operator is applied and maps the completed mini-language sentence to a 
+some usual mathematical type.
+
+\subsection{\zcmd{ballRR}}
 
 For any real numbers $x$ and $r$, let $\ballRR(x,r)$ denote the set of all real numbers within distance $r$ of $x$.
 
@@ -160,9 +320,7 @@ If $r \leR 0$ then $\ballRR(x,r) = \emptyset$.
 $\ballRR(x,r) = \intervalRR(x-r, x+r)$
 \end{remark}
 
-\section{Open Sets}
-
-\subsection{$\openR$ \cmd{openR}}
+\subsection{\zcmd{openR}}
 
 A subset $U$ of $\R$ is said to be {\it open} if for every point $x \in U$ there is some $r > 0$ such that $\ballRR(x,r) \subset U$.
 Let $\openR$ denote the set of all open subsets of $\R$.
@@ -186,9 +344,7 @@ $\emptyset \in \openR$
 $\R \in \openR$
 \end{remark}
 
-\section{Neighbourhoods}
-
-\subsection{$\neighR$ \cmd{neighR}}
+\subsection{\zcmd{neighR}}
 
 Let $x$ be a real number.
 Any open set that contains $x$ is called a {\it neighbourhood} of it.
@@ -215,7 +371,7 @@ an arbitrarily small neighbourhood of any given point in their domains.
 It is therefore useful to first introduce the set of {\it locally defined} functions, 
 namely those functions that are defined in some neighbourhood of each point of  their domains.
 
-\subsection{$\FunR$ \cmd{FunR}}
+\subsection{\zcmd{FunR}}
 
 For $x$ a real number,
 let $\FunR(x)$ denote the set of all real-valued functions that are locally defined at $x$.
@@ -227,7 +383,12 @@ let $\FunR(x)$ denote the set of all real-valued functions that are locally defi
 	\t1	\FunR(x) = \{~ f: \R \pfun \R | \exists U: \neighR(x) @ U \subseteq \dom f ~\}
 \end{axdef}
 
-\subsection{$\FunPR$ \cmd{FunPR}}
+\begin{remark}
+The function $\sqrtR$ is not locally defined at $0$ because it's defined only for non-negative numbers
+but every neighbourhood of $0$ contains some negative numbers.
+\end{remark}
+
+\subsection{\zcmd{FunPR}}
 
 For $U$ a subset of $\R$,
 let $\FunPR(U)$ denote the set of all real-valued functions on $U$ that are locally defined at each point of $U$.
@@ -266,7 +427,7 @@ when $x' \in U$ is within $\delta$ of $x$.
 	\t1	\absR(x' \subR x) \ltR \delta \implies \absR(f(x') \subR f(x)) \ltR \epsilon
 \end{schema}
 
-\subsection{$\CzeroR$ \cmd{CzeroR}}
+\subsection{\zcmd{CzeroR}}
 
 Let $\CzeroR(x)$ denote the set of all functions that are continuous at $x$.
 \begin{axdef}
@@ -276,7 +437,7 @@ Let $\CzeroR(x)$ denote the set of all functions that are continuous at $x$.
 	\t1	\CzeroR(x) = \{~ f: \R \pfun \R | Continuous ~\}
 \end{axdef}
 
-\subsection{$\CzeroPR$ \cmd{CzeroPR}}
+\subsection{\zcmd{CzeroPR}}
 
 Let $U$ be any subset of $\R$. 
 Define $\CzeroPR(U)$ to be the set of all functions on $U$ that are continuous at each point in $U$.
@@ -309,7 +470,7 @@ $$
 	f \oplus \{x \mapsto l\} \in \CzeroR(x)
 \end{schema}
 
-\subsection{$\limRR$ \cmd{limRR}}
+\subsection{\zcmd{limRR}}
 
 Let $\limRR(x,l)$ denote the set of all functions that approach the limit $l$ at $x$.
 
@@ -362,7 +523,7 @@ Since the above holds for any $\epsilon > 0$ we must have
 
 \end{proof}
 
-\subsection{$\limFR$ \cmd{limFR}}
+\subsection{\zcmd{limFR}}
 
 If $f$ approaches the limit $l$ at $x$ then let $\limFR(f,x)$ denote $l$.
 By the preceding theorem, $\limFR(f,x)$ is well-defined when it exists.
@@ -415,10 +576,10 @@ $$
 \end{schema}
 
 \begin{remark}
-If $f$ is differentiable at $x$ then $L$ is unique.
+If $f$ is differentiable at $x$ then the limit $l$ is unique.
 \end{remark}
 
-\subsection{$\diffRR$ \cmd{diffRR}}
+\subsection{\zcmd{diffRR}}
 
 Let $\diffRR(x,l)$ denote the set of all functions $f$ that are differentiable at $x$ with $f'(x) = l$.
 
@@ -429,7 +590,7 @@ Let $\diffRR(x,l)$ denote the set of all functions $f$ that are differentiable a
 	\t1	\diffRR(x, l) = \{~ f: \R \pfun \R | Differentiable ~\}
 \end{axdef}
 
-\subsection{$\diffR$ \cmd{diffR}}
+\subsection{\zcmd{diffR}}
 
 Let $\diffR(x)$ denote the set of all functions that are differentiable at $x$.
 
@@ -440,7 +601,7 @@ Let $\diffR(x)$ denote the set of all functions that are differentiable at $x$.
 	\t1	\diffR(x) = \bigcup \{~ l: \R @ \diffRR(x,l) ~\}
 \end{axdef}
 
-\subsection{$\diffPR$ \cmd{diffPR}}
+\subsection{\zcmd{diffPR}}
 
 Let $U$ be any subset of $\R$. 
 Let $\diffPR(U)$ denote the set of all functions on $U$
@@ -455,7 +616,7 @@ that are differentiable at each point of $U$.
 
 \section{Derivatives}
 
-\subsection{$\derivFR$ \cmd{derivFR}}
+\subsection{\zcmd{derivFR}}
 
 The function $f'$ is called the {\it derived function} or the {\it derivative} of $f$.
 Let $\derivFR(f,x)$ denote $f'(x)$, the derivative of $f$ at $x$.
@@ -466,7 +627,7 @@ Let $\derivFR(f,x)$ denote $f'(x)$, the derivative of $f$ at $x$.
 	\derivFR = \{~ Differentiable @ (f,x) \mapsto l ~\}
 \end{axdef}
 
-\subsection{$\derivF$ \cmd{derivF}}
+\subsection{\zcmd{derivF}}
 
 Let $\derivF(f)$ denote $f'$, the derived function.
 
@@ -493,7 +654,7 @@ Let $n$ be a natural number and let $x$ be a real number.
 In differential geometry we normally deal with $C^n(x)$, the set of functions
 that possess continuous derivatives of order $0, \ldots, n$ at $x$.
 
-\subsection{$\CnR$ \cmd{CnR}}
+\subsection{\zcmd{CnR}}
 
 Let $\CnR(n,x)$ denote the set of all functions that have continuous derivatives of order $0, \ldots, n$ at $x$.
 
@@ -507,7 +668,7 @@ Let $\CnR(n,x)$ denote the set of all functions that have continuous derivatives
 	\t1	\CnR(n + 1, x) = \{~ f: \diffR(x) | \derivF f \in \CnR(n,x) ~\}
 \end{axdef}
 
-\subsection{$\CnPR$ \cmd{CnPR}}
+\subsection{\zcmd{CnPR}}
 
 Let $n$ be a natural number and let $U$ be a subset of $\R$.
 Let $\CnPR(n,U)$ denote the set of all functions on $U$ that have continuous derivatives of order $0, \ldots, n$
@@ -522,7 +683,7 @@ at every point of $U$.
 
 \section{Smoothness}
 
-\subsection{$\smoothR$ \cmd{smoothR}}
+\subsection{\zcmd{smoothR}}
 
 A function is said to be smooth if it possesses continuous derivatives of all orders.
 Let $x$ be a real number.
@@ -535,7 +696,7 @@ Let $\smoothR(x)$ denote the set of all functions that are smooth at $x$.
 	\t1	\smoothR(x) = \{~ f: \FunR(x) | \forall n: \nat @ f \in \CnR(n, x) ~\}
 \end{axdef}
 
-\subsection{$\smoothPR$ \cmd{smoothPR}}
+\subsection{\zcmd{smoothPR}}
 
 Let $\smoothPR(U)$ denote the set of all functions on $U$ that are smooth at every point of $U$.
 

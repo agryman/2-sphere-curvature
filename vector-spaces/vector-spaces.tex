@@ -26,20 +26,27 @@ They are the objects studied in linear algebra and are foundational to different
 
 \section{Real $n$-tuples}
 
+\subsection{\zcmd{Rinf}}
+
 Let $n$ be a natural number.
 A finite sequence of $n$ real numbers is called a real $n$-tuple.
-Define $\Rinf$ to be the set of all real $n$-tuples for any $n$.
+Let $\Rinf$ denote the set of all real $n$-tuples for any $n$.
+
 \begin{zed}
 	\Rinf == \seq \R
 \end{zed}
 
-Define $\Rtuples(n)$ to be $\R^n$, the set of all $n$-tuples.
+\subsection{\zcmd{Rtuples}}
+
+Let $\Rtuples(n)$ denote $\R^n$, the set of all $n$-tuples for some given $n$.
 \begin{axdef}
 	\Rtuples: \nat \fun \power \Rinf
 \where
 	\forall n: \nat @ \\
 	\t1	\Rtuples(n) = \{~ v: \Rinf | \# v = n ~\}
 \end{axdef}
+
+\subsubsection{\zcmd{pi}}
 
 The real numbers that comprise an $n$-tuple are called its components.
 The real number $v(i)$ is the $i$-th component of the $n$-tuple $v$ where
