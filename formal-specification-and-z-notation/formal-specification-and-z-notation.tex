@@ -1,36 +1,10 @@
 \documentclass[11pt, oneside]{article}
 
-\usepackage[utf8]{inputenc}
-\usepackage[english]{babel}
-
-\usepackage{geometry}
-\geometry{letterpaper}
-
-\usepackage{amsmath}
-\usepackage{amsfonts}
-\usepackage{amssymb}
-\usepackage{amsthm}
-
-\usepackage{commath}
-
-\usepackage[autostyle]{csquotes}
-
-\usepackage{hyperref}
-
-\usepackage[
-backend=biber,
-style=alphabetic,
-sorting=ynt
-]{biblatex}
+\usepackage{../shared/preamble}
 \addbibresource{../shared/references.bib}
 
-% put fuzz last because it redefines \t
-\usepackage{fuzz}
-
-\input{../newcommands}
-
-\newtheorem{theorem}{Theorem}
-\newtheorem*{remark}{Remark}
+\usepackage{../real-numbers/real-numbers}
+\usepackage{formal-specification-and-z-notation}
 
 \title{The Role of Formalization and Z Notation}
 \author{Arthur Ryman, {\tt arthur.ryman@gmail.com}}
@@ -154,14 +128,14 @@ A few symbols have two names, reflecting two different uses for the
 symbol in Z:
 \begin{itemize}
 \item The symbol $\semi$ is called 
-\textbackslash\texttt{semi} when it is used as an operation on schemas, and 
-\textbackslash\texttt{comp} when it is used for composition of relations.
+\cmd{semi} when it is used as an operation on schemas, and 
+\cmd{comp} when it is used for composition of relations.
 \item The symbol $\hide$ is called
-\textbackslash\texttt{hide} as the hiding operator of the schema calculus, and 
-\textbackslash\texttt{setminus} as the set difference operator. 
+\cmd{hide} as the hiding operator of the schema calculus, and 
+\cmd{setminus} as the set difference operator. 
 \item The symbol $\project$ is called
-\textbackslash\texttt{project} as the schema projection operator, and 
-\textbackslash\texttt{filter} as the filtering operator on sequences.
+\cmd{project} as the schema projection operator, and 
+\cmd{filter} as the filtering operator on sequences.
 \end{itemize}
 Although the printed appearance of
 each of these pairs of symbols is the same, the type checker
@@ -171,13 +145,223 @@ recognizes each member of the pair only in the appropriate
 This approach keeps both the Z type checker and the mathematician reader happy.
 For example, in my formalization of the reals:
 \begin{itemize} 
-\item The symbol $0$ is called \texttt{0} when it is used as an integer,
-and \textbackslash\texttt{zeroR} as a real number.
+\item The symbol $0$ is called 
+\texttt{0} when it is used as an integer, and 
+\cmd{zeroR} as a real number.
 \item The symbol $+$ is called 
 \texttt{+} as the addition operator on the integers, and
-\textbackslash\texttt{addR} as the addition operator on the reals.
+\cmd{addR} as the addition operator on the reals.
 \end{itemize}
 The mathematician reader will always be able to infer the actual type of an object from its context.
+
+\section{Theorems, Examples, and Remarks}
+
+In mathematical writing it is good practice to follow a definition with some examples.
+When an example is given, there is a proof obligation associated with it,
+namely that whatever the author is asserting about the example is in fact true.
+Similarly, when the author makes a remark or states a theorem, there is also a proof obligation.
+In each of these cases, the author makes a statement and asserts it to be true, but may not offer any proof.
+
+Z notation allows the author to add constraints to a specification.
+However, if the constraint is a logical consequence of the preceding definitions then it adds nothing to the specification.
+Therefore, we can freely add examples, remarks, and theorems to a specification without changing its meaning.
+These statements should be placed in a zed box that is enclosed in an appropriate \LaTeX\ theorem-like environment.
+
+For example, the following statement will be type checked by \fuzz, is true, and does not change the meaning of
+the specification.
+
+\begin{example}
+
+\begin{zed}
+	1 + 1 = 2
+\end{zed}
+	
+\end{example}
+
+The benefit of placing theorem-like statements in zed boxes is that the \fuzz\ type checker will check their type-correctness.
+
+\subsection{Generic Theorem-like Statements}
+
+It will often be the case that a theorem-like statement will involve generic constructs.
+Although Z notation provides a mechanism for introducing formal generic parameters into the definition of 
+generic constants and schemas, it does not provide such a mechanism for constraints.
+We can work around this limitations by declaring a set of global given sets which are understood to be used in theorem-like
+statements where they are taken to represent arbitrary sets.
+The article on topological spaces introduces the global given sets $t_1$, $t_2$, and $t_3$ for this purpose.
+
+For example, we can remark that every element $x$ of an arbitrary set $t_1$ is a member of that set.
+
+\begin{remark}
+
+\begin{zed}
+	\forall x: t_1 @ x \in t_1
+\end{zed}
+
+\end{remark}
+
+\section{Simulating Standard Mathematical Notation}
+
+The expression $(a,b)$ usually denotes an ordered pair in mathematical writing.
+Sometimes the writer asks us to interpret $(a,b)$ as an open interval of the real number line.
+In this case we recognize that the symbols used in the expression $(a,b)$ do not have their usual meanings
+and we interpret them accordingly.
+The notation $(a,b)$ for denoting an open interval of the real number line is
+arguably very compact, convenient, and easy to understand. 
+In contrast, the Z notation function application $\intervalRR(a,b)$, defined in the article on real numbers, 
+may strike the reader as somewhat verbose and clumsy, albeit precise.
+
+\subsection{Prefix, Infix, and Postfix Operators in \fuzz}
+
+There is a way to achieve some of the compactness of standard mathematical notation in Z while
+preserving its precision and type-correctness.
+The approach is to take advantage of the \fuzz\ type checker's ability to define infix and postfix 
+operator symbols. 
+In the grammar used by \fuzz, postfix operators have higher precedence than prefix operators,
+and prefix operators have higher precedence than infix operators.
+Infix operators are assigned numerical priorities of 1 through 6 with higher priorities taking precedence 
+over lower ones.
+We can use these relative precedences to define operators that allow us to construct expressions 
+that resemble usual mathematical writing.
+
+\subsection{\zcmd{lowerBound}, \zcmd{upperBound}, and \zcmd{intersect}}
+
+First, we use \LaTeX\ bold styling to provide a visual cue that helps the reader
+distinguish the interval $\lowerBound a \intersect b \upperBound$ from the
+usual ordered pair $(a,b)$.
+Next, we interpret the symbols as prefix, infix, and postfix operators.
+The symbol $\lowerBound$ is a prefix operator that maps $a$ to $\lowerBound a$, 
+the open interval bounded below by $a$.
+Similarly, $\upperBound$ is a postfix operator that maps $b$ to $b \upperBound$, 
+the open interval bounded above by $b$.
+Finally, we interpret the symbol $\intersect$ as an infix operator that forms the intersection of the two intervals.
+
+\begin{axdef}
+	\lowerBound: \R \fun \power \R \\
+	\_ \upperBound: \R \fun \power \R \\
+	\_ \intersect \_ : \power \R \cross \power \R \fun \power \R
+\where
+	\forall a: \R @ \lowerBound a = \{~ x: \R | a \ltR x ~\}
+\also
+	\forall b: \R @ b \upperBound = \{~ x: \R | x \ltR b ~\}
+\also
+	\forall a, b: \R @ \lowerBound a \intersect b \upperBound = \{~ x: \R | a \ltR x \ltR b ~\}
+\end{axdef}
+
+This design is a step in the right direction, but it doesn't prevent the writer from abusing the notation.
+For example, the following paragraph looks odd but makes perfect sense to \fuzz.
+
+\begin{zed}
+	\forall a, b: \R @ \lowerBound a \intersect b \upperBound = b \upperBound \intersect \lowerBound a 
+\end{zed}
+
+When we are asked to interpret $(a,b)$ as an interval, we are, in a sense, being asked to parse a sentence
+in a new mathematical mini-language that defines intervals.
+If we want to enforce the usual syntax for intervals,
+we can introduce new types to represent fragments of the expression so that the operators can only be applied to
+fragments in some prescribed order.
+
+To illustrate this point, let's expand the example to include closed intervals $[a,b]$ as well as semi-closed intervals
+$(a,b]$ and $[a,b)$.
+Regard $(a$ and $[a$ as open and closed right half lines, and $b)$ and $b]$ as open and closed left half lines.
+Only allow a right half line to be combined with a left half line.
+
+\subsection{Right Half Lines, \zcmd{openLowerBound}, and \zcmd{closedLowerBound}}
+
+Let $RightHalfLine$ denote the type of syntactic fragments that define open and closed right half-lines.
+
+\begin{zed}
+	RightHalfLine ::= \openLowerBound \ldata \R \rdata | \closedLowerBound \ldata \R \rdata
+\end{zed}
+
+For example
+
+\begin{zed}
+	\openLowerBound \zeroR \in RightHalfLine
+\also
+	\closedLowerBound \oneR \in RightHalfLine
+\end{zed}
+
+Let $rightSet(R)$ denote the set of real numbers that the right half-line syntactic fragment $R$ represents.
+
+\begin{axdef}
+	rightSet: RightHalfLine \fun \power \R
+\where
+	\forall a : \R @ rightSet(\openLowerBound a) = \{~ x: \R | a \ltR x ~\}
+\also
+	\forall a : \R @ rightSet(\closedLowerBound a) = \{~ x: \R | a \leR x ~\}
+\end{axdef}
+
+For example
+
+\begin{zed}
+	\zeroR \notin rightSet(\openLowerBound \zeroR)
+\also
+	\oneR \in rightSet(\closedLowerBound \oneR)
+\end{zed}
+
+\subsection{Left Half Lines, \zcmd{openUpperBound}, and \zcmd{closedUpperBound}}
+
+Let $LeftHalfLine$ denote the type of syntactic fragments that define open and closed left half-lines.
+
+\begin{zed}
+	LeftHalfLine ::= (\_ \openUpperBound)  \ldata \R \rdata | (\_ \closedUpperBound)  \ldata \R \rdata
+\end{zed}
+
+For example
+
+\begin{zed}
+	\zeroR \openUpperBound \in LeftHalfLine
+\also
+	\oneR \closedUpperBound \in LeftHalfLine
+\end{zed}
+
+Let $leftSet(L)$ denote the set of real numbers that the left half-line syntactic fragment $L$ represents.
+
+\begin{axdef}
+	leftSet: LeftHalfLine \fun \power \R
+\where
+	\forall b : \R @ leftSet(b \openUpperBound) = \{~ x: \R | x \ltR b ~\}
+\also
+	\forall b : \R @ leftSet(b \closedUpperBound) = \{~ x: \R | x \leR b ~\}
+\end{axdef}
+
+For example
+
+\begin{zed}
+	\zeroR \notin leftSet(\zeroR \openUpperBound)
+\also
+	\oneR \in leftSet(\oneR \closedUpperBound)
+\end{zed}
+
+\subsection{\zcmd{intersectRightLeft}}
+
+Let $R \intersectRightLeft L$ denote the set of real numbers in the intersection of the sets represented by
+the half-line syntactic fragments $R$ and $L$.
+
+\begin{axdef}
+	\_ \intersectRightLeft \_ : RightHalfLine \cross LeftHalfLine \fun \power \R
+\where
+	\forall R: RightHalfLine; L: LeftHalfLine @ \\
+	\t1	R \intersectRightLeft L = rightSet~R \cap leftSet~L
+\end{axdef}
+
+For example
+
+\begin{zed}
+	\zeroR \in \closedLowerBound \zeroR \intersectRightLeft \oneR \openUpperBound
+\end{zed}
+
+\subsection{Summary}
+
+A lot of standard mathematical notation can be written directly using the built-in capabilities of Z notation and \fuzz.
+However, mathematics contains many specialized notations including those for intervals, probability, and quantum mechanics (Dirac bra-ket notation).
+One can view these specialized notations as mathematical mini-languages.
+As demonstrated above for the case of intervals, it is possible to simulate these notations in Z by introducing new syntactic types along with infix and postfix operators that construct, combine, and reduce fragments of this syntax.
+The general pattern is for the opening and closing symbols to correspond to prefix and postfix operators that
+construct fragments, and for internal symbols to correspond to infix operators that combine and then finally 
+reduce fragments.
+Reduction occurs when the final infix operator is applied and maps the completed mini-language sentence to a 
+some usual mathematical type.
 
 \printbibliography
 
