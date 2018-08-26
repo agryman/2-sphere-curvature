@@ -222,3 +222,5 @@
 %%tame \inv \limg\rimg \oplus \comp \circ
 \newcommand{\family}{\mathcal{F}}
 %%pregen \family
+
+\DeclareMathOperator{\CzeroTT}{C^0}
