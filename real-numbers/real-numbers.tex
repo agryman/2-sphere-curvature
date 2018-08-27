@@ -121,66 +121,111 @@ For non-negative $x$, let $\sqrtR(x)$ denote $\sqrt{x}$, the non-negative square
 
 \section{Open Sets}
 
-\subsection{\zcmd{intervalRR}}
+\subsection{\zcmd{intervalR}}
 
-For any real numbers $a$ and $b$, let $\intervalRR(a,b)$ denote $(a,b)$, the open interval bounded by $a$ and $b$.
+For any real numbers $a$ and $b$, let $\intervalR(a,b)$ denote $(a,b)$, the open interval bounded by $a$ and $b$.
 
 \begin{axdef}
-	\intervalRR: \R \cross \R \fun \power \R
+	\intervalR: \R \cross \R \fun \power \R
 \where
 	\forall a, b: \R @ \\
-	\t1	\intervalRR(a,b) = \{~ x: \R | a \ltR x \ltR b ~\}
+	\t1	\intervalR(a,b) = \{~ x: \R | a \ltR x \ltR b ~\}
 \end{axdef}
 
 \begin{remark}
-If $a \geR b$ then $\intervalRR(a,b) = \emptyset$.
+If $a \geR b$ then $\intervalR(a,b) = \emptyset$.
 \end{remark}
 
-\subsection{\zcmd{ballRR}}
+\subsection{\zcmd{ballR}}
 
-For any real numbers $x$ and $r$, let $\ballRR(x,r)$ denote the set of all real numbers within distance $r$ of $x$.
+For any real numbers $x$ and $r$, let $\ballR(x,r)$ denote the set of all real numbers within distance $r$ of $x$.
 
 \begin{axdef}
-	\ballRR: \R \cross \R \fun \power \R
+	\ballR: \R \cross \R \fun \power \R
 \where
 	\forall x, r: \R @ \\
-	\t1	\ballRR(x,r) = \{~ x': \R | \absR(x' \subR x) \ltR r ~\}
+	\t1	\ballR(x,r) = \{~ x': \R | \absR(x' \subR x) \ltR r ~\}
 \end{axdef}
 
 \begin{remark}
-If $r \gtR 0$ then $x \in \ballRR(x, r)$. 
+Balls are intervals.
+
+\begin{zed}
+	\forall x, r: \R @ \\
+	\t1	\ballR(x,r) = \intervalR(x \subR r, x \addR r)
+\end{zed}
+
 \end{remark}
 
 \begin{remark}
-If $r \leR 0$ then $\ballRR(x,r) = \emptyset$.
+If $r \gtR 0$ then $x$ is in $\ballR(x, r)$. 
+
+\begin{zed}
+	\forall x: \R; r: \Rpos @ \\
+	\t1	x \in \ballR(x,r)
+\end{zed}
+
 \end{remark}
 
 \begin{remark}
-$\ballRR(x,r) = \intervalRR(x-r, x+r)$
+If $r \leR 0$ then $\ballR(x,r)$ is empty.
+
+\begin{zed}
+	\forall x, r: \R | r \leR \zeroR @ \\
+	\t1	\ballR(x,r) = \emptyset
+\end{zed}
+
 \end{remark}
+
+\subsection{\zcmd{ballsR}}
+
+Let $\ballsR$ denote the set of all open balls in $\R$.
+
+\begin{axdef}
+	\ballsR: \family~\R
+\where
+	\ballsR = \{~ x, r: \R @ \ballR(x,r) ~\}
+\end{axdef}
 
 \subsection{\zcmd{openR}}
 
-A subset $U$ of $\R$ is said to be {\it open} if for every point $x \in U$ there is some $r > 0$ such that $\ballRR(x,r) \subset U$.
+A subset $U$ of $\R$ is said to be {\it open} if every point $x \in U$ is surrounded by some open ball $B \subset U$ that lies
+strictly within $U$.
 Let $\openR$ denote the set of all open subsets of $\R$.
 
 \begin{axdef}
-	\openR: \power (\power \R)
+	\openR: \family~\R
 \where
-	\openR = \{~ U:  \power \R | \forall x: U @ \\
-	\t1	\exists r: \Rpos @ \ballRR(x,r) \subset U ~\}
+	\openR = \{~ U:  \power \R | \\
+	\t1	\forall x: U @ \\
+	\t2		\exists B: \ballsR @ x \in B \subset U ~\}
 \end{axdef}
 
 \begin{remark}
-$\ballRR(x,r) \in \openR$
+All balls are open.
+
+\begin{zed}
+	\ballsR \subset \openR
+\end{zed}
+
 \end{remark}
 
 \begin{remark}
-$\emptyset \in \openR$
+The empty set is open.
+
+\begin{zed}
+	\emptyset \in \openR
+\end{zed}
+
 \end{remark}
 
 \begin{remark}
-$\R \in \openR$
+The set of all real numbers is open.
+
+\begin{zed}
+	\R \in \openR
+\end{zed}
+
 \end{remark}
 
 \subsection{\zcmd{tauR}}
@@ -191,7 +236,7 @@ Let $\tauR$ denote the usual topology on $\R$.
 \begin{axdef}
 	\tauR: top[\R]
 \where
-	\tauR = topGen[\R] \{~ x: \R; r: \Rpos @ \ballRR(x, r) ~\}
+	\tauR = topGen[\R] \{~ x: \R; r: \Rpos @ \ballR(x, r) ~\}
 \end{axdef}
 
 \begin{remark}
@@ -202,10 +247,20 @@ Let $\tauR$ denote the usual topology on $\R$.
 
 \end{remark}
 
+\subsection{\zcmd{Rtau}}
+
+Let $\Rtau$ denote the topological space defined by $\R$ with the usual topology.
+
+\begin{axdef}
+	\Rtau: topSpaces[\R]
+\where
+	\Rtau = (\R, \tauR)
+\end{axdef}
+
 \begin{example}
 
 \begin{zed}
-	(\R, \tauR) \in topSpace[\R]
+	\Rtau \in topSpace[\R]
 \end{zed}
 
 \end{example}
@@ -226,7 +281,14 @@ Let $\neighR(x)$ denote the set of all neighbourhoods of $x$.
 Clearly, every real number has an infinity of neighbourhoods.
 
 \begin{remark}
-If $r \gtR 0$ then $\ballRR(x, r) \in \neighR(x)$.
+Any open ball that contains $x$ is a neighbourhood of $x$.
+
+\begin{zed}
+	\forall x: \R; B: \ballsR | \\
+	\t1	x \in B @ \\
+	\t2		B \in \neighR(x)
+\end{zed}
+
 \end{remark}
 
 \section{Functions}
@@ -250,8 +312,13 @@ let $\FunR(x)$ denote the set of all real-valued functions that are locally defi
 \end{axdef}
 
 \begin{remark}
-The function $\sqrtR$ is not locally defined at $0$ because it's defined only for non-negative numbers
+The function $\sqrtR$ is not locally defined at $0$ because it's defined only for non-negative numbers,
 but every neighbourhood of $0$ contains some negative numbers.
+
+\begin{zed}
+	\sqrtR \notin \FunR(\zeroR)
+\end{zed}
+
 \end{remark}
 
 \subsection{\zcmd{FunPR}}

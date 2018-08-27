@@ -224,6 +224,23 @@
 %%pregen \family
 
 \DeclareMathOperator{\CzeroTT}{C^0}
+\DeclareMathOperator{\const}{const}
+
+% the induced family infix operator
+\newcommand{\inducedFam}{\mathbin{|}}
+
+% the induced topology infix operator
+\newcommand{\inducedTop}{\mathbin{|_\mathsf{top}}}
+
+% the induced topological space infix operator
+\newcommand{\inducedTopSp}{\mathbin{|_\mathsf{top}}}
+
+%%inop \inducedFam \inducedTop \inducedTopSp 6
+
+% the product topology infix operator
+\newcommand{\prodTop}{\mathbin{\cross}}
+
+%%inop \prodTop 5
 \documentclass[11pt, oneside]{article}
 
 \usepackage{../shared/preamble}
@@ -288,13 +305,23 @@ A {\it topology} $\tau$ on $X$ is a family of subsets of $X$, referred to as the
 \item The union of any family of open sets is open. 
 \end{itemize}
 
-\subsection{$top$}
+\subsection{$top$ and $tops$}
 
 Let $top[X]$ denote the set of all topologies on $X$.
 
-\begin{zed}
-	top[X] == \{~ Topology[X] @ \tau ~\}
-\end{zed}
+\begin{gendef}[X]
+	top: \power(\family X)
+\where
+	top = \{~ Topology[X] @ \tau ~\}
+\end{gendef}
+
+Let $tops[X]$ denote the set of all topologies on subsets $U \subseteq X$.
+
+\begin{gendef}[X]
+	tops: \power(\family X)
+\where
+	tops = \bigcup \{~ U: \power X @ top[U] ~\}
+\end{gendef}
 
 \subsection{$discrete$ and $indiscrete$}
 
@@ -302,14 +329,17 @@ The {\it discrete} topology on $X$ consists of all subsets of $X$.
 The {\it indiscrete} topology on $X$ consists of just $X$ and $\emptyset$.
 Let $discrete[X]$ and $indiscrete[X]$ denote the discrete and indiscrete topologies on $X$.
 
-\begin{zed}
-	discrete[X] == \power X
+\begin{gendef}[X]
+	discrete, indiscrete: \family X
+\where
+	discrete = \power X
 \also
-	indiscrete[X] ==  \{ \emptyset, X \}
-\end{zed}
+	indiscrete =  \{ \emptyset, X \}
+\end{gendef}
 
 \begin{example}
 Let $t_1$ be an arbitrary set.
+Then $discrete[t_1]$ and $indiscrete[t_1]$ are topologies on $t_1$.
 
 \begin{zed}
 	discrete[t_1] \in top[t_1] 
@@ -371,7 +401,26 @@ Let $t_1$ be an arbitrary set.
 	(t_1, discrete[t_1]) \in topSpace[t_1]
 \end{zed}
 
+
 \end{example}
+
+\subsection{$topSpaces$}
+
+Let $topSpaces[t]$ dentote the set of all topological spaces $(X,\tau)$ where $X$ is a subset of $t$.
+
+\begin{gendef}[t]
+	topSpaces: \power t \rel \family t
+\where
+	topSpaces = \{~ X: \power t; \tau: \family t | \tau \in top[X] ~\}
+\end{gendef}
+
+\begin{remark}
+
+\begin{zed}
+	topSpace[t_1] \subseteq topSpaces[t_1]
+\end{zed}
+
+\end{remark}
 
 \section{Continuous Mappings}
 
@@ -392,14 +441,55 @@ A mapping $f \in X \fun Y$ is said to be {\it continuous} if the inverse image o
 
 \subsection{\zcmd{CzeroTT}}
 
-Let $\CzeroTT((X,\tau),(Y,\sigma))$ denote the set of continuous mappings from $(X,\tau)$ to $(Y,\sigma)$.
+Let $A$ and $B$ be topological spaces, and
+let $\CzeroTT(A,B)$ denote the set of continuous mappings from $A$ to $B$.
 
 \begin{gendef}[X,Y]
 	\CzeroTT: topSpace[X] \cross topSpace[Y] \fun \power (X \fun Y)
 \where
 	\forall \tau: top[X]; \sigma: top[Y] @ \\
-	\t1	\CzeroTT((X,\tau),(Y,\sigma)) = \{~ f: X \fun Y | Continuous[X,Y] ~\}
+	\t1	\LET A == (X, \tau); B == (Y, \sigma) @ \\
+	\t2		\CzeroTT(A,B) = \{~ f: X \fun Y | Continuous[X,Y] ~\}
 \end{gendef}
+
+\subsection{The Identity Mapping}
+
+\begin{remark}
+The identity mapping is continuous.
+
+\begin{zed}
+	\forall \tau: top[t_1] @ \\
+	\t1	\LET A == (t_1, \tau) @ \\
+	\t2		\id t_1 \in \CzeroTT(A, A)
+\end{zed}
+
+\end{remark}
+
+\subsection{\zcmd{const}}
+
+Let $X$ and $Y$ be sets and let $c \in Y$ be some given point.
+The mapping that sends every point of $X$ to $c$ is called the {\it constant mapping} defined by $c$.
+Let $\const(c)$ denote the constant mapping.
+
+\begin{gendef}[X,Y]
+	\const: Y \fun (X \fun Y)
+\where
+	\forall c: Y @ \\
+	\t1	\const(c) = (\lambda x: X @ c)
+\end{gendef}
+
+\begin{remark}
+The constant mapping is continuous.
+
+\begin{zed}
+	\forall \tau: top[t_1]; \sigma: top[t_2]; c: t_2 @ \\
+	\t1	\LET A == (t_1, \tau); B == (t_2, \sigma) @ \\
+	\t2		\const[t_1,t_2] c \in \CzeroTT(A,B)
+\end{zed}
+
+\end{remark}
+
+\subsection{Composition of Continuous Mapping}
 
 \begin{remark}
 Let $t_1$, $t_2$, and $t_3$ be arbitrary sets.
@@ -413,6 +503,83 @@ The composition of continuous mappings is a continuous mapping.
 
 \end{remark}
 
+\section{Induced Topology}
+
+Let $A = (X, \tau)$ be a topological space and let $U \subseteq X$ be a subset.
+The topology on $X$ {\it induces} a topology on $U$.
+This topology is variously referred to as the {\it induced}, {\it relative}, or {\it subspace} topology on $U$.
+
+\subsection{\zcmd{inducedFam}}
+
+Let $\phi$ be a family of subsets of $X$ and let $U$ be a subset of $X$.
+The family of subsets of $U$ {\it induced} by $\phi$ is the set of intersections of the members of $\phi$ with $U$.
+Let $\phi \inducedFam U$ denote the family on $U$ induced by $\phi$.
+
+\begin{gendef}[X]
+	\_ \inducedFam \_:  \family X \cross \power X \fun \family X
+\where
+	\forall \phi: \family X; U: \power X @ \\
+	\t1	\phi \inducedFam U = \{~ Y: \phi @ Y \cap U ~\}
+\end{gendef}
+
+\begin{remark}
+If $\tau$ is a topology on $X$ then $\tau \inducedFam U$ is a topology on $U$.
+
+\begin{zed}
+	\forall \tau: top[t_1]; U: \power t_1 @ \\
+	\t1	\tau \inducedFam U \in top[U]
+\end{zed}
+
+\end{remark}
+
+\subsection{\zcmd{inducedTop} and \zcmd{inducedTopSp}}
+
+Let $A = (X, \tau)$ be a topological space.
+Let $\tau \inducedTop U$ denote the topology on $U$ induced by $\tau$
+\begin{gendef}[X]
+	\_ \inducedTop \_: top[X] \cross \power X \fun tops[X]
+\where
+	\forall \tau: top[X]; U: \power X @ \\
+		\tau \inducedTop U = \tau \inducedFam U
+\end{gendef}
+
+Let $A \inducedTopSp U$ denote the corresponding induced topological space.
+
+\begin{gendef}[X]
+	\_ \inducedTopSp \_: topSpace[X] \cross \power X \fun topSpaces[X]
+\where
+	\forall \tau: top[X]; U: \power X @ \\
+	\t1	\LET A == (X, \tau) @ \\
+	\t2		A \inducedTopSp U = (U, \tau \inducedTop U)
+\end{gendef}
+
+\begin{remark}
+The induced topological space $A \inducedTopSp U$ is a topological space on $U$.
+
+\begin{zed}
+	\forall \tau: top[t_1]; U: \power t_1 @ \\
+	\t1	\LET A == (t_1, \tau) @ \\
+	\t2		A \inducedTopSp U \in topSpace[U]
+\end{zed}
+
+\end{remark}
+
+\section{Product Topology}
+
+Let $X$ and $Y$ be sets and let $A$ and $B$ be topological spaces on them.
+There is a natural topology on the product set $X \cross Y$.
+
+%\subsection{\zcmd{prodTop}}
+%
+%Let $A \prodTop B$ denote the product topological space.
+%
+%\begin{gendef}[X,Y]
+%	\_ \prodTop \_: topSpace[X] \cross topSpace[Y] \fun topSpace[X \cross Y]
+%\where
+%	\forall \tau: top[X]; \sigma: top[Y] @ \\
+%	\t1	\LET A == (X, \tau); B == (Y, \sigma); Z == X \cross Y @ \\
+%	\t2		A \prodTop B = (Z, topGen[Z](\tau \cross \sigma))
+%\end{gendef}
 
 \printbibliography
 
@@ -478,11 +645,13 @@ The composition of continuous mappings is a continuous mapping.
 % the positive square root function sqrt(x)
 \DeclareMathOperator{\sqrtR}{sqrt}
 
-\DeclareMathOperator{\intervalRR}{interval}
-\DeclareMathOperator{\ballRR}{ball}
+\DeclareMathOperator{\intervalR}{interval}
+\DeclareMathOperator{\ballR}{ball}
+\DeclareMathOperator{\ballsR}{balls}
 \DeclareMathOperator{\neighR}{neigh}
 
 \newcommand{\tauR}{\tau_\R}
+\newcommand{\Rtau}{\R_\tau}
 
 \DeclareMathOperator{\limRR}{lim}
 \DeclareMathOperator{\limR}{lim}
@@ -629,66 +798,111 @@ For non-negative $x$, let $\sqrtR(x)$ denote $\sqrt{x}$, the non-negative square
 
 \section{Open Sets}
 
-\subsection{\zcmd{intervalRR}}
+\subsection{\zcmd{intervalR}}
 
-For any real numbers $a$ and $b$, let $\intervalRR(a,b)$ denote $(a,b)$, the open interval bounded by $a$ and $b$.
+For any real numbers $a$ and $b$, let $\intervalR(a,b)$ denote $(a,b)$, the open interval bounded by $a$ and $b$.
 
 \begin{axdef}
-	\intervalRR: \R \cross \R \fun \power \R
+	\intervalR: \R \cross \R \fun \power \R
 \where
 	\forall a, b: \R @ \\
-	\t1	\intervalRR(a,b) = \{~ x: \R | a \ltR x \ltR b ~\}
+	\t1	\intervalR(a,b) = \{~ x: \R | a \ltR x \ltR b ~\}
 \end{axdef}
 
 \begin{remark}
-If $a \geR b$ then $\intervalRR(a,b) = \emptyset$.
+If $a \geR b$ then $\intervalR(a,b) = \emptyset$.
 \end{remark}
 
-\subsection{\zcmd{ballRR}}
+\subsection{\zcmd{ballR}}
 
-For any real numbers $x$ and $r$, let $\ballRR(x,r)$ denote the set of all real numbers within distance $r$ of $x$.
+For any real numbers $x$ and $r$, let $\ballR(x,r)$ denote the set of all real numbers within distance $r$ of $x$.
 
 \begin{axdef}
-	\ballRR: \R \cross \R \fun \power \R
+	\ballR: \R \cross \R \fun \power \R
 \where
 	\forall x, r: \R @ \\
-	\t1	\ballRR(x,r) = \{~ x': \R | \absR(x' \subR x) \ltR r ~\}
+	\t1	\ballR(x,r) = \{~ x': \R | \absR(x' \subR x) \ltR r ~\}
 \end{axdef}
 
 \begin{remark}
-If $r \gtR 0$ then $x \in \ballRR(x, r)$. 
+Balls are intervals.
+
+\begin{zed}
+	\forall x, r: \R @ \\
+	\t1	\ballR(x,r) = \intervalR(x \subR r, x \addR r)
+\end{zed}
+
 \end{remark}
 
 \begin{remark}
-If $r \leR 0$ then $\ballRR(x,r) = \emptyset$.
+If $r \gtR 0$ then $x$ is in $\ballR(x, r)$. 
+
+\begin{zed}
+	\forall x: \R; r: \Rpos @ \\
+	\t1	x \in \ballR(x,r)
+\end{zed}
+
 \end{remark}
 
 \begin{remark}
-$\ballRR(x,r) = \intervalRR(x-r, x+r)$
+If $r \leR 0$ then $\ballR(x,r)$ is empty.
+
+\begin{zed}
+	\forall x, r: \R | r \leR \zeroR @ \\
+	\t1	\ballR(x,r) = \emptyset
+\end{zed}
+
 \end{remark}
+
+\subsection{\zcmd{ballsR}}
+
+Let $\ballsR$ denote the set of all open balls in $\R$.
+
+\begin{axdef}
+	\ballsR: \family~\R
+\where
+	\ballsR = \{~ x, r: \R @ \ballR(x,r) ~\}
+\end{axdef}
 
 \subsection{\zcmd{openR}}
 
-A subset $U$ of $\R$ is said to be {\it open} if for every point $x \in U$ there is some $r > 0$ such that $\ballRR(x,r) \subset U$.
+A subset $U$ of $\R$ is said to be {\it open} if every point $x \in U$ is surrounded by some open ball $B \subset U$ that lies
+strictly within $U$.
 Let $\openR$ denote the set of all open subsets of $\R$.
 
 \begin{axdef}
-	\openR: \power (\power \R)
+	\openR: \family~\R
 \where
-	\openR = \{~ U:  \power \R | \forall x: U @ \\
-	\t1	\exists r: \Rpos @ \ballRR(x,r) \subset U ~\}
+	\openR = \{~ U:  \power \R | \\
+	\t1	\forall x: U @ \\
+	\t2		\exists B: \ballsR @ x \in B \subset U ~\}
 \end{axdef}
 
 \begin{remark}
-$\ballRR(x,r) \in \openR$
+All balls are open.
+
+\begin{zed}
+	\ballsR \subset \openR
+\end{zed}
+
 \end{remark}
 
 \begin{remark}
-$\emptyset \in \openR$
+The empty set is open.
+
+\begin{zed}
+	\emptyset \in \openR
+\end{zed}
+
 \end{remark}
 
 \begin{remark}
-$\R \in \openR$
+The set of all real numbers is open.
+
+\begin{zed}
+	\R \in \openR
+\end{zed}
+
 \end{remark}
 
 \subsection{\zcmd{tauR}}
@@ -699,7 +913,7 @@ Let $\tauR$ denote the usual topology on $\R$.
 \begin{axdef}
 	\tauR: top[\R]
 \where
-	\tauR = topGen[\R] \{~ x: \R; r: \Rpos @ \ballRR(x, r) ~\}
+	\tauR = topGen[\R] \{~ x: \R; r: \Rpos @ \ballR(x, r) ~\}
 \end{axdef}
 
 \begin{remark}
@@ -710,10 +924,20 @@ Let $\tauR$ denote the usual topology on $\R$.
 
 \end{remark}
 
+\subsection{\zcmd{Rtau}}
+
+Let $\Rtau$ denote the topological space defined by $\R$ with the usual topology.
+
+\begin{axdef}
+	\Rtau: topSpaces[\R]
+\where
+	\Rtau = (\R, \tauR)
+\end{axdef}
+
 \begin{example}
 
 \begin{zed}
-	(\R, \tauR) \in topSpace[\R]
+	\Rtau \in topSpace[\R]
 \end{zed}
 
 \end{example}
@@ -734,7 +958,14 @@ Let $\neighR(x)$ denote the set of all neighbourhoods of $x$.
 Clearly, every real number has an infinity of neighbourhoods.
 
 \begin{remark}
-If $r \gtR 0$ then $\ballRR(x, r) \in \neighR(x)$.
+Any open ball that contains $x$ is a neighbourhood of $x$.
+
+\begin{zed}
+	\forall x: \R; B: \ballsR | \\
+	\t1	x \in B @ \\
+	\t2		B \in \neighR(x)
+\end{zed}
+
 \end{remark}
 
 \section{Functions}
@@ -758,8 +989,13 @@ let $\FunR(x)$ denote the set of all real-valued functions that are locally defi
 \end{axdef}
 
 \begin{remark}
-The function $\sqrtR$ is not locally defined at $0$ because it's defined only for non-negative numbers
+The function $\sqrtR$ is not locally defined at $0$ because it's defined only for non-negative numbers,
 but every neighbourhood of $0$ contains some negative numbers.
+
+\begin{zed}
+	\sqrtR \notin \FunR(\zeroR)
+\end{zed}
+
 \end{remark}
 
 \subsection{\zcmd{FunPR}}

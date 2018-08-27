@@ -4,7 +4,7 @@
 \addbibresource{../shared/references.bib}
 
 \usepackage{../real-numbers/real-numbers}
-\usepackage{formal-specification-and-z-notation}
+\usepackage{formal-specifications}
 
 \title{The Role of Formalization and Z Notation}
 \author{Arthur Ryman, {\tt arthur.ryman@gmail.com}}
@@ -185,7 +185,7 @@ The benefit of placing theorem-like statements in zed boxes is that the \fuzz\ t
 It will often be the case that a theorem-like statement will involve generic constructs.
 Although Z notation provides a mechanism for introducing formal generic parameters into the definition of 
 generic constants and schemas, it does not provide such a mechanism for constraints.
-We can work around this limitations by declaring a set of global given sets which are understood to be used in theorem-like
+We can work around this limitation by declaring a set of global given sets which are understood to be used in theorem-like
 statements where they are taken to represent arbitrary sets.
 The article on topological spaces introduces the global given sets $t_1$, $t_2$, and $t_3$ for this purpose.
 
@@ -207,7 +207,7 @@ In this case we recognize that the symbols used in the expression $(a,b)$ do not
 and we interpret them accordingly.
 The notation $(a,b)$ for denoting an open interval of the real number line is
 arguably very compact, convenient, and easy to understand. 
-In contrast, the Z notation function application $\intervalRR(a,b)$, defined in the article on real numbers, 
+In contrast, the Z notation function application $\intervalR(a,b)$, defined in the article on real numbers, 
 may strike the reader as somewhat verbose and clumsy, albeit precise.
 
 \subsection{Prefix, Infix, and Postfix Operators in \fuzz}

@@ -62,13 +62,23 @@ A {\it topology} $\tau$ on $X$ is a family of subsets of $X$, referred to as the
 \item The union of any family of open sets is open. 
 \end{itemize}
 
-\subsection{$top$}
+\subsection{$top$ and $tops$}
 
 Let $top[X]$ denote the set of all topologies on $X$.
 
-\begin{zed}
-	top[X] == \{~ Topology[X] @ \tau ~\}
-\end{zed}
+\begin{gendef}[X]
+	top: \power(\family X)
+\where
+	top = \{~ Topology[X] @ \tau ~\}
+\end{gendef}
+
+Let $tops[X]$ denote the set of all topologies on subsets $U \subseteq X$.
+
+\begin{gendef}[X]
+	tops: \power(\family X)
+\where
+	tops = \bigcup \{~ U: \power X @ top[U] ~\}
+\end{gendef}
 
 \subsection{$discrete$ and $indiscrete$}
 
@@ -76,14 +86,17 @@ The {\it discrete} topology on $X$ consists of all subsets of $X$.
 The {\it indiscrete} topology on $X$ consists of just $X$ and $\emptyset$.
 Let $discrete[X]$ and $indiscrete[X]$ denote the discrete and indiscrete topologies on $X$.
 
-\begin{zed}
-	discrete[X] == \power X
+\begin{gendef}[X]
+	discrete, indiscrete: \family X
+\where
+	discrete = \power X
 \also
-	indiscrete[X] ==  \{ \emptyset, X \}
-\end{zed}
+	indiscrete =  \{ \emptyset, X \}
+\end{gendef}
 
 \begin{example}
 Let $t_1$ be an arbitrary set.
+Then $discrete[t_1]$ and $indiscrete[t_1]$ are topologies on $t_1$.
 
 \begin{zed}
 	discrete[t_1] \in top[t_1] 
@@ -145,7 +158,26 @@ Let $t_1$ be an arbitrary set.
 	(t_1, discrete[t_1]) \in topSpace[t_1]
 \end{zed}
 
+
 \end{example}
+
+\subsection{$topSpaces$}
+
+Let $topSpaces[t]$ dentote the set of all topological spaces $(X,\tau)$ where $X$ is a subset of $t$.
+
+\begin{gendef}[t]
+	topSpaces: \power t \rel \family t
+\where
+	topSpaces = \{~ X: \power t; \tau: \family t | \tau \in top[X] ~\}
+\end{gendef}
+
+\begin{remark}
+
+\begin{zed}
+	topSpace[t_1] \subseteq topSpaces[t_1]
+\end{zed}
+
+\end{remark}
 
 \section{Continuous Mappings}
 
@@ -166,14 +198,55 @@ A mapping $f \in X \fun Y$ is said to be {\it continuous} if the inverse image o
 
 \subsection{\zcmd{CzeroTT}}
 
-Let $\CzeroTT((X,\tau),(Y,\sigma))$ denote the set of continuous mappings from $(X,\tau)$ to $(Y,\sigma)$.
+Let $A$ and $B$ be topological spaces, and
+let $\CzeroTT(A,B)$ denote the set of continuous mappings from $A$ to $B$.
 
 \begin{gendef}[X,Y]
 	\CzeroTT: topSpace[X] \cross topSpace[Y] \fun \power (X \fun Y)
 \where
 	\forall \tau: top[X]; \sigma: top[Y] @ \\
-	\t1	\CzeroTT((X,\tau),(Y,\sigma)) = \{~ f: X \fun Y | Continuous[X,Y] ~\}
+	\t1	\LET A == (X, \tau); B == (Y, \sigma) @ \\
+	\t2		\CzeroTT(A,B) = \{~ f: X \fun Y | Continuous[X,Y] ~\}
 \end{gendef}
+
+\subsection{The Identity Mapping}
+
+\begin{remark}
+The identity mapping is continuous.
+
+\begin{zed}
+	\forall \tau: top[t_1] @ \\
+	\t1	\LET A == (t_1, \tau) @ \\
+	\t2		\id t_1 \in \CzeroTT(A, A)
+\end{zed}
+
+\end{remark}
+
+\subsection{\zcmd{const}}
+
+Let $X$ and $Y$ be sets and let $c \in Y$ be some given point.
+The mapping that sends every point of $X$ to $c$ is called the {\it constant mapping} defined by $c$.
+Let $\const(c)$ denote the constant mapping.
+
+\begin{gendef}[X,Y]
+	\const: Y \fun (X \fun Y)
+\where
+	\forall c: Y @ \\
+	\t1	\const(c) = (\lambda x: X @ c)
+\end{gendef}
+
+\begin{remark}
+The constant mapping is continuous.
+
+\begin{zed}
+	\forall \tau: top[t_1]; \sigma: top[t_2]; c: t_2 @ \\
+	\t1	\LET A == (t_1, \tau); B == (t_2, \sigma) @ \\
+	\t2		\const[t_1,t_2] c \in \CzeroTT(A,B)
+\end{zed}
+
+\end{remark}
+
+\subsection{Composition of Continuous Mapping}
 
 \begin{remark}
 Let $t_1$, $t_2$, and $t_3$ be arbitrary sets.
@@ -187,6 +260,83 @@ The composition of continuous mappings is a continuous mapping.
 
 \end{remark}
 
+\section{Induced Topology}
+
+Let $A = (X, \tau)$ be a topological space and let $U \subseteq X$ be a subset.
+The topology on $X$ {\it induces} a topology on $U$.
+This topology is variously referred to as the {\it induced}, {\it relative}, or {\it subspace} topology on $U$.
+
+\subsection{\zcmd{inducedFam}}
+
+Let $\phi$ be a family of subsets of $X$ and let $U$ be a subset of $X$.
+The family of subsets of $U$ {\it induced} by $\phi$ is the set of intersections of the members of $\phi$ with $U$.
+Let $\phi \inducedFam U$ denote the family on $U$ induced by $\phi$.
+
+\begin{gendef}[X]
+	\_ \inducedFam \_:  \family X \cross \power X \fun \family X
+\where
+	\forall \phi: \family X; U: \power X @ \\
+	\t1	\phi \inducedFam U = \{~ Y: \phi @ Y \cap U ~\}
+\end{gendef}
+
+\begin{remark}
+If $\tau$ is a topology on $X$ then $\tau \inducedFam U$ is a topology on $U$.
+
+\begin{zed}
+	\forall \tau: top[t_1]; U: \power t_1 @ \\
+	\t1	\tau \inducedFam U \in top[U]
+\end{zed}
+
+\end{remark}
+
+\subsection{\zcmd{inducedTop} and \zcmd{inducedTopSp}}
+
+Let $A = (X, \tau)$ be a topological space.
+Let $\tau \inducedTop U$ denote the topology on $U$ induced by $\tau$
+\begin{gendef}[X]
+	\_ \inducedTop \_: top[X] \cross \power X \fun tops[X]
+\where
+	\forall \tau: top[X]; U: \power X @ \\
+	\t1	\tau \inducedTop U = \tau \inducedFam U
+\end{gendef}
+
+Let $A \inducedTopSp U$ denote the corresponding induced topological space.
+
+\begin{gendef}[X]
+	\_ \inducedTopSp \_: topSpace[X] \cross \power X \fun topSpaces[X]
+\where
+	\forall \tau: top[X]; U: \power X @ \\
+	\t1	\LET A == (X, \tau) @ \\
+	\t2		A \inducedTopSp U = (U, \tau \inducedTop U)
+\end{gendef}
+
+\begin{remark}
+The induced topological space $A \inducedTopSp U$ is a topological space on $U$.
+
+\begin{zed}
+	\forall \tau: top[t_1]; U: \power t_1 @ \\
+	\t1	\LET A == (t_1, \tau) @ \\
+	\t2		A \inducedTopSp U \in topSpace[U]
+\end{zed}
+
+\end{remark}
+
+\section{Product Topology}
+
+Let $X$ and $Y$ be sets and let $A$ and $B$ be topological spaces on them.
+There is a natural topology on the product set $X \cross Y$ generated by the products of the open sets on $X$ and $Y$.
+
+\subsection{\zcmd{prodTop}}
+
+Let $A \prodTop B$ denote the product topological space.
+
+\begin{gendef}[X,Y]
+	\_ \prodTop \_: topSpace[X] \cross topSpace[Y] \fun topSpace[X \cross Y]
+\where
+	\forall \tau: top[X]; \sigma: top[Y] @ \\
+	\t1	\LET A == (X, \tau); B == (Y, \sigma); Z == X \cross Y @ \\
+	\t2		A \prodTop B = (Z, topGen[Z](\tau \cross \sigma))
+\end{gendef}
 
 \printbibliography
 

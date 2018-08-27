@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-#!/usr/bin/env bash
+cd $(dirname $0)
+pwd
 cat ../shared/fuzzlib\
  ../topological-spaces/topological-spaces.sty\
  ../topological-spaces/topological-spaces.tex\
