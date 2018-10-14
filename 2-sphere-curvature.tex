@@ -24,18 +24,52 @@ The approach taken here is to precisely formalize every concept involved in the 
 
 \section{Introduction}
 
-The 2-sphere, $\Stwo$, is an extremely ubiquitous and illuminating example of a Riemannian manifold.
-It appears in many interesting contexts including complex analysis, special relativity, electromagnetism, and quantum mechanics.
-It is a compact submanifold of $\Rthree$ and so, unlike its higher-dimensional versions, can be clearly visualized.
-These attributes make $\Stwo$ an ideal concrete example for illustrating the concepts of 
-abstract Riemannian geometry.
-
 In Lecture 3 of his Stanford University course on General Relativity \cite{susskind-gr3},
 Leonard Susskind asks his class to prove that $\Stwo$ is curved.
 He does this before defining curvature.
 The class is simply tasked to show that there is no coordinate system in which the components
 of the metric tensor become those of flat space.
 The goal of this article is to produce such a proof.
+
+The 2-sphere, $\Stwo$, is an extremely ubiquitous and illuminating example of a Riemannian manifold.
+It appears in many interesting contexts including complex analysis, special relativity, electromagnetism, and quantum mechanics.
+It is a compact submanifold of $\Rthree$ and so, unlike its higher-dimensional versions, can be easily visualized.
+These attributes make $\Stwo$ an ideal concrete example for illustrating the concepts of 
+abstract Riemannian geometry.
+
+\section{Plan}
+
+\begin{enumerate}
+
+\item Define the usual topology on $\R^n$. - DONE
+
+\item Refactor the definitions of continuous and smooth functions on $\R$ so that they align with mainstream notation. - DONE
+
+\item Define the smooth functions on $\R^n$.
+
+A function is smooth if it is infinitely differentiable.
+
+A function is differentiable on a set if it is differentiable at each point of the set.
+
+A function is differentiable at a point if it is approximately linear at that point.
+
+A function is approximately linear at a point if the residual vanishes to second order.
+This condition is normally phrased in terms of the difference quotient.
+
+\item Define tangent vectors.
+
+\item Define the metric tensor and how its components transform under coordinate change.
+
+\item Set up the differential equations to solve.
+
+\item Solve the equations modulo terms of $O(x)$, $O(x^2)$, and $O(x^3)$, showing that no solution exists
+modulo $O(x^3)$.
+
+\item Generalize to other submanifolds of $R^3$.
+
+\item Generalize to submanifolds of $R^n$ for $n > 3$.
+
+\end{enumerate}
 
 \section{Proof Approaches}
 
@@ -129,38 +163,6 @@ While this proof answers the question, it doesn't provide much insight into curv
 For example, the 3-sphere $\Sthree$ must surely also be curved, but $\chi(\Sthree) = 0$.
 Curvature is a local, geometric property, not a global, topological one.
 A coordinate proof for $\Stwo$ should generalize to all higher-dimensional spheres and to other submanifolds of $\R^n$.
-
-\section{Plan}
-
-\begin{enumerate}
-
-\item Define the usual topology on $\R^n$. - DONE
-
-\item Define the smooth functions on $\R^n$.
-
-A function is smooth if it is infinitely differentiable.
-
-A function is differentiable on a set if it is differentiable at each point of the set.
-
-A function is differentiable at a point if it is approximately linear at that point.
-
-A function is approximately linear at a point if the residual vanishes to second order.
-This condition is normally phrased in terms of the difference quotient.
-
-\item Define tangent vectors.
-
-\item Define the metric tensor and how its components transform under coordinate change.
-
-\item Set up the differential equations to solve.
-
-\item Solve the equations modulo terms of $O(x)$, $O(x^2)$, and $O(x^3)$, showing that no solution exists
-modulo $O(x^3)$.
-
-\item Generalize to other submanifolds of $R^3$.
-
-\item Generalize to submanifolds of $R^n$ for $n > 3$.
-
-\end{enumerate}
 
 \section{Smooth Functions}
 

@@ -3,6 +3,8 @@
 \usepackage{../shared/preamble}
 \addbibresource{../shared/references.bib}
 
+\usepackage{../sets/sets}
+\usepackage{../topological-spaces/topological-spaces}
 \usepackage{../real-numbers/real-numbers}
 \usepackage{formal-specifications}
 
@@ -187,14 +189,14 @@ Although Z notation provides a mechanism for introducing formal generic paramete
 generic constants and schemas, it does not provide such a mechanism for constraints.
 We can work around this limitation by declaring a set of global given sets which are understood to be used in theorem-like
 statements where they are taken to represent arbitrary sets.
-The article on topological spaces introduces the global given sets $t_1$, $t_2$, and $t_3$ for this purpose.
+The article on topological spaces introduces the global given sets $\setX$, $\setY$, and $\setZ$ for this purpose.
 
-For example, we can remark that every element $x$ of an arbitrary set $t_1$ is a member of that set.
+For example, we can remark that every element $x$ of an arbitrary set $\setX$ is a member of that set.
 
 \begin{remark}
 
 \begin{zed}
-	\forall x: t_1 @ x \in t_1
+	\forall x: \setX @ x \in \setX
 \end{zed}
 
 \end{remark}
@@ -273,13 +275,15 @@ Let $RightHalfLine$ denote the type of syntactic fragments that define open and 
 	RightHalfLine ::= \openLowerBound \ldata \R \rdata | \closedLowerBound \ldata \R \rdata
 \end{zed}
 
-For example
+\begin{example}
 
 \begin{zed}
 	\openLowerBound \zeroR \in RightHalfLine
 \also
 	\closedLowerBound \oneR \in RightHalfLine
 \end{zed}
+
+\end{example}
 
 Let $rightSet(R)$ denote the set of real numbers that the right half-line syntactic fragment $R$ represents.
 
@@ -350,6 +354,15 @@ For example
 \begin{zed}
 	\zeroR \in \closedLowerBound \zeroR \intersectRightLeft \oneR \openUpperBound
 \end{zed}
+
+\subsection{Improvements}
+
+After reading the above, my reaction is that it would be more readable to first define the relevant objects using meaningful names
+and then define the symbols as abbreviations for them.
+
+TODO: Fix up the above discussion.
+
+TODO: Use the example environment for examples.
 
 \subsection{Summary}
 

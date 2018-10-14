@@ -3,6 +3,7 @@
 \usepackage{../shared/preamble}
 \addbibresource{../shared/references.bib}
 
+\usepackage{../sets/sets}
 \usepackage{../topological-spaces/topological-spaces}
 \usepackage{real-numbers}
 
@@ -236,7 +237,7 @@ Let $\tauR$ denote the usual topology on $\R$.
 \begin{axdef}
 	\tauR: top[\R]
 \where
-	\tauR = topGen[\R] \{~ x: \R; r: \Rpos @ \ballR(x, r) ~\}
+	\tauR = topGen[\R] \ballsR
 \end{axdef}
 
 \begin{remark}
@@ -272,7 +273,7 @@ Any open set that contains $x$ is called a {\it neighbourhood} of it.
 Let $\neighR(x)$ denote the set of all neighbourhoods of $x$.
 
 \begin{axdef}
-	\neighR: \R \fun \power (\power \R)
+	\neighR: \R \fun \family~\R
 \where
 	\forall x: \R @ \\
 	\t1	\neighR(x) = \{~ U: \openR | x \in U~\}
@@ -293,16 +294,16 @@ Any open ball that contains $x$ is a neighbourhood of $x$.
 
 \section{Functions}
 
-The following sections define continuity, limits, and differentiability, which are properties of functions.
-These properties are {\it local} in the sense that they only depend on the values that the function takes in 
-an arbitrarily small neighbourhood of any given point in their domains.
+The following sections define continuity, limits, and differentiability, which are point-wise properties of functions.
+These properties are {\it local} in the sense that in order to determine if they hold at a given point it is sufficient to
+consider the restriction of the function to an arbitrarily small neighbourhood of the point.
 It is therefore useful to first introduce the set of {\it locally defined} functions, 
 namely those functions that are defined in some neighbourhood of each point of  their domains.
 
 \subsection{\zcmd{FunR}}
 
 For $x$ a real number,
-let $\FunR(x)$ denote the set of all real-valued functions that are locally defined at $x$.
+let $\FunR(x)$ denote the set of all real-valued, partial functions on $\R$ that are locally defined at $x$.
 
 \begin{axdef}
 	\FunR: \R \fun \power(\R \pfun \R)
@@ -335,11 +336,18 @@ let $\FunPR(U)$ denote the set of all real-valued functions on $U$ that are loca
 
 \begin{remark}
 If $f \in \FunPR(U)$ then $U \in \openR$.
+
+\begin{zed}
+	\forall U: \power \R @ \\
+	\t1	\FunPR(U) \neq \emptyset \implies U \in \openR
+\end{zed}
+
 \end{remark}
 
 \section{Continuity}
 
-Let $f$ be a real-valued function that is locally defined at $x$ and let $U$ be a neighbourhood of $x$
+Let $f$ be a real-valued partial function on $\R$ 
+that is locally defined at $x$ and let $U$ be a neighbourhood of $x$
 contained within the domain of $f$.
 The function $f$ is said to be {\it continuous} at $x$ if 
 for any $\epsilon > 0$ there is some $\delta > 0$ for which 
@@ -362,18 +370,18 @@ when $x' \in U$ is within $\delta$ of $x$.
 
 \subsection{\zcmd{CzeroR}}
 
-Let $\CzeroR(x)$ denote the set of all functions that are continuous at $x$.
+Let $\CzeroR(x)$ denote the set of all real-valued partial functions on $\R$ that are continuous at $x$.
 \begin{axdef}
 	\CzeroR: \R \fun \power(\R \pfun \R)
 \where
 	\forall x: \R @ \\
-	\t1	\CzeroR(x) = \{~ f: \R \pfun \R | RealContinuous ~\}
+	\t1	\CzeroR(x) = \{~ f: \FunR(x) | RealContinuous ~\}
 \end{axdef}
 
 \subsection{\zcmd{CzeroPR}}
 
 Let $U$ be any subset of $\R$. 
-Define $\CzeroPR(U)$ to be the set of all functions on $U$ that are continuous at each point in $U$.
+Define $\CzeroPR(U)$ to be the set of all real-valued functions on $U$ that are continuous at each point in $U$.
 
 \begin{axdef}
 	\CzeroPR: \power \R \fun \power (\R \pfun \R)
@@ -383,13 +391,31 @@ Define $\CzeroPR(U)$ to be the set of all functions on $U$ that are continuous a
 \end{axdef}
 
 \begin{remark}
-If $f \in \CzeroPR(U)$ then $U$ is a, possibly infinite, union of neighbourhoods.
+If $f \in \CzeroPR(U)$ then $U$ is open.
+
+\begin{zed}
+	\forall U: \power \R @ \\
+	\t1	\CzeroPR(U) \neq \emptyset \implies U \in \openR
+\end{zed}
+
+\end{remark}
+
+\begin{remark}
+The $\epsilon-\delta$ definition of continuity given above is compatible with the definition
+of continuity for mappings between topological spaces when we consider $\Rtau$, the usual topology on $\R$,
+and $\Rtau \inducedTopSp U$, the topology induced on the subset $U$.
+
+\begin{zed}
+	\forall U: \openR @ \\
+	\t1	\CzeroPR(U) = \CzeroTT(\Rtau \inducedTopSp U, \Rtau)
+\end{zed}
+
 \end{remark}
 
 \section{Limits}
 
 Let $x$ and $l$ be real numbers and
-let $f$ be a real-valued function that is defined everywhere in some
+let $f$ be a real-valued partial function on $\R$ that is defined everywhere in some
 neighbourhood $U$ of $x$, except possibly at $x$.
 The function $f$ is said to approach the limit $l$ at $x$ if $f \oplus \{ x \mapsto l \}$ is continuous at $x$.
 $$
@@ -405,7 +431,7 @@ $$
 
 \subsection{\zcmd{limRR}}
 
-Let $\limRR(x,l)$ denote the set of all functions that approach the limit $l$ at $x$.
+Let $\limRR(x,l)$ denote the set of all real-valued partial functions on $\R$ that approach the limit $l$ at $x$.
 
 \begin{axdef}
 	\limRR: \R \cross \R \fun \power(\R \pfun \R)
@@ -469,10 +495,10 @@ By the preceding theorem, $\limFR(f,x)$ is well-defined when it exists.
 
 \section{Differentiability}
 
-Let $f$ be a real-valued function on the real numbers, let $x$ be a real number,
+Let $f$ be a real-valued partial function on $\R$, let $x$ be a real number,
 and let $f$ be defined on some neighbourhood $U$ of $x$.
 
-The function $f$ is said to be differentiable at $x$ if the following limit holds for some number $f'(x)$.
+The function $f$ is said to be {\it differentiable} at $x$ if the following limit holds for some number denoted by $f'(x)$.
 $$
 \lim_{h \to 0} \frac{f(x+h) - f(x)}{h} = f'(x)
 $$
@@ -482,11 +508,12 @@ If $f$ is differentiable at $x$ then $f$ is continuous at $x$.
 \end{remark}
 
 The geometric intuition behind the concept of differentiability is that $f$ is differentiable at $x$
-when, very near $x$, the function $f$ is approximately a straight line with slope $f'(x)$.
+when, very near $x$, the graph of $f$ is approximately a straight line through the point $(x, f(x))$ with slope $f'(x)$.
 $$
 f(x + h) \approx f(x) + f'(x) h \quad \text{when} \quad \abs{h} \approx 0
 $$
-The slope $f'(x)$ is called the derivative of $f$ at $x$.
+The slope $f'(x)$ is called the {\it derivative} of $f$ at $x$
+and $f'$ is called the {\it derived function}.
 
 We can read this definition as saying that the approximate slope function $m(h)$ defined for 
 small enough, non-zero values of $h$ by
@@ -551,7 +578,6 @@ that are differentiable at each point of $U$.
 
 \subsection{\zcmd{derivFR}}
 
-The function $f'$ is called the {\it derived function} or the {\it derivative} of $f$.
 Let $\derivFR(f,x)$ denote $f'(x)$, the derivative of $f$ at $x$.
 
 \begin{axdef}
@@ -618,7 +644,7 @@ at every point of $U$.
 
 \subsection{\zcmd{smoothR}}
 
-A function is said to be smooth if it possesses continuous derivatives of all orders.
+A function is said to be {\it smooth} if it possesses continuous derivatives of all orders.
 Let $x$ be a real number.
 Let $\smoothR(x)$ denote the set of all functions that are smooth at $x$.
 

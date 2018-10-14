@@ -2,25 +2,29 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="82c0bf44-ae61-4473-a000-ce8a864ba31d" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/type-check-all.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/groups/groups.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/groups/groups.sty" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/groups/groups.tex" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sets/sets.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sets/sets.sty" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sets/sets.tex" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/2-sphere-curvature.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/2-sphere-curvature.pdf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/2-sphere-curvature.tex" beforeDir="false" afterPath="$PROJECT_DIR$/2-sphere-curvature.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/formal-specification-and-z-notation/formal-specification-and-z-notation.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/formal-specification-and-z-notation/formal-specification-and-z-notation.prelude" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/formal-specification-and-z-notation/formal-specification-and-z-notation.sh" beforeDir="false" afterPath="$PROJECT_DIR$/formal-specifications/formal-specifications.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/formal-specification-and-z-notation/formal-specification-and-z-notation.sty" beforeDir="false" afterPath="$PROJECT_DIR$/formal-specifications/formal-specifications.sty" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/formal-specification-and-z-notation/formal-specification-and-z-notation.tex" beforeDir="false" afterPath="$PROJECT_DIR$/formal-specifications/formal-specifications.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/formal-specifications/formal-specifications.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/formal-specifications/formal-specifications.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/formal-specifications/formal-specifications.prelude" beforeDir="false" afterPath="$PROJECT_DIR$/formal-specifications/formal-specifications.prelude" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/formal-specifications/formal-specifications.sh" beforeDir="false" afterPath="$PROJECT_DIR$/formal-specifications/formal-specifications.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/formal-specifications/formal-specifications.tex" beforeDir="false" afterPath="$PROJECT_DIR$/formal-specifications/formal-specifications.tex" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/real-numbers/real-numbers.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/real-numbers/real-numbers.pdf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/real-numbers/real-numbers.prelude" beforeDir="false" afterPath="$PROJECT_DIR$/real-numbers/real-numbers.prelude" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/real-numbers/real-numbers.sh" beforeDir="false" afterPath="$PROJECT_DIR$/real-numbers/real-numbers.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/real-numbers/real-numbers.sty" beforeDir="false" afterPath="$PROJECT_DIR$/real-numbers/real-numbers.sty" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/real-numbers/real-numbers.tex" beforeDir="false" afterPath="$PROJECT_DIR$/real-numbers/real-numbers.tex" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/topological-spaces/topological-spaces.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/topological-spaces/topological-spaces.pdf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/topological-spaces/topological-spaces.prelude" beforeDir="false" afterPath="$PROJECT_DIR$/topological-spaces/topological-spaces.prelude" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/topological-spaces/topological-spaces.sh" beforeDir="false" afterPath="$PROJECT_DIR$/topological-spaces/topological-spaces.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/topological-spaces/topological-spaces.sty" beforeDir="false" afterPath="$PROJECT_DIR$/topological-spaces/topological-spaces.sty" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/topological-spaces/topological-spaces.tex" beforeDir="false" afterPath="$PROJECT_DIR$/topological-spaces/topological-spaces.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/type-check-all.sh" beforeDir="false" afterPath="$PROJECT_DIR$/type-check-all.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vector-spaces/vector-spaces.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/vector-spaces/vector-spaces.pdf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vector-spaces/vector-spaces.prelude" beforeDir="false" afterPath="$PROJECT_DIR$/vector-spaces/vector-spaces.prelude" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vector-spaces/vector-spaces.sh" beforeDir="false" afterPath="$PROJECT_DIR$/vector-spaces/vector-spaces.sh" afterDir="false" />
@@ -38,28 +42,30 @@
     <session id="758923210">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="9" />
-          <entry key="project.open.time.4" value="1" />
-          <entry key="project.open.time.5" value="2" />
-          <entry key="project.open.time.6" value="6" />
-          <entry key="project.opened" value="9" />
+          <entry key="project.closed" value="20" />
+          <entry key="project.open.time.0" value="1" />
+          <entry key="project.open.time.4" value="3" />
+          <entry key="project.open.time.5" value="8" />
+          <entry key="project.open.time.6" value="7" />
+          <entry key="project.open.time.7" value="1" />
+          <entry key="project.opened" value="20" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.spring.boot.run.usages" />
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Bash" value="14" />
-          <entry key="LaTeX source file" value="3" />
-          <entry key="LaTeX style file" value="15" />
+          <entry key="Bash" value="24" />
+          <entry key="LaTeX source file" value="5" />
+          <entry key="LaTeX style file" value="24" />
           <entry key="PLAIN_TEXT" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="prelude" value="1" />
-          <entry key="sh" value="185" />
-          <entry key="sty" value="449" />
-          <entry key="tex" value="1" />
+          <entry key="sh" value="244" />
+          <entry key="sty" value="1550" />
+          <entry key="tex" value="18" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.js.language.service.starts" />
@@ -68,19 +74,20 @@
         <counts>
           <entry key="fuzzlib" value="1" />
           <entry key="prelude" value="3" />
-          <entry key="sh" value="14" />
-          <entry key="sty" value="15" />
-          <entry key="tex" value="3" />
+          <entry key="sh" value="24" />
+          <entry key="sty" value="24" />
+          <entry key="tex" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Bash" value="185" />
-          <entry key="LaTeX source file" value="1" />
-          <entry key="LaTeX style file" value="449" />
+          <entry key="Bash" value="244" />
+          <entry key="LaTeX source file" value="18" />
+          <entry key="LaTeX style file" value="1550" />
           <entry key="PLAIN_TEXT" value="1" />
         </counts>
       </usages-collector>
+      <usages-collector id="statistics.vcs.git.usages" />
     </session>
   </component>
   <component name="FileEditorManager">
@@ -88,29 +95,35 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/vector-spaces/vector-spaces.sty">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="20" lean-forward="true" selection-start-line="19" selection-end-line="20" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/real-numbers/real-numbers.sty">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
-              <caret line="30" lean-forward="true" selection-start-line="26" selection-end-line="30" />
-              <folding>
-                <element signature="e#105#129#2" expanded="true" />
-              </folding>
+            <state relative-caret-position="465">
+              <caret line="31" lean-forward="true" selection-start-line="31" selection-end-line="31" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/groups/groups.sty">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="435">
+              <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/topological-spaces/topological-spaces.sty">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
+            <state relative-caret-position="255">
+              <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/groups/groups.sh">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="105">
+              <caret line="7" column="29" lean-forward="true" selection-start-line="7" selection-start-column="29" selection-end-line="7" selection-end-column="29" />
             </state>
           </provider>
         </entry>
@@ -125,6 +138,8 @@
       <find>digression</find>
       <find>\ballRR</find>
       <find>\intervalRR</find>
+      <find>\family</find>
+      <find>\Rtaun</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/shared</dir>
@@ -160,18 +175,23 @@
         <option value="$PROJECT_DIR$/shared/preamble.sty" />
         <option value="$PROJECT_DIR$/2-sphere-curvature.sty" />
         <option value="$PROJECT_DIR$/formal-specification-and-z-notation/formal-specification-and-z-notation.sty" />
-        <option value="$PROJECT_DIR$/topological-spaces/topological-spaces.sh" />
-        <option value="$PROJECT_DIR$/real-numbers/real-numbers.sh" />
         <option value="$PROJECT_DIR$/formal-specification-and-z-notation/formal-specification-and-z-notation.sh" />
-        <option value="$PROJECT_DIR$/vector-spaces/vector-spaces.sh" />
         <option value="$PROJECT_DIR$/check-all.sh" />
         <option value="$PROJECT_DIR$/formal-specifications/formal-specifications.tex" />
-        <option value="$PROJECT_DIR$/type-check-all.sh" />
-        <option value="$PROJECT_DIR$/formal-specifications/formal-specifications.sh" />
-        <option value="$PROJECT_DIR$/vector-spaces/vector-spaces.sty" />
         <option value="$PROJECT_DIR$/real-numbers/real-numbers.sty" />
         <option value="$PROJECT_DIR$/topological-spaces/topological-spaces.prelude" />
+        <option value="$PROJECT_DIR$/sets/sets.sh" />
+        <option value="$PROJECT_DIR$/type-check-all.sh" />
+        <option value="$PROJECT_DIR$/sets/sets.sty" />
         <option value="$PROJECT_DIR$/topological-spaces/topological-spaces.sty" />
+        <option value="$PROJECT_DIR$/vector-spaces/vector-spaces.sh" />
+        <option value="$PROJECT_DIR$/topological-spaces/topological-spaces.sh" />
+        <option value="$PROJECT_DIR$/real-numbers/real-numbers.sh" />
+        <option value="$PROJECT_DIR$/formal-specifications/formal-specifications.sh" />
+        <option value="$PROJECT_DIR$/vector-spaces/vector-spaces.sty" />
+        <option value="$PROJECT_DIR$/groups/groups.sh" />
+        <option value="$PROJECT_DIR$/vector-spaces/vector-spaces.tex" />
+        <option value="$PROJECT_DIR$/groups/groups.sty" />
       </list>
     </option>
   </component>
@@ -189,8 +209,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1029" />
-    <option name="y" value="66" />
+    <option name="x" value="1331" />
+    <option name="y" value="80" />
     <option name="width" value="1168" />
     <option name="height" value="1087" />
   </component>
@@ -230,7 +250,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -238,11 +258,26 @@
               <item name="2-sphere-curvature" type="b2602c69:ProjectViewProjectNode" />
               <item name="2-sphere-curvature" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="2-sphere-curvature" type="b2602c69:ProjectViewProjectNode" />
+              <item name="2-sphere-curvature" type="462c0819:PsiDirectoryNode" />
+              <item name="groups" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="2-sphere-curvature" type="b2602c69:ProjectViewProjectNode" />
+              <item name="2-sphere-curvature" type="462c0819:PsiDirectoryNode" />
+              <item name="topological-spaces" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="2-sphere-curvature" type="b2602c69:ProjectViewProjectNode" />
+              <item name="2-sphere-curvature" type="462c0819:PsiDirectoryNode" />
+              <item name="vector-spaces" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -255,6 +290,8 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/groups" />
+      <recent name="$PROJECT_DIR$/sets" />
       <recent name="$PROJECT_DIR$/formal-specification-and-z-notation" />
       <recent name="$PROJECT_DIR$/topological-spaces" />
       <recent name="$PROJECT_DIR$/real-numbers" />
@@ -276,7 +313,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Bash.type-check-all.sh">
+  <component name="RunManager" selected="Bash.groups.sh">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
       <method v="2">
@@ -289,13 +326,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="formal-specifications.sh" type="BashConfigurationType" factoryName="Bash" temporary="true">
+    <configuration name="groups.sh" type="BashConfigurationType" factoryName="Bash" temporary="true">
       <module name="2-sphere-curvature" />
       <option name="INTERPRETER_OPTIONS" value="bash" />
       <option name="INTERPRETER_PATH" value="/usr/bin/env" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/formal-specifications" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/groups" />
       <option name="PARENT_ENVS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/formal-specifications/formal-specifications.sh" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/groups/groups.sh" />
       <option name="PARAMETERS" value="" />
       <method v="2" />
     </configuration>
@@ -309,6 +346,16 @@
       <option name="PARAMETERS" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="sets.sh" type="BashConfigurationType" factoryName="Bash" temporary="true">
+      <module name="2-sphere-curvature" />
+      <option name="INTERPRETER_OPTIONS" value="bash" />
+      <option name="INTERPRETER_PATH" value="/usr/bin/env" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/sets" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/sets/sets.sh" />
+      <option name="PARAMETERS" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="topological-spaces.sh" type="BashConfigurationType" factoryName="Bash" temporary="true">
       <module name="2-sphere-curvature" />
       <option name="INTERPRETER_OPTIONS" value="bash" />
@@ -319,7 +366,7 @@
       <option name="PARAMETERS" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="type-check-all.sh" type="BashConfigurationType" factoryName="Bash" temporary="true">
+    <configuration name="type-check-all.sh" type="BashConfigurationType" factoryName="Bash">
       <module name="2-sphere-curvature" />
       <option name="INTERPRETER_OPTIONS" value="bash" />
       <option name="INTERPRETER_PATH" value="/usr/bin/env" />
@@ -363,19 +410,20 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Bash.topological-spaces.sh" />
       <item itemvalue="Bash.type-check-all.sh" />
-      <item itemvalue="Bash.formal-specifications.sh" />
+      <item itemvalue="Bash.sets.sh" />
+      <item itemvalue="Bash.topological-spaces.sh" />
       <item itemvalue="Bash.vector-spaces.sh" />
       <item itemvalue="Bash.real-numbers.sh" />
+      <item itemvalue="Bash.groups.sh" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Bash.type-check-all.sh" />
-        <item itemvalue="Bash.topological-spaces.sh" />
-        <item itemvalue="Bash.real-numbers.sh" />
+        <item itemvalue="Bash.groups.sh" />
         <item itemvalue="Bash.vector-spaces.sh" />
-        <item itemvalue="Bash.formal-specifications.sh" />
+        <item itemvalue="Bash.topological-spaces.sh" />
+        <item itemvalue="Bash.sets.sh" />
+        <item itemvalue="Bash.real-numbers.sh" />
       </list>
     </recent_temporary>
   </component>
@@ -409,22 +457,33 @@
       <workItem from="1535225504844" duration="12000" />
       <workItem from="1535225576350" duration="11046000" />
       <workItem from="1535294643153" duration="20445000" />
+      <workItem from="1535835034774" duration="7000" />
+      <workItem from="1536440612262" duration="2828000" />
+      <workItem from="1536445353502" duration="16000" />
+      <workItem from="1536531286073" duration="1158000" />
+      <workItem from="1537048565823" duration="233000" />
+      <workItem from="1537110671593" duration="7112000" />
+      <workItem from="1538232067912" duration="46000" />
+      <workItem from="1538232141429" duration="5790000" />
+      <workItem from="1538319996560" duration="766000" />
+      <workItem from="1538849636961" duration="12000" />
+      <workItem from="1538849662644" duration="4005000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="55085000" />
+    <option name="totallyTimeSpent" value="77058000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1029" y="66" width="1168" height="1087" extended-state="0" />
+    <frame x="1331" y="80" width="1168" height="1087" extended-state="0" />
     <layout>
-      <window_info id="Project" order="0" visible="true" weight="0.54174066" />
+      <window_info id="Project" order="0" visible="true" weight="0.4946714" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="UI Designer" order="3" />
       <window_info id="Favorites" order="4" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32921812" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4698046" weight="0.37448558" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
@@ -531,62 +590,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
           <caret line="14" column="10" lean-forward="true" selection-start-line="14" selection-start-column="10" selection-end-line="14" selection-end-column="10" />
-          <folding>
-            <element signature="e#40#71#2" expanded="true" />
-            <element signature="e#115#156#2" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/topological-spaces/topological-spaces.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" lean-forward="true" selection-start-line="1" selection-end-line="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/real-numbers/real-numbers.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" selection-start-line="3" selection-end-line="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vector-spaces/vector-spaces.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" selection-start-line="3" selection-end-line="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/formal-specifications/formal-specifications.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="32" selection-start-line="9" selection-start-column="32" selection-end-line="9" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/type-check-all.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vector-spaces/vector-spaces.sty">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" lean-forward="true" selection-start-line="19" selection-end-line="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/real-numbers/real-numbers.sty">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="30" lean-forward="true" selection-start-line="26" selection-end-line="30" />
-          <folding>
-            <element signature="e#105#129#2" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -597,10 +600,101 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/type-check-all.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" selection-start-line="6" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sets/sets.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="25" selection-start-line="5" selection-start-column="25" selection-end-line="5" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sets/sets.sty">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" selection-start-line="8" selection-end-line="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/formal-specifications/formal-specifications.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="59" selection-start-line="11" selection-start-column="59" selection-end-line="11" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vector-spaces/vector-spaces.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" selection-start-line="4" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/real-numbers/real-numbers.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" selection-start-line="6" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/real-numbers/real-numbers.sty">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="258">
+          <caret line="78" column="35" lean-forward="true" selection-start-line="78" selection-start-column="35" selection-end-line="78" selection-end-column="35" />
+          <folding>
+            <element signature="e#105#129#2" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/topological-spaces/topological-spaces.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/groups/groups.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="29" lean-forward="true" selection-start-line="7" selection-start-column="29" selection-end-line="7" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vector-spaces/vector-spaces.tex">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="43" lean-forward="true" selection-start-line="12" selection-start-column="43" selection-end-line="12" selection-end-column="43" />
+          <folding>
+            <element signature="e#40#71#2" expanded="true" />
+            <element signature="e#115#140#2" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vector-spaces/vector-spaces.sty">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="31" lean-forward="true" selection-start-line="31" selection-end-line="31" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/topological-spaces/topological-spaces.sty">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
+        <state relative-caret-position="255">
+          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/groups/groups.sty">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
         </state>
       </provider>
     </entry>
