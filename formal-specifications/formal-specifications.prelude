@@ -265,7 +265,7 @@ It has been type checked by \fuzz.
 
 \section{Introduction}
 
-Typed set theory is forms the mathematical foundation of Z Notation
+Typed set theory forms the mathematical foundation of Z Notation
 and many concepts relating to set theory are defined by its built-in mathematical tool-kit. 
 The articles augments the tool-kit with some additional concepts.
 
@@ -757,6 +757,7 @@ Let $(X, \tau) \prodTop (Y, \sigma)$ denote the product topological space.
 \usepackage{../shared/preamble}
 \addbibresource{../shared/references.bib}
 
+\usepackage{../sets/sets}
 \usepackage{../topological-spaces/topological-spaces}
 \usepackage{real-numbers}
 
@@ -1155,8 +1156,8 @@ If $f \in \CzeroPR(U)$ then $U$ is open.
 
 \begin{remark}
 The $\epsilon-\delta$ definition of continuity given above is compatible with the definition
-of continuity for mappings between topological spaces when we consider the usual topology on $\R$ and the induced topology on the
-subset $U$.
+of continuity for mappings between topological spaces when we consider $\Rtau$, the usual topology on $\R$,
+and $\Rtau \inducedTopSp U$, the topology induced on the subset $U$.
 
 \begin{zed}
 	\forall U: \openR @ \\
