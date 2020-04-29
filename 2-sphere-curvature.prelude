@@ -245,8 +245,8 @@
 %%inop \restrictU 6
 \documentclass[11pt, oneside]{article}
 
-\usepackage{../shared/preamble}
-\addbibresource{../shared/references.bib}
+\usepackage{../../shared/preamble}
+\addbibresource{../../shared/references.bib}
 
 \usepackage{sets}
 
@@ -343,8 +343,8 @@ Let $f \restrictU U$ denote the restriction of $f$ to $U$.
 %%inop \prodTopSp 5
 \documentclass[11pt, oneside]{article}
 
-\usepackage{../shared/preamble}
-\addbibresource{../shared/references.bib}
+\usepackage{../../shared/preamble}
+\addbibresource{../../shared/references.bib}
 
 \usepackage{../sets/sets}
 \usepackage{topological-spaces}
@@ -754,8 +754,8 @@ Let $(X, \tau) \prodTop (Y, \sigma)$ denote the product topological space.
 \DeclareMathOperator{\derivF}{D}
 \documentclass[11pt, oneside]{article}
 
-\usepackage{../shared/preamble}
-\addbibresource{../shared/references.bib}
+\usepackage{../../shared/preamble}
+\addbibresource{../../shared/references.bib}
 
 \usepackage{../sets/sets}
 \usepackage{../topological-spaces/topological-spaces}
@@ -1483,8 +1483,8 @@ Let $\smoothPR(U)$ denote the set of all functions on $U$ that are smooth at eve
 \DeclareMathOperator{\smoothRnm}{C^\infty}
 \documentclass[11pt, oneside]{article}
 
-\usepackage{../shared/preamble}
-\addbibresource{../shared/references.bib}
+\usepackage{../../shared/preamble}
+\addbibresource{../../shared/references.bib}
 
 \usepackage{../sets/sets}
 \usepackage{../groups/groups}
