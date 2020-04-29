@@ -220,7 +220,447 @@
 %%tame \plus \cat head last tail front rev \filter \dcat
 %%tame first second \mapsto \dom \ran \dres \rres \ndres \nrres 
 %%tame \inv \limg\rimg \oplus \comp \circ
-\NeedsTeXFormat{LaTeX2e}
+% arbitrary sets
+\newcommand{\setX}{\mathsf{X}}
+\newcommand{\setY}{\mathsf{Y}}
+\newcommand{\setZ}{\mathsf{Z}}
+
+% families of sets
+\newcommand{\family}{\mathcal{F}}
+%%pregen \family
+
+% the induced family infix operator
+\newcommand{\inducedFam}{\mathbin{|_\family}}
+%%inop \inducedFam 6
+
+% the product family infix operator
+\newcommand{\prodFam}{\mathbin{\cross_\family}}
+%%inop \prodFam 5
+
+% the constant function
+\DeclareMathOperator{\const}{const}
+
+% the function restriction infix operator
+\newcommand{\restrictU}{\mathbin{|_{\mathsf{fun}}}}
+%%inop \restrictU 6
+\documentclass[11pt, oneside]{article}
+
+\usepackage{../shared/preamble}
+\addbibresource{../shared/references.bib}
+
+\usepackage{sets}
+
+\title{Sets}
+\author{Arthur Ryman, {\tt arthur.ryman@gmail.com}}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This article contains Z Notation type declarations for concepts related to sets.
+It has been type checked by \fuzz.
+\end{abstract}
+
+\section{Introduction}
+
+Typed set theory forms the mathematical foundation of Z Notation
+and many concepts relating to set theory are defined by its built-in mathematical tool-kit. 
+The articles augments the tool-kit with some additional concepts.
+
+\section{Arbitrary Sets}
+
+\subsection{\zcmd{setX}, \zcmd{setY}, and \zcmd{setZ}}
+
+Let $\setX$, $\setY$, and $\setZ$ denote arbitrary sets.
+These will be used throughout in the statement of theorems, remarks, and examples that are parameterized
+by arbitrary sets.
+
+\begin{zed}
+	[\setX, \setY, \setZ]
+\end{zed}
+
+\section{Families}
+
+\subsection{\zcmd{family}}
+
+Let $X$ be a set.
+A {\it family} of subsets of $X$ is a set of subsets of $X$.
+Let $\family X$ denote the set of all families of subsets of $X$.
+
+\begin{zed}
+	\family X == \power(\power X)
+\end{zed}
+
+\section{Functions}
+
+
+\subsection{\zcmd{const}}
+
+Let $X$ and $Y$ be sets and let $c \in Y$ be some given point.
+The mapping that sends every point of $X$ to $c$ is called the {\it constant mapping} defined by $c$.
+Let $\const(c)$ denote the constant mapping.
+
+\begin{gendef}[X,Y]
+	\const: Y \fun (X \fun Y)
+\where
+	\forall c: Y @ \\
+	\t1	\const(c) = (\lambda x: X @ c)
+\end{gendef}
+
+
+\subsection{\zcmd{restrictU}}
+
+Let $f: X \fun Y$ and let $U \subseteq X$.
+Let $f \restrictU U$ denote the restriction of $f$ to $U$.
+
+\begin{gendef}[X,Y]
+	\_ \restrictU \_: (X \fun Y) \cross \power X \fun (X \pfun Y)
+\where
+	\forall f: X \fun Y; U: \power X @ \\
+	\t1	f \restrictU U = U \dres f
+\end{gendef}
+
+\printbibliography
+
+\end{document}% continuous mappings between topological spaces
+\DeclareMathOperator{\CzeroTT}{C^0}
+
+% topological decoration on operators
+\newcommand{\topology}{\mathsf{top}}
+
+% the induced topological space infix operator
+\newcommand{\inducedTopSp}{\mathbin{|_\topology}}
+%%inop \inducedTopSp 6
+
+% the product topology infix operator
+\newcommand{\prodTop}{\mathbin{\cross_\topology}}
+%%inop \prodTop 5
+
+% the product topological space infix operator
+\newcommand{\prodTopSp}{\mathbin{\cross_\topology}}
+%%inop \prodTopSp 5
+\documentclass[11pt, oneside]{article}
+
+\usepackage{../shared/preamble}
+\addbibresource{../shared/references.bib}
+
+\usepackage{../sets/sets}
+\usepackage{topological-spaces}
+
+\title{Topological Spaces}
+\author{Arthur Ryman, {\tt arthur.ryman@gmail.com}}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This article defines topological spaces and related concepts.
+\end{abstract}
+
+\section{Topological Spaces}
+
+\subsection{$Topology$}
+
+A {\it topology} $\tau$ on $X$ is a family of subsets of $X$, referred to as the {\it open} subsets of $X$, that satisfy the following axioms.
+
+\begin{schema}{Topology}[X]
+	\tau: \family X
+\where
+	\emptyset \in \tau
+\also
+	X \in \tau
+\also
+	\forall F: \finset \tau @ \bigcap F \in \tau
+\also
+	\forall F: \power \tau @ \bigcup F \in \tau
+\end{schema}
+
+\begin{itemize}
+\item The empty set is open.
+\item The whole set is open.
+\item The intersection of a finite family of open sets is open.
+\item The union of any family of open sets is open. 
+\end{itemize}
+
+\subsection{$top$ and $tops$}
+
+Let $top[X]$ denote the set of all topologies on $X$.
+
+\begin{gendef}[X]
+	top: \power(\family X)
+\where
+	top = \{~ Topology[X] @ \tau ~\}
+\end{gendef}
+
+Let $tops[X]$ denote the set of all topologies on subsets $U \subseteq X$.
+
+\begin{gendef}[X]
+	tops: \power(\family X)
+\where
+	tops = \bigcup \{~ U: \power X @ top[U] ~\}
+\end{gendef}
+
+\subsection{$discrete$ and $indiscrete$}
+
+The {\it discrete} topology on $X$ consists of all subsets of $X$.
+The {\it indiscrete} topology on $X$ consists of just $X$ and $\emptyset$.
+Let $discrete[X]$ and $indiscrete[X]$ denote the discrete and indiscrete topologies on $X$.
+
+\begin{gendef}[X]
+	discrete, indiscrete: \family X
+\where
+	discrete = \power X
+\also
+	indiscrete =  \{ \emptyset, X \}
+\end{gendef}
+
+\begin{example}
+Let $\setX$ be an arbitrary set.
+Then $discrete[\setX]$ and $indiscrete[\setX]$ are topologies on $\setX$.
+
+\begin{zed}
+	discrete[\setX] \in top[\setX] 
+\also
+	indiscrete[\setX] \in top[\setX]
+\end{zed}
+
+\end{example}
+
+\subsection{$topGen$}
+
+\begin{remark}
+
+The intersection of a set of topologies on $X$ is also a topology on $X$.
+
+\end{remark}
+
+Given a family $B$ of subsets of $X$, the topology {\it generated by} $B$ is the intersection of all
+topologies that contain $B$.
+The set $B$ is referred to as a {\it basis} for the topology it generates.
+Let $topGen[X]~B$ denote the topology on $X$ generated by the basis $B$.
+
+\begin{gendef}[X]
+	topGen: \family X \fun top[X]
+\where
+	\forall B: \family X @ \\
+	\t1	topGen~B = \bigcap \{~ \tau: top[X] | B \subseteq \tau ~\}
+\end{gendef}
+
+\begin{example}
+Let $\setX$ be an arbitrary set.
+
+\begin{zed}
+	topGen[\setX] \emptyset = indiscrete[\setX]
+\also
+	topGen[\setX] \{ \emptyset \} = indiscrete[\setX]
+\also
+	topGen[\setX] \{ \setX \} = indiscrete[\setX]
+\end{zed}
+
+\end{example}
+
+\subsection{$topSpace$}
+
+Let $X$ be a set.
+A {\it topological space} is a pair $(X, \tau)$ where $\tau$ is a topology on $X$.
+Let $topSpace[X]$ denote the set of all topological spaces $(X,\tau)$.
+
+\begin{zed}
+	topSpace[X] == \{~ \tau: top[X] @ (X, \tau) ~\}
+\end{zed}
+
+\begin{example}
+Let $\setX$ be an arbitrary set.
+
+\begin{zed}
+	(\setX, indiscrete[\setX]) \in topSpace[\setX]
+\also
+	(\setX, discrete[\setX]) \in topSpace[\setX]
+\end{zed}
+
+
+\end{example}
+
+\subsection{$topSpaces$}
+
+Let $topSpaces[t]$ dentote the set of all topological spaces $(X,\tau)$ where $X$ is a subset of $t$.
+
+\begin{gendef}[t]
+	topSpaces: \power t \rel \family t
+\where
+	topSpaces = \{~ X: \power t; \tau: \family t | \tau \in top[X] ~\}
+\end{gendef}
+
+\begin{remark}
+
+\begin{zed}
+	topSpace[\setX] \subseteq topSpaces[\setX]
+\end{zed}
+
+\end{remark}
+
+\section{Continuous Mappings}
+
+Let $(X,\tau)$ and $(Y,\sigma)$ be topological spaces.
+
+\subsection{$Continuous$}
+
+A mapping $f \in X \fun Y$ is said to be {\it continuous} if the inverse image of every open set is open.
+
+\begin{schema}{Continuous}[X,Y]
+	f: X \fun Y \\
+	\tau: top[X] \\
+	\sigma: top[Y]
+\where
+	\forall U: \sigma @ \\
+	\t1	f\inv\limg U \rimg \in \tau
+\end{schema}
+
+\subsection{\zcmd{CzeroTT}}
+
+Let $A$ and $B$ be topological spaces, and
+let $\CzeroTT(A,B)$ denote the set of continuous mappings from $A$ to $B$.
+
+\begin{gendef}[X,Y]
+	\CzeroTT: topSpace[X] \cross topSpace[Y] \fun \power (X \fun Y)
+\where
+	\forall \tau: top[X]; \sigma: top[Y] @ \\
+	\t1	\LET A == (X, \tau); B == (Y, \sigma) @ \\
+	\t2		\CzeroTT(A,B) = \{~ f: X \fun Y | Continuous[X,Y] ~\}
+\end{gendef}
+
+\subsection{The Identity Mapping}
+
+\begin{remark}
+The identity mapping is continuous.
+
+\begin{zed}
+	\forall \tau: top[\setX] @ \\
+	\t1	\LET A == (\setX, \tau) @ \\
+	\t2		\id \setX \in \CzeroTT(A, A)
+\end{zed}
+
+\end{remark}
+
+\begin{remark}
+The constant mapping is continuous.
+
+\begin{zed}
+	\forall \tau: top[\setX]; \sigma: top[\setY]; c: \setY @ \\
+	\t1	\LET A == (\setX, \tau); B == (\setY, \sigma) @ \\
+	\t2		\const[\setX,\setY] c \in \CzeroTT(A,B)
+\end{zed}
+
+\end{remark}
+
+\subsection{Composition of Continuous Mapping}
+
+\begin{remark}
+Let $\setX$, $\setY$, and $\setZ$ be arbitrary sets.
+The composition of continuous mappings is a continuous mapping.
+
+\begin{zed}
+	\forall A: topSpace[\setX]; B: topSpace[\setY]; C: topSpace[\setZ] @ \\
+	\t1	\forall f: \CzeroTT(A, B); g: \CzeroTT(B, C) @ \\
+	\t2		g \circ f \in \CzeroTT(A, C)
+\end{zed}
+
+\end{remark}
+
+\section{Induced Topology}
+
+Let $A = (X, \tau)$ be a topological space and let $U \subseteq X$ be a subset.
+The topology on $X$ {\it induces} a topology on $U$.
+This topology is variously referred to as the {\it induced}, {\it relative}, or {\it subspace} topology on $U$.
+
+\subsection{\zcmd{inducedFam}}
+
+Let $\phi$ be a family of subsets of $X$ and let $U$ be a subset of $X$.
+The family of subsets of $U$ {\it induced} by $\phi$ is the set of intersections of the members of $\phi$ with $U$.
+Let $\phi \inducedFam U$ denote the family on $U$ induced by $\phi$.
+
+\begin{gendef}[X]
+	\_ \inducedFam \_:  \family X \cross \power X \fun \family X
+\where
+	\forall \phi: \family X; U: \power X @ \\
+	\t1	\phi \inducedFam U = \{~ Y: \phi @ Y \cap U ~\}
+\end{gendef}
+
+\begin{remark}
+If $\tau$ is a topology on $X$ then $\tau \inducedFam U$ is a topology on $U$.
+
+\begin{zed}
+	\forall \tau: top[\setX]; U: \power \setX @ \\
+	\t1	\tau \inducedFam U \in top[U]
+\end{zed}
+
+\end{remark}
+
+\subsection{\zcmd{inducedTopSp}}
+
+Let $(X, \tau) \inducedTopSp U$ denote the corresponding induced topological space.
+
+\begin{gendef}[X]
+	\_ \inducedTopSp \_: topSpace[X] \cross \power X \fun topSpaces[X]
+\where
+	\forall \tau: top[X]; U: \power X @ \\
+	\t1	(X, \tau) \inducedTopSp U = (U, \tau \inducedFam U)
+\end{gendef}
+
+\section{Product Topology}
+
+Let $(X, \tau)$ and $(Y, \sigma) $ be topological spaces.
+There is a natural topology on $X \cross Y$ generated by the products of the sets in $\tau$ and $\sigma$.
+
+\subsection{\zcmd{prodFam}}
+
+Let $X$ and $Y$ be sets and let $\phi$ and $\psi$ be families on them.
+The product of these families is the family that consists of the products of the sets in them and is a family on $X \cross Y$.
+Let $\phi \prodFam \psi$ denote the product of the families.
+
+\begin{gendef}[X,Y]
+	\_ \prodFam \_ : \family X \cross \family Y \fun \family(X \cross Y)
+\where
+	\forall \phi: \family~X; \psi: \family~Y @ \\
+	\t1	\phi \prodFam \psi = \{~ U: \phi; V: \psi @ U \cross V ~\}
+\end{gendef}
+
+\begin{remark}
+
+If $\tau$ and $sigma$ are topologies then $\tau \prodFam \sigma$ is not, in general, a topology.
+However, we can use it to generate a topology.
+
+\end{remark}
+
+\subsection{\zcmd{prodTop}}
+
+Let $\tau \prodTop \sigma$ denote the topology generated by $\tau \prodFam \sigma$.
+
+\begin{gendef}[X,Y]
+	\_ \prodTop \_: top[X] \cross top[Y] \fun top[X \cross Y]
+\where
+	\forall \tau: top[X]; \sigma: top[Y] @ \\
+	\t1	\tau \prodTop \sigma = topGen(\tau \prodFam \sigma)
+\end{gendef}
+
+\subsection{\zcmd{prodTopSp}}
+
+Let $(X, \tau) \prodTop (Y, \sigma)$ denote the product topological space.
+
+\begin{gendef}[X,Y]
+	\_ \prodTopSp \_: topSpace[X] \cross topSpace[Y] \fun topSpace[X \cross Y]
+\where
+	\forall \tau: top[X]; \sigma: top[Y] @ \\
+	\t1	(X, \tau) \prodTopSp (Y, \sigma) = (X \cross Y, \tau \prodTop \sigma)
+\end{gendef}
+
+\printbibliography
+
+\end{document}\NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{real-numbers}[2018/08/05 Z Notation for real numbers package]
 
 \RequirePackage{amssymb}
@@ -282,27 +722,13 @@
 % the positive square root function sqrt(x)
 \DeclareMathOperator{\sqrtR}{sqrt}
 
-% interval notation (a,b)
-\newcommand{\lowerBound}{\boldsymbol{(}}
-\newcommand{\upperBound}{\boldsymbol{)}}
-\newcommand{\intersect}{\mathbin{\boldsymbol{,}}}
-
-%%postop \upperBound
-%%inop \intersect 4
-
-% typed intervals
-\newcommand{\openLowerBound}{\boldsymbol{(}}
-\newcommand{\closedLowerBound}{\boldsymbol{[}}
-\newcommand{\openUpperBound}{\boldsymbol{)}}
-\newcommand{\closedUpperBound}{\boldsymbol{]}}
-\newcommand{\intersectRightLeft}{\mathbin{\boldsymbol{,}}}
-
-%%postop \openUpperBound \closedUpperBound
-%%inop \intersectRightLeft 4
-
-\DeclareMathOperator{\intervalRR}{interval}
-\DeclareMathOperator{\ballRR}{ball}
+\DeclareMathOperator{\intervalR}{interval}
+\DeclareMathOperator{\ballR}{ball}
+\DeclareMathOperator{\ballsR}{balls}
 \DeclareMathOperator{\neighR}{neigh}
+
+\newcommand{\tauR}{\tau_\R}
+\newcommand{\Rtau}{\R_\tau}
 
 \DeclareMathOperator{\limRR}{lim}
 \DeclareMathOperator{\limR}{lim}
@@ -331,6 +757,8 @@
 \usepackage{../shared/preamble}
 \addbibresource{../shared/references.bib}
 
+\usepackage{../sets/sets}
+\usepackage{../topological-spaces/topological-spaces}
 \usepackage{real-numbers}
 
 \title{Real Numbers}
@@ -448,229 +876,149 @@ For non-negative $x$, let $\sqrtR(x)$ denote $\sqrt{x}$, the non-negative square
 
 \section{Open Sets}
 
-\subsection{\zcmd{intervalRR}}
+\subsection{\zcmd{intervalR}}
 
-For any real numbers $a$ and $b$, let $\intervalRR(a,b)$ denote $(a,b)$, the open interval bounded by $a$ and $b$.
+For any real numbers $a$ and $b$, let $\intervalR(a,b)$ denote $(a,b)$, the open interval bounded by $a$ and $b$.
 
 \begin{axdef}
-	\intervalRR: \R \cross \R \fun \power \R
+	\intervalR: \R \cross \R \fun \power \R
 \where
 	\forall a, b: \R @ \\
-	\t1	\intervalRR(a,b) = \{~ x: \R | a \ltR x \ltR b ~\}
+	\t1	\intervalR(a,b) = \{~ x: \R | a \ltR x \ltR b ~\}
 \end{axdef}
 
 \begin{remark}
-If $a \geR b$ then $\intervalRR(a,b) = \emptyset$.
+If $a \geR b$ then $\intervalR(a,b) = \emptyset$.
 \end{remark}
 
-\subsubsection{Digression on Simulating Standard Mathematical Notation in Z}
+\subsection{\zcmd{ballR}}
 
-The expression $(a,b)$ usually denotes an ordered pair in mathematical writing.
-Sometimes the writer asks us to interpret $(a,b)$ as an open interval.
-In this case we recognize that the symbols used in the expression $(a,b)$ do not have their usual meanings
-and we interpret them accordingly.
-The notation $(a,b)$ for denoting an open interval of the real number line is
-arguably very compact, convenient, and easy to understand. 
-In contrast, the Z notation function application $\intervalRR(a,b)$ defined above may strike the reader as
-precise but somewhat verbose and clumsy.
-
-There is a way to achieve some of the compactness of standard mathematical notation while
-preserving the precision of type-correct Z.
-The approach is to take advantage of the \fuzz\ type checker's ability to define infix and postfix 
-operator symbols. 
-In the grammar used by \fuzz\ postfix operators have higher precedence than prefix operators,
-and prefix operators have higher precedence than infix operators.
-Infix operators are assigned numerical priorities of 1 through 6 with higher priorities taking precedence 
-over lower ones.
-We can use these relative precedences to define operators that allow us to construct expressions 
-that resemble usual mathematical writing.
-
-\subsubsection{\zcmd{lowerBound}, \zcmd{upperBound}, and \zcmd{intersect}}
-
-First, we use \LaTeX\ bold styling to provide a visual cue that helps the reader
-distinguish the interval $\lowerBound a \intersect b \upperBound$ from the
-usual ordered pair $(a,b)$.
-Next, we interpret the symbols as prefix, infix, and postfix operators.
-The symbol $\lowerBound$ is a prefix operator that maps $a$ to $\lowerBound a$, 
-the open interval bounded below by $a$.
-Similarly, $\upperBound$ is a postfix operator that maps $b$ to $b \upperBound$, 
-the open interval bounded above by $b$.
-Finally, we interpret the symbol $\intersect$ as an infix operator that forms the intersection of the two intervals.
+For any real numbers $x$ and $r$, let $\ballR(x,r)$ denote the set of all real numbers within distance $r$ of $x$.
 
 \begin{axdef}
-	\lowerBound: \R \fun \power \R \\
-	\_ \upperBound: \R \fun \power \R \\
-	\_ \intersect \_ : \power \R \cross \power \R \fun \power \R
-\where
-	\forall a: \R @ \lowerBound a = \{~ x: \R | a \ltR x ~\}
-\also
-	\forall b: \R @ b \upperBound = \{~ x: \R | x \ltR b ~\}
-\also
-	\forall a, b: \R @ \lowerBound a \intersect b \upperBound = \{~ x: \R | a \ltR x \ltR b ~\}
-\end{axdef}
-
-This design is a step in the right direction, but it doesn't prevent the writer from abusing the notation.
-For example, the following paragraph looks odd but makes perfect sense to \fuzz.
-
-\begin{zed}
-	\forall a, b: \R @ \lowerBound a \intersect b \upperBound = b \upperBound \intersect \lowerBound a 
-\end{zed}
-
-When we are asked to interpret $(a,b)$ as an interval, we are, in a sense, being asked to parse a sentence
-in a new mathematical mini-language that defines intervals.
-If we want to enforce the usual syntax for intervals,
-we can introduce new types to represent fragments of the expression so that the operators can only be applied to
-fragments in some prescribed order.
-
-To illustrate this point, let's expand the example to include closed intervals $[a,b]$ as well as semi-closed intervals
-$(a,b]$ and $[a,b)$.
-Regard $(a$ and $[a$ as open and closed right half lines, and $b)$ and $b]$ as open and closed left half lines.
-Only allow a right half line to be combined with a left half line.
-
-\subsubsection{Right Half Lines, \zcmd{openLowerBound}, and \zcmd{closedLowerBound}}
-
-Let $RightHalfLine$ denote the type of syntactic fragments that define open and closed right half-lines.
-
-\begin{zed}
-	RightHalfLine ::= \openLowerBound \ldata \R \rdata | \closedLowerBound \ldata \R \rdata
-\end{zed}
-
-For example
-
-\begin{zed}
-	\openLowerBound \zeroR \in RightHalfLine
-\also
-	\closedLowerBound \oneR \in RightHalfLine
-\end{zed}
-
-Let $rightSet(R)$ denote the set of real numbers that the right half-line syntactic fragment $R$ represents.
-
-\begin{axdef}
-	rightSet: RightHalfLine \fun \power \R
-\where
-	\forall a : \R @ rightSet(\openLowerBound a) = \{~ x: \R | a \ltR x ~\}
-\also
-	\forall a : \R @ rightSet(\closedLowerBound a) = \{~ x: \R | a \leR x ~\}
-\end{axdef}
-
-For example
-
-\begin{zed}
-	\zeroR \notin rightSet(\openLowerBound \zeroR)
-\also
-	\oneR \in rightSet(\closedLowerBound \oneR)
-\end{zed}
-
-\subsubsection{Left Half Lines, \zcmd{openUpperBound}, and \zcmd{closedUpperBound}}
-
-Let $LeftHalfLine$ denote the type of syntactic fragments that define open and closed left half-lines.
-
-\begin{zed}
-	LeftHalfLine ::= (\_ \openUpperBound)  \ldata \R \rdata | (\_ \closedUpperBound)  \ldata \R \rdata
-\end{zed}
-
-For example
-
-\begin{zed}
-	\zeroR \openUpperBound \in LeftHalfLine
-\also
-	\oneR \closedUpperBound \in LeftHalfLine
-\end{zed}
-
-Let $leftSet(L)$ denote the set of real numbers that the left half-line syntactic fragment $L$ represents.
-
-\begin{axdef}
-	leftSet: LeftHalfLine \fun \power \R
-\where
-	\forall b : \R @ leftSet(b \openUpperBound) = \{~ x: \R | x \ltR b ~\}
-\also
-	\forall b : \R @ leftSet(b \closedUpperBound) = \{~ x: \R | x \leR b ~\}
-\end{axdef}
-
-For example
-
-\begin{zed}
-	\zeroR \notin leftSet(\zeroR \openUpperBound)
-\also
-	\oneR \in leftSet(\oneR \closedUpperBound)
-\end{zed}
-
-\subsubsection{\zcmd{intersectRightLeft}}
-
-Let $R \intersectRightLeft L$ denote the set of real numbers in the intersection of the sets represented by
-the half-line syntactic fragments $R$ and $L$.
-
-\begin{axdef}
-	\_ \intersectRightLeft \_ : RightHalfLine \cross LeftHalfLine \fun \power \R
-\where
-	\forall R: RightHalfLine; L: LeftHalfLine @ \\
-	\t1	R \intersectRightLeft L = rightSet~R \cap leftSet~L
-\end{axdef}
-
-For example
-
-\begin{zed}
-	\zeroR \in \closedLowerBound \zeroR \intersectRightLeft \oneR \openUpperBound
-\end{zed}
-
-\subsubsection{Conclusion and End of Digression}
-
-A lot of standard mathematical notation can be written directly using the built-in capabilities of Z notation and \fuzz.
-However, mathematics contains many specialized notations including those for intervals, probability, and quantum mechanics (Dirac bra-ket notation).
-One can view these specialized notations as mathematical mini-languages.
-As demonstrated above for the case of intervals, it is possible to simulate these notations in Z by introducing new syntactic types along with infix and postfix operators that construct, combine, and reduce fragments of this syntax.
-The general pattern is for the opening and closing symbols to correspond to prefix and postfix operators that
-construct fragments, and for internal symbols to correspond to infix operators that combine and then finally 
-reduce fragments.
-Reduction occurs when the final infix operator is applied and maps the completed mini-language sentence to a 
-some usual mathematical type.
-
-\subsection{\zcmd{ballRR}}
-
-For any real numbers $x$ and $r$, let $\ballRR(x,r)$ denote the set of all real numbers within distance $r$ of $x$.
-
-\begin{axdef}
-	\ballRR: \R \cross \R \fun \power \R
+	\ballR: \R \cross \R \fun \power \R
 \where
 	\forall x, r: \R @ \\
-	\t1	\ballRR(x,r) = \{~ x': \R | \absR(x' \subR x) \ltR r ~\}
+	\t1	\ballR(x,r) = \{~ x': \R | \absR(x' \subR x) \ltR r ~\}
 \end{axdef}
 
 \begin{remark}
-If $r \gtR 0$ then $x \in \ballRR(x, r)$. 
+Balls are intervals.
+
+\begin{zed}
+	\forall x, r: \R @ \\
+	\t1	\ballR(x,r) = \intervalR(x \subR r, x \addR r)
+\end{zed}
+
 \end{remark}
 
 \begin{remark}
-If $r \leR 0$ then $\ballRR(x,r) = \emptyset$.
+If $r \gtR 0$ then $x$ is in $\ballR(x, r)$. 
+
+\begin{zed}
+	\forall x: \R; r: \Rpos @ \\
+	\t1	x \in \ballR(x,r)
+\end{zed}
+
 \end{remark}
 
 \begin{remark}
-$\ballRR(x,r) = \intervalRR(x-r, x+r)$
+If $r \leR 0$ then $\ballR(x,r)$ is empty.
+
+\begin{zed}
+	\forall x, r: \R | r \leR \zeroR @ \\
+	\t1	\ballR(x,r) = \emptyset
+\end{zed}
+
 \end{remark}
+
+\subsection{\zcmd{ballsR}}
+
+Let $\ballsR$ denote the set of all open balls in $\R$.
+
+\begin{axdef}
+	\ballsR: \family~\R
+\where
+	\ballsR = \{~ x, r: \R @ \ballR(x,r) ~\}
+\end{axdef}
 
 \subsection{\zcmd{openR}}
 
-A subset $U$ of $\R$ is said to be {\it open} if for every point $x \in U$ there is some $r > 0$ such that $\ballRR(x,r) \subset U$.
+A subset $U$ of $\R$ is said to be {\it open} if every point $x \in U$ is surrounded by some open ball $B \subset U$ that lies
+strictly within $U$.
 Let $\openR$ denote the set of all open subsets of $\R$.
 
 \begin{axdef}
-	\openR: \power (\power \R)
+	\openR: \family~\R
 \where
-	\openR = \{~ U:  \power \R | \forall x: U @ \\
-	\t1	\exists r: \Rpos @ \ballRR(x,r) \subset U ~\}
+	\openR = \{~ U:  \power \R | \\
+	\t1	\forall x: U @ \\
+	\t2		\exists B: \ballsR @ x \in B \subset U ~\}
 \end{axdef}
 
 \begin{remark}
-$\ballRR(x,r) \in \openR$
+All balls are open.
+
+\begin{zed}
+	\ballsR \subset \openR
+\end{zed}
+
 \end{remark}
 
 \begin{remark}
-$\emptyset \in \openR$
+The empty set is open.
+
+\begin{zed}
+	\emptyset \in \openR
+\end{zed}
+
 \end{remark}
 
 \begin{remark}
-$\R \in \openR$
+The set of all real numbers is open.
+
+\begin{zed}
+	\R \in \openR
+\end{zed}
+
 \end{remark}
+
+\subsection{\zcmd{tauR}}
+
+The topology generated by the open balls of $\R$ is referred to as the {\it usual} or {\it standard} topology on $\R$ .
+Let $\tauR$ denote the usual topology on $\R$.
+
+\begin{axdef}
+	\tauR: top[\R]
+\where
+	\tauR = topGen[\R] \ballsR
+\end{axdef}
+
+\begin{remark}
+
+\begin{zed}
+	\tauR = \openR
+\end{zed}
+
+\end{remark}
+
+\subsection{\zcmd{Rtau}}
+
+Let $\Rtau$ denote the topological space defined by $\R$ with the usual topology.
+
+\begin{axdef}
+	\Rtau: topSpaces[\R]
+\where
+	\Rtau = (\R, \tauR)
+\end{axdef}
+
+\begin{example}
+
+\begin{zed}
+	\Rtau \in topSpace[\R]
+\end{zed}
+
+\end{example}
 
 \subsection{\zcmd{neighR}}
 
@@ -679,7 +1027,7 @@ Any open set that contains $x$ is called a {\it neighbourhood} of it.
 Let $\neighR(x)$ denote the set of all neighbourhoods of $x$.
 
 \begin{axdef}
-	\neighR: \R \fun \power (\power \R)
+	\neighR: \R \fun \family~\R
 \where
 	\forall x: \R @ \\
 	\t1	\neighR(x) = \{~ U: \openR | x \in U~\}
@@ -688,21 +1036,28 @@ Let $\neighR(x)$ denote the set of all neighbourhoods of $x$.
 Clearly, every real number has an infinity of neighbourhoods.
 
 \begin{remark}
-If $r \gtR 0$ then $\ballRR(x, r) \in \neighR(x)$.
+Any open ball that contains $x$ is a neighbourhood of $x$.
+
+\begin{zed}
+	\forall x: \R; B: \ballsR | \\
+	\t1	x \in B @ \\
+	\t2		B \in \neighR(x)
+\end{zed}
+
 \end{remark}
 
 \section{Functions}
 
-The following sections define continuity, limits, and differentiability, which are properties of functions.
-These properties are {\it local} in the sense that they only depend on the values that the function takes in 
-an arbitrarily small neighbourhood of any given point in their domains.
+The following sections define continuity, limits, and differentiability, which are point-wise properties of functions.
+These properties are {\it local} in the sense that in order to determine if they hold at a given point it is sufficient to
+consider the restriction of the function to an arbitrarily small neighbourhood of the point.
 It is therefore useful to first introduce the set of {\it locally defined} functions, 
 namely those functions that are defined in some neighbourhood of each point of  their domains.
 
 \subsection{\zcmd{FunR}}
 
 For $x$ a real number,
-let $\FunR(x)$ denote the set of all real-valued functions that are locally defined at $x$.
+let $\FunR(x)$ denote the set of all real-valued, partial functions on $\R$ that are locally defined at $x$.
 
 \begin{axdef}
 	\FunR: \R \fun \power(\R \pfun \R)
@@ -712,8 +1067,13 @@ let $\FunR(x)$ denote the set of all real-valued functions that are locally defi
 \end{axdef}
 
 \begin{remark}
-The function $\sqrtR$ is not locally defined at $0$ because it's defined only for non-negative numbers
+The function $\sqrtR$ is not locally defined at $0$ because it's defined only for non-negative numbers,
 but every neighbourhood of $0$ contains some negative numbers.
+
+\begin{zed}
+	\sqrtR \notin \FunR(\zeroR)
+\end{zed}
+
 \end{remark}
 
 \subsection{\zcmd{FunPR}}
@@ -730,11 +1090,18 @@ let $\FunPR(U)$ denote the set of all real-valued functions on $U$ that are loca
 
 \begin{remark}
 If $f \in \FunPR(U)$ then $U \in \openR$.
+
+\begin{zed}
+	\forall U: \power \R @ \\
+	\t1	\FunPR(U) \neq \emptyset \implies U \in \openR
+\end{zed}
+
 \end{remark}
 
 \section{Continuity}
 
-Let $f$ be a real-valued function that is locally defined at $x$ and let $U$ be a neighbourhood of $x$
+Let $f$ be a real-valued partial function on $\R$ 
+that is locally defined at $x$ and let $U$ be a neighbourhood of $x$
 contained within the domain of $f$.
 The function $f$ is said to be {\it continuous} at $x$ if 
 for any $\epsilon > 0$ there is some $\delta > 0$ for which 
@@ -745,7 +1112,7 @@ when $x' \in U$ is within $\delta$ of $x$.
 \t1	\abs{x' - x} < \delta \implies \abs{f(x') - f(x)} < \epsilon
 \end{argue}
 
-\begin{schema}{Continuous}
+\begin{schema}{RealContinuous}
 	f: \R \pfun \R \\
 	x: \R
 \where
@@ -757,18 +1124,18 @@ when $x' \in U$ is within $\delta$ of $x$.
 
 \subsection{\zcmd{CzeroR}}
 
-Let $\CzeroR(x)$ denote the set of all functions that are continuous at $x$.
+Let $\CzeroR(x)$ denote the set of all real-valued partial functions on $\R$ that are continuous at $x$.
 \begin{axdef}
 	\CzeroR: \R \fun \power(\R \pfun \R)
 \where
 	\forall x: \R @ \\
-	\t1	\CzeroR(x) = \{~ f: \R \pfun \R | Continuous ~\}
+	\t1	\CzeroR(x) = \{~ f: \FunR(x) | RealContinuous ~\}
 \end{axdef}
 
 \subsection{\zcmd{CzeroPR}}
 
 Let $U$ be any subset of $\R$. 
-Define $\CzeroPR(U)$ to be the set of all functions on $U$ that are continuous at each point in $U$.
+Define $\CzeroPR(U)$ to be the set of all real-valued functions on $U$ that are continuous at each point in $U$.
 
 \begin{axdef}
 	\CzeroPR: \power \R \fun \power (\R \pfun \R)
@@ -778,13 +1145,31 @@ Define $\CzeroPR(U)$ to be the set of all functions on $U$ that are continuous a
 \end{axdef}
 
 \begin{remark}
-If $f \in \CzeroPR(U)$ then $U$ is a, possibly infinite, union of neighbourhoods.
+If $f \in \CzeroPR(U)$ then $U$ is open.
+
+\begin{zed}
+	\forall U: \power \R @ \\
+	\t1	\CzeroPR(U) \neq \emptyset \implies U \in \openR
+\end{zed}
+
+\end{remark}
+
+\begin{remark}
+The $\epsilon-\delta$ definition of continuity given above is compatible with the definition
+of continuity for mappings between topological spaces when we consider $\Rtau$, the usual topology on $\R$,
+and $\Rtau \inducedTopSp U$, the topology induced on the subset $U$.
+
+\begin{zed}
+	\forall U: \openR @ \\
+	\t1	\CzeroPR(U) = \CzeroTT(\Rtau \inducedTopSp U, \Rtau)
+\end{zed}
+
 \end{remark}
 
 \section{Limits}
 
 Let $x$ and $l$ be real numbers and
-let $f$ be a real-valued function that is defined everywhere in some
+let $f$ be a real-valued partial function on $\R$ that is defined everywhere in some
 neighbourhood $U$ of $x$, except possibly at $x$.
 The function $f$ is said to approach the limit $l$ at $x$ if $f \oplus \{ x \mapsto l \}$ is continuous at $x$.
 $$
@@ -800,7 +1185,7 @@ $$
 
 \subsection{\zcmd{limRR}}
 
-Let $\limRR(x,l)$ denote the set of all functions that approach the limit $l$ at $x$.
+Let $\limRR(x,l)$ denote the set of all real-valued partial functions on $\R$ that approach the limit $l$ at $x$.
 
 \begin{axdef}
 	\limRR: \R \cross \R \fun \power(\R \pfun \R)
@@ -864,10 +1249,10 @@ By the preceding theorem, $\limFR(f,x)$ is well-defined when it exists.
 
 \section{Differentiability}
 
-Let $f$ be a real-valued function on the real numbers, let $x$ be a real number,
+Let $f$ be a real-valued partial function on $\R$, let $x$ be a real number,
 and let $f$ be defined on some neighbourhood $U$ of $x$.
 
-The function $f$ is said to be differentiable at $x$ if the following limit holds for some number $f'(x)$.
+The function $f$ is said to be {\it differentiable} at $x$ if the following limit holds for some number denoted by $f'(x)$.
 $$
 \lim_{h \to 0} \frac{f(x+h) - f(x)}{h} = f'(x)
 $$
@@ -877,11 +1262,12 @@ If $f$ is differentiable at $x$ then $f$ is continuous at $x$.
 \end{remark}
 
 The geometric intuition behind the concept of differentiability is that $f$ is differentiable at $x$
-when, very near $x$, the function $f$ is approximately a straight line with slope $f'(x)$.
+when, very near $x$, the graph of $f$ is approximately a straight line through the point $(x, f(x))$ with slope $f'(x)$.
 $$
 f(x + h) \approx f(x) + f'(x) h \quad \text{when} \quad \abs{h} \approx 0
 $$
-The slope $f'(x)$ is called the derivative of $f$ at $x$.
+The slope $f'(x)$ is called the {\it derivative} of $f$ at $x$
+and $f'$ is called the {\it derived function}.
 
 We can read this definition as saying that the approximate slope function $m(h)$ defined for 
 small enough, non-zero values of $h$ by
@@ -946,7 +1332,6 @@ that are differentiable at each point of $U$.
 
 \subsection{\zcmd{derivFR}}
 
-The function $f'$ is called the {\it derived function} or the {\it derivative} of $f$.
 Let $\derivFR(f,x)$ denote $f'(x)$, the derivative of $f$ at $x$.
 
 \begin{axdef}
@@ -1013,7 +1398,7 @@ at every point of $U$.
 
 \subsection{\zcmd{smoothR}}
 
-A function is said to be smooth if it possesses continuous derivatives of all orders.
+A function is said to be {\it smooth} if it possesses continuous derivatives of all orders.
 Let $x$ be a real number.
 Let $\smoothR(x)$ denote the set of all functions that are smooth at $x$.
 
@@ -1041,24 +1426,69 @@ Let $\smoothPR(U)$ denote the set of all functions on $U$ that are smooth at eve
 \newcommand{\Rinf}{\R^\infty}
 \newcommand{\Rtuples}{\R}
 
+% the zero n-tuple
+\newcommand{\zeroRn}{\mathbf{0}}
+
+% the projection function
+\newcommand{\piR}{\pi}
+
 \newcommand{\smulR}{\mathbin{*}}
 %%inop \smulR 4
+
+% the set of pairs of equal length tuples
+\newcommand{\Rdelta}{\R^\Delta}
 
 \newcommand{\vaddR}{\mathbin{+}}
 \newcommand{\vsubR}{\mathbin{-}}
 %%inop \vaddR \vsubR 3
 
+% the abstract zero vector
+\newcommand{\zeroV}{\mathbf{0}}
+
+% the abstract vector addition and subtraction operators
+\newcommand{\addV}{\mathbin{+}}
+\newcommand{\subV}{\mathbin{-}}
+%%inop \addV \subV 3
+
+% the abstract vector scalar multiplication operator
+\newcommand{\smulV}{\mathbin{*}}
+%%inop \smulV 4
+
 \newcommand{\dotR}{\mathbin{\cdot}}
 %%inop \dotR 4
 
 \DeclareMathOperator{\normR}{norm}
+\DeclareMathOperator{\ballRn}{ball}
+\DeclareMathOperator{\ballsRn}{balls}
+\DeclareMathOperator{\neighRn}{neigh}
+
+\newcommand{\tauRn}{\tau_\R}
+\newcommand{\RtauN}{\R_\tau}
+\newcommand{\DeltaR}{\Delta_\R}
+\DeclareMathOperator{\dimR}{dim}
+
 
 \DeclareMathOperator{\linR}{lin}
+\DeclareMathOperator{\In}{I}
+
+\DeclareMathOperator{\CzeroN}{C^0}
+\DeclareMathOperator{\CzeroPRn}{C^0}
+\DeclareMathOperator{\CzeroRn}{C^0}
+
+\DeclareMathOperator{\CzeroNN}{C^0}
+\DeclareMathOperator{\CzeroPRnN}{C^0}
+\DeclareMathOperator{\CzeroRnN}{C^0}
+
+\DeclareMathOperator{\smoothRn}{C^\infty}
+\DeclareMathOperator{\smoothRnm}{C^\infty}
 \documentclass[11pt, oneside]{article}
 
 \usepackage{../shared/preamble}
 \addbibresource{../shared/references.bib}
 
+\usepackage{../sets/sets}
+\usepackage{../groups/groups}
+\usepackage{../topological-spaces/topological-spaces}
 \usepackage{../real-numbers/real-numbers}
 \usepackage{vector-spaces}
 
@@ -1085,7 +1515,7 @@ They are the objects studied in linear algebra and are foundational to different
 \subsection{\zcmd{Rinf}}
 
 Let $n$ be a natural number.
-A finite sequence of $n$ real numbers is called a real $n$-tuple.
+A finite sequence of $n$ real numbers is called a {\it real $n$-tuple}.
 Let $\Rinf$ denote the set of all real $n$-tuples for any $n$.
 
 \begin{zed}
@@ -1102,21 +1532,106 @@ Let $\Rtuples(n)$ denote $\R^n$, the set of all $n$-tuples for some given $n$.
 	\t1	\Rtuples(n) = \{~ v: \Rinf | \# v = n ~\}
 \end{axdef}
 
-\subsubsection{\zcmd{pi}}
+\begin{remark}
+
+\begin{zed}
+	\Rinf = \bigcup \{~ n: \nat @ \Rtuples(n) ~\}
+\end{zed}
+
+\end{remark}
+
+\subsection{\zcmd{DeltaR}}
+
+Let $\DeltaR$ denote the family of subsets of $\Rinf$ such that all tuples in each subset have the same number of components.
+Such as subset is said to be {\it well-dimensioned}.
+
+\begin{axdef}
+	\DeltaR: \family~\Rinf
+\where
+	\DeltaR = \bigcup \{~ n: \nat @ \power(\Rtuples(n)) ~\}
+\end{axdef}
+
+\begin{example}
+The subset $\Rtuples(n)$ is well-dimensioned.
+
+\begin{zed}
+	\forall n: \nat @ \\
+	\t1	\Rtuples(n) \in \DeltaR
+\end{zed}
+
+\end{example}
+
+\subsection{\zcmd{dimR}}
+
+Let $\dimR(U)$ denote the number of components of the tuples in $U \in \DeltaR$.
+
+\begin{axdef}
+	\dimR: \DeltaR \fun \nat
+\where
+	\forall n: \nat @ \forall U: \power(\Rtuples(n)) @ \\
+	\t1	\dimR(U) = n
+\end{axdef}
+
+\begin{example}
+The dimension of $\Rtuples(n)$ is $n$.
+
+\begin{zed}
+	\forall n: \nat @ \\
+	\t1	\dimR(\Rtuples(n)) = n
+\end{zed}
+
+\end{example}
+
+\subsection{\zcmd{zeroRn}}
+
+Let $\zeroRn(n)$ denote the $n$-tuple consisting of all zeroes.
+
+\begin{axdef}
+	\zeroRn: \nat \fun \Rinf
+\where
+	\zeroRn(0) = \langle \rangle
+\also
+	\forall n: \nat_1 @ \\
+	\t1	\zeroRn(n) = (\lambda i: 1 \upto n @ \zeroR)
+\end{axdef}
+
+\begin{remark}
+The tuple $\zeroRn(n)$ is in $\Rtuples(n)$.
+
+\begin{zed}
+	\forall n: \nat @
+		\zeroRn(n) \in \Rtuples(n)
+\end{zed}
+
+\end{remark}
+
+\subsection{\zcmd{piR}}
 
 The real numbers that comprise an $n$-tuple are called its components.
 The real number $v(i)$ is the $i$-th component of the $n$-tuple $v$ where
 $1 \le i \le n$.
-Let $\pi(i)$ be the projection function that maps an $n$-tuple $v$ to its $i$-th component $v(i)$.
+Let $\piR(i)$ be the projection function that maps an $n$-tuple $v$ to its $i$-th component $v(i)$.
 
 \begin{axdef}
-	\pi: \nat_1 \fun \Rinf \pfun \R
+	\piR: \nat_1 \fun \Rinf \pfun \R
 \where
 	\forall i: \nat_1 @ \\
-	\t1	\pi(i) = (\lambda v: \Rinf | i \in \dom v @ v(i))
+	\t1	\piR(i) = (\lambda v: \Rinf | i \in \dom v @ v(i))
 \end{axdef}
 
+\begin{remark}
+Every component of $\zeroRn(n)$ is $\zeroR$.
+
+\begin{zed}
+	\forall n: \nat @ \forall i: 1 \upto n @ \\
+	\t1	\piR(i)(\zeroRn(n)) = \zeroR
+\end{zed}
+
+\end{remark}
+
 \section{Scalar Multiplication}
+
+\subsection{\zcmd{smulR}}
 
 Let $v$ be an $n$-tuple and let $c$ be a real number.
 Scalar multiplication of $v$ by $c$ is the $n$-tuple $c \smulR v$ defined by component-wise multiplication.
@@ -1132,16 +1647,36 @@ Scalar multiplication of $v$ by $c$ is the $n$-tuple $c \smulR v$ defined by com
 	\t2		(c \smulR v)(i) = c \mulR v(i)
 \end{axdef}
 
+\begin{remark}
+Scalar multiplication is associative in the sense that $(a \mulR b) \smulR v = a \smulR (b \smulR v)$
+
+\begin{zed}
+	\forall a, b: \R; v: \Rinf @ \\
+	\t1	(a \mulR b) \smulR v = a \smulR (b \smulR v)
+\end{zed}
+
+\end{remark}
+
 \section{Vector Addition and Subtraction}
+
+\subsection{\zcmd{Rdelta}}
+
+Let $\Rdelta$ denote the set of all pairs of tuples that have the same number of components.
+
+\begin{axdef}
+	\Rdelta: \Rinf \rel \Rinf
+\where
+	\Rdelta = \{~ v, w: \Rinf | \# v = \# w ~\}
+\end{axdef}
+
+\subsection{\zcmd{vaddR}}
 
 Let $v$ and $w$ be $n$-tuples.
 Vector addition of $v$ and $w$ is the $n$-tuple $v \vaddR w$ defined by component-wise addition.
 
 \begin{axdef}
-	\_ \vaddR \_: \Rinf \cross \Rinf \pfun \Rinf
+	\_ \vaddR \_: \Rdelta \fun \Rinf
 \where
-	\dom(\_ \vaddR \_) = \{~ v, w: \Rinf | \# v = \# w ~\}
-\also
 	\langle \rangle \vaddR \langle \rangle = \langle \rangle
 \also
 	\forall n: \nat_1 @ \\
@@ -1149,13 +1684,13 @@ Vector addition of $v$ and $w$ is the $n$-tuple $v \vaddR w$ defined by componen
 	\t2		(v \vaddR w)(i) = v(i) \addR w(i)
 \end{axdef}
 
+\subsection{\zcmd{vsubR}}
+
 Vector subtraction is defined similarly.
 
 \begin{axdef}
-	\_ \vsubR \_: \Rinf \cross \Rinf \pfun \Rinf
+	\_ \vsubR \_: \Rdelta \fun \Rinf
 \where
-	\dom(\_ \vsubR \_) = \{~ v, w: \Rinf | \# v = \# w ~\}
-\also
 	\langle \rangle \vsubR \langle \rangle = \langle \rangle
 \also
 	\forall n: \nat_1 @ \\
@@ -1166,10 +1701,67 @@ Vector subtraction is defined similarly.
 Each $\Rtuples(n)$ is a real vector space under the operations of scalar multiplication and vector addition
 defined above. 
 
+\section{Vector Spaces}
+
+The sets $\R^n$ with the operations of scalar multiplication and vector addition form vector spaces.
+In general, a vector space is a set of vectors endowed with scalar multiplication and vector addition operations that
+follow rules analogous to those for $\R^n$.
+
+\subsection{$VectorSpace$}
+
+Let $V$ be a set and let $VectorSpace[V]$ denote the set of all vector spaces whose vectors are $V$.
+
+\begin{schema}{VectorSpace}[V]
+	\zeroV: V \\
+	\_ \addV \_: V \cross V \fun V \\
+	\_ \smulV \_: \R \cross V \fun V
+\where
+	\forall v: V @ \\
+	\t1	\zeroV \addV v = v = v \addV \zeroV
+\also
+	\forall v, w: V @ \\
+	\t1	v \addV w = w \addV v
+\also
+	\forall u, v, w: V @ \\
+	\t1	u \addV (v \addV w) = (u \addV v) \addV w
+\also
+	\forall v: V @ \\
+	\t1	\zeroR \smulV v = \zeroV
+\also
+	\forall v: V @ \\
+	\t1	\oneR \smulV v = v
+\also
+	\forall a, b: \R; v: V @ \\
+	\t1	(a \addR b) \smulV v = (a \smulV v) \addV (b \smulV v)
+\also
+	\forall a, b: \R; v: V @ \\
+	\t1	(a \mulR b) \smulV v = a \smulV (b \smulV v)
+\also
+	\forall a: \R; v, w: V @ \\
+	\t1	a \smulV (v \addV w) = (a \smulV v) \addV (a \smulV w)
+\end{schema}
+\begin{itemize}
+	\item the zero vector $\zeroV$ is the identity element for vector addition
+	\item vector addition is commutative
+	\item vector addition is associative
+	\item scalar multiplication by $\zeroR$ gives the zero vector
+	\item scalar multiplication by $\oneR$ leaves any vector unchanged
+	\item real addition distributes over scalar multiplication
+	\item real multiplication associates over scalar multiplication
+	\item scalar multiplication distributes over vector addition
+\end{itemize}
+
+\subsection{$vectorSpace$}
+
+Let $vectorSpace[V]$ the set of all triples consisting of a zero vector, a vector addition operation, and a scalar multiplication operation
+that define a vector space whose vectors are $V$,
+
 \section{Linear Transformations}
 
+\subsection{Linear}
+
 Let $n$ and $m$ be natural numbers.
-A mapping $L$ from $\R^n$ to $\R^m$ is said to be a linear transformation if it preserves scalar multiplication and vector addition.
+A mapping $L$ from $\R^n$ to $\R^m$ is said to be a {\it linear transformation} if it preserves scalar multiplication and vector addition.
 \begin{schema}{Linear}
 	n, m: \nat \\
 	L: \Rinf \pfun \Rinf
@@ -1183,6 +1775,8 @@ A mapping $L$ from $\R^n$ to $\R^m$ is said to be a linear transformation if it 
 	\t1	L(v \vaddR w) = L(v) \vaddR L(w)
 \end{schema}
 
+\subsection{\zcmd{linR}}
+
 Define $\linR(n,m)$ to be the set of all linear transformations from $\R^n$ to $\R^m$.
 \begin{axdef}
 	\linR: \nat \cross \nat \fun \power(\Rinf \pfun \Rinf)
@@ -1191,15 +1785,36 @@ Define $\linR(n,m)$ to be the set of all linear transformations from $\R^n$ to $
 	\t1	\linR(n,m) = \{~ L: \Rinf \pfun \Rinf | Linear ~\}
 \end{axdef}
 
-\section{The Dot Product}
+\subsection{\zcmd{In}}
 
-The inner or dot product of $n$-tuples $v$ and $w$ is the real number $v \dotR w$ defined by the sum of the component-wise products.
+Let $\In(n)$ denote the identity function on $\Rtuples(n)$.
 
 \begin{axdef}
-	\_ \dotR \_ : \Rinf \cross \Rinf \pfun \R
+	\In: \nat \fun \Rinf \pfun \Rinf
 \where
-	\dom(\_ \dotR \_) = \{~ v, w: \Rinf | \# v = \# w ~\}
-\also
+	\forall n: \nat @ \\
+	\t1	\In(n) = \id(\Rtuples(n))
+\end{axdef}
+
+\begin{remark}
+The function $\In(n)$ is a linear transformation.
+
+\begin{zed}
+	\forall n: \nat @ \\
+	\t1	\In(n) \in \linR(n, n)
+\end{zed}
+
+\end{remark}
+
+\section{The Dot Product}
+
+\subsection{\zcmd{dotR}}
+
+The {\it inner} or {\it dot} product of $n$-tuples $v$ and $w$ is the real number $v \dotR w$ defined by the sum of the component-wise products.
+
+\begin{axdef}
+	\_ \dotR \_ : \Rdelta \fun \R
+\where
 	\langle \rangle \dotR \langle \rangle = \zeroR
 \also
 	\forall x, y: \R; v, w: \Rinf | \# v = \# w @ \\
@@ -1209,6 +1824,8 @@ The inner or dot product of $n$-tuples $v$ and $w$ is the real number $v \dotR w
 Each $\Rtuples(n)$ is a real inner product space under the operation of dot product defined above.
 
 \section{The Norm}
+
+\subsection{\zcmd{normR}}
 
 The norm $\norm{v}$ of the $n$-tuple $v$ is the positive square root of its dot product with itself.
 $$
@@ -1225,14 +1842,290 @@ Define $\normR(v)$ to be $\norm{v}$.
 
 The concepts of continuity, limits, and differentiability extend to functions between normed vector spaces such as $\R^n$.
 
+\subsection{\zcmd{ballRn}}
+
+Let $\ballRn(v,r)$ denote the open ball in $\Rtuples(n)$ of radius $r  \in \R$ centred at $v \in \Rtuples(n)$.
+
+\begin{axdef}
+	\ballRn: \Rinf \cross \R \fun \power \Rinf
+\where
+	\forall v: \Rinf; r: \R @ \LET n == \# v @ \\
+	\t1	\ballRn(v, r) = \{~ w: \Rtuples(n) | \normR(v \vsubR w) \ltR r ~\}
+\end{axdef}
+
+\subsection{\zcmd{ballsRn}}
+
+Let $\ballsRn(n)$ denote the family of all open balls in $\Rtuples(n)$.
+
+\begin{axdef}
+	\ballsRn: \nat \fun \family~\Rinf
+\where
+	\forall n: \nat @ \\
+	\t1	\ballsRn(n) =  \{~ v: \Rtuples(n); r: \R @ \ballRn(v,r) ~\}
+\end{axdef}
+
+\subsection{\zcmd{tauRn}}
+
+The usual topology on $\Rtuples(n)$ is the topology generated by the open balls in $\Rtuples(n)$.
+Let $\tauRn(n)$ denote the usual topology on $\Rtuples(n)$.
+
+\begin{axdef}
+	\tauRn: \nat \fun \family~\Rinf
+\where
+	\forall n: \nat @ \\
+	\t1	\tauRn(n) = topGen[\Rtuples(n)] (\ballsRn(n))
+\end{axdef}
+
+\begin{remark}
+
+If $n \in \nat$ then $\tauRn(n)$ is a topology on $\Rtuples(n)$.
+
+\begin{zed}
+	\forall n: \nat @ \tauRn(n) \in top[\Rtuples(n)]
+\end{zed}
+\end{remark}
+
+\subsection{\zcmd{neighRn}}
+
+Let $x \in \Rtuples(n)$. 
+Let $\neighRn(x)$ denote the set of all open sets $U$ in the usual topology $\tauRn(n)$ that contain $x$.
+Such a set $U$ is called a neighbourhood of $x$.
+
+\begin{axdef}
+	\neighRn: \Rinf \fun \family~\Rinf
+\where
+	\forall x: \Rinf @ \LET n == \# x @\\
+	\t1	\neighRn(x) = \{~ U: \tauRn(n) | x \in U ~\}
+\end{axdef}
+
+\begin{remark}
+
+\begin{zed}
+	\forall v: \Rinf @ \LET n == \# v @ \neighRn(v) \in \family(\Rtuples(n))
+\end{zed}
+
+\end{remark}
+
+\subsection{\zcmd{RtauN}}
+
+Let $\RtauN(n)$ denote the topological space defined by the usual topology on $\Rtuples(n)$.
+
+\begin{axdef}
+	\RtauN: \nat \fun topSpaces[\Rinf]
+\where
+	\forall n: \nat @ \\
+	\t1	\RtauN(n) = (\Rtuples(n), \tauRn(n))
+\end{axdef}
+
+\section{Continuity}
+
+\subsection{\zcmd{CzeroN}}
+
+A function $f$ from $\R^n$ to $\R$ is said to be continuous if it is continuous with respect to the usual topologies.
+Let $\CzeroN(n)$ denote the set of these continuous mappings.
+
+\begin{axdef}
+	\CzeroN: \nat \fun \power(\Rinf \pfun \R)
+\where
+	\forall n: \nat @ \\
+	\t1	\CzeroN(n) = \CzeroTT(\RtauN(n), \Rtau)
+\end{axdef}
+
+\subsection{\zcmd{CzeroPRn}}
+
+Let $U$ be a subset of $\R^n$.
+A function $f \in U \fun \R$ is said to be continuous if it is continuous with respect to the topology induced on $U$.
+Let $\CzeroPRn(U)$ denote the set of these continuous functions.
+
+\begin{axdef}
+	\CzeroPRn: \DeltaR \fun \power(\Rinf \pfun \R)
+\where
+	\forall U: \DeltaR @ \\
+	\t1	\LET n == \dimR U @ \\
+	\t2		\CzeroPRn(U) = \CzeroTT(\RtauN(n) \inducedTopSp U, \Rtau)
+\end{axdef}
+
+\subsection{\zcmd{CzeroRn}}
+
+A partial function $f$ from $\R^n$ to $\R$ is said to be continuous at $x \in \R^n$ if its domain contains a neighbourhood $U$ of $x$
+such that its restriction to $U$ is continuous on $U$.
+Let $\CzeroRn(x)$ denote the set of such functions.
+
+\begin{axdef}
+	\CzeroRn: \Rinf \fun \power(\Rinf \pfun \R)
+\where
+	\forall x: \Rinf @ \\
+	\t1	\LET n == \# x @ \\
+	\t2		\CzeroRn(x) = \{~ f: \Rtuples(n) \pfun \R | \exists U: \neighRn(x) | U \subseteq \dom f @ U \dres f \in \CzeroPRn(U) ~\}
+\end{axdef}
+
+\subsection{\zcmd{CzeroNN}}
+
+A mapping $f$ from $\Rtuples(n)$ to $\Rtuples(m)$ is said to be continuous if it is continuous with respect to the usual topologies.
+Let $\CzeroNN(n,m)$ denote the set of these continuous mappings.
+
+\begin{axdef}
+	\CzeroNN: \nat \cross \nat \fun \power(\Rinf \pfun \Rinf)
+\where
+	\forall n, m: \nat @ \\
+	\t1	\CzeroNN(n,m) = \CzeroTT(\RtauN(n), \RtauN(m))
+\end{axdef}
+
+\begin{example}
+The function $\In(n)$ is continuous.
+
+\begin{zed}
+	\forall n: \nat @ \\
+	\t1	\In(n) \in \CzeroNN(n,n)
+\end{zed}
+
+\begin{theorem}
+Linear functions are continuous.
+
+\begin{zed}
+	\forall n, m: \nat@ \\
+	\t1	\linR(n, m) \subseteq \CzeroNN(n,m)
+\end{zed}
+
+\end{theorem}
+
+\end{example}
+
+\subsection{\zcmd{CzeroPRnN}}
+
+Let $U$ be any subset of $\Rtuples(n)$.
+Let $\CzeroPRnN(U,m)$ denote the set of continuous mappings from the topology induced by $\RtauN(n)$ on $U$ to $\RtauN(m)$.
+
+\begin{axdef}
+	\CzeroPRnN: \DeltaR \cross \nat \fun \power (\Rinf \pfun \Rinf)
+\where
+	\forall n, m: \nat @ \\
+	\t1	\forall U: \DeltaR | \dimR(U) = n @ \\
+	\t2		\CzeroPRnN(U, m) = \CzeroTT(\RtauN(n) \inducedTopSp U, \RtauN(m))
+\end{axdef}
+
+\begin{remark}
+
+\begin{zed}
+	\forall n, m: \nat @ \\
+	\t1	\CzeroPRnN(\Rtuples(n),m) = \CzeroNN(n,m)
+\end{zed}
+
+\end{remark}
+
+\subsection{\zcmd{CzeroRnN}}
+
+Let $x \in \Rtuples(n)$ and let $f$ be a partial function from $\Rtuples(n)$ to $\Rtuples(m)$
+whose domain includes some neighbourhood $U$ of $x$ such that $f$ restricted to $U$ is continuous.
+In this case $f$ is said to be {\it continuous at $x$}.
+
+\begin{schema}{VectorContinuous}
+	n, m: \nat \\
+	f: \Rinf \pfun \Rinf \\
+	x: \Rinf
+\where
+	f \in \Rtuples(n) \pfun \Rtuples(m)
+\also
+	\exists U: \neighRn(x) | \\
+	\t1	U \subseteq \dom f @ \\
+	\t2		U \dres f \in \CzeroPRnN(U,m)
+\end{schema}
+
+Let $\CzeroRnN(x,m)$ denote the set of all partial functions $f$ from $\Rtuples(n)$ to $\Rtuples(m)$
+that are continuous at $x$.
+
+\begin{axdef}
+	\CzeroRnN: \Rinf \cross \nat \fun \power (\Rinf \pfun \Rinf)
+\where
+	\forall n, m: \nat @ \forall x: \Rtuples(n)  @ \\
+	\t1	\CzeroRnN(x, m) = \\
+	\t2		\{~ f: \Rtuples(n) \pfun \Rtuples(m) | VectorContinuous ~\}
+\end{axdef}
+
+\begin{example}
+The function $\In(n)$ is continuous at every point $x \in \Rtuples(n)$.
+
+\begin{zed}
+	\forall n: \nat @ \forall x: \Rtuples(n) @ \\
+	\t1	\In(n) \in \CzeroRnN(x, n)
+\end{zed}
+
+\end{example}
+
+\begin{theorem}
+Linear functions are continuous everywhere.
+
+\begin{zed}
+	\forall n, m: \nat @ \\
+	\t1	\forall x: \Rtuples(n); L: \linR(n,m) @ \\
+	\t2		L \in \CzeroRnN(x, m)
+\end{zed}
+
+\end{theorem}
+
+
 \section{Differentiability}
 
-Let $f: \R^n \fun \R^m$ and let $x \in \R^n$.
-Then $f$ is differentiable at $x$ if there exists a linear transformation $L: \R^n \fun \R^m$
-such that $f$ is approximately linear very near $x$.
+Let $x \in \R^n$ and let $f: \R^n \pfun \R^m$ be continuous at $x$.
+Then $f$ is said to be {\it differentiable at $x$} if there exists a linear transformation $L: \R^n \fun \R^m$
+such that $f(x + h) - f(x)$ is approximately linear in $h$ for very small $h$.
 $$
-f(x + h) \approx f(x) + L(h) \quad \text{when} \quad \norm{h} \approx 0
-$$ 
+f(x + h) - f(x) \approx  L(h) + O(h^2) \quad \text{when} \quad \norm{h} \approx 0
+$$
+
+This condition can be written as a limit.
+$$
+\lim_{h \to 0} \frac{\norm{f(x+h) - f(x) - L(h)}}{\norm{h}} = 0
+$$
+
+\subsection{$diffQuot$}
+
+The limit exists when the following difference quotient function $q: \R^n \pfun \R$ is continuous at $0$.
+$$
+q(h) = 
+\begin{cases}
+	\frac{\norm{f(x+h) - f(x) - L(h)}}{\norm{h}}	&	\text{if } h \neq 0\\
+	0								&	\text{otherwise}
+\end{cases}
+$$
+
+\begin{schema}{DifferenceQuotient}
+	VectorContinuous \\
+	L: \Rinf \pfun \Rinf \\
+	q: \Rinf \pfun \R
+\where
+	L \in \linR(n, m)
+\also
+	\dom q = \{~ h: \Rtuples(n) | x \vaddR h \in \dom f ~\}
+\also
+	\forall h: \dom q | h \neq \zeroRn(n) @ \\
+	\t1	q(h) = \normR(f(x \vaddR h) \vsubR f(x) \vsubR L(h)) \divR \normR(h)
+\also
+	q(\zeroRn(n)) = \zeroR
+\end{schema}
+
+The function $f$ is differentiable at $x$ when there exists a linear transformation $L$ such that the difference quotient $q$ is
+continuous at $0$.
+
+\begin{schema}{VectorDifferentiable}
+	DifferenceQuotient
+\where
+	q \in \CzeroRn(\zeroRn(n))
+\end{schema}
+
+Clearly $q$ is uniquely determined by $f$, $x$, and $L$.
+Let $diffQuot(f,x,L)$ denote the difference quotient.
+
+\begin{axdef}
+	diffQuot: (\Rinf \pfun \Rinf) \cross \Rinf \cross (\Rinf \pfun \Rinf) \pfun (\Rinf \pfun \R)
+\where
+	diffQuot = \{~ VectorDifferentiable @ (f, x, L) \mapsto q ~\}
+\end{axdef}
+
+
+
+
+Let $\smoothRnm(x,m)$ denote the set of all functions $f \in \Rtuples(n) \pfun \Rtuples(m)$ that are smooth at $x \in \Rtuples(n)$.
 
 \printbibliography
 
@@ -1242,8 +2135,3 @@ $$
 \newcommand{\Stwo}{S^2}
 \newcommand{\Sthree}{S^3}
 \newcommand{\Sn}{S^n}
-
-\newcommand{\family}{\mathcal{F}}
-%%pregen \family
-
-\newcommand{\tauR}{\tau_\R}
