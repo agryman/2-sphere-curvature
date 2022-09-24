@@ -3,46 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="82c0bf44-ae61-4473-a000-ce8a864ba31d" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/2-sphere-curvature.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/2-sphere-curvature.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/2-sphere-curvature.prelude" beforeDir="false" afterPath="$PROJECT_DIR$/2-sphere-curvature.prelude" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/2-sphere-curvature.sh" beforeDir="false" afterPath="$PROJECT_DIR$/2-sphere-curvature.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/2-sphere-curvature.tex" beforeDir="false" afterPath="$PROJECT_DIR$/2-sphere-curvature.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/formal-specifications/formal-specifications.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/formal-specifications/formal-specifications.prelude" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/formal-specifications/formal-specifications.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/formal-specifications/formal-specifications.sty" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/formal-specifications/formal-specifications.tex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/groups/groups.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/groups/groups.prelude" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/groups/groups.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/groups/groups.sty" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/groups/groups.tex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/manifolds/manifolds.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/manifolds/manifolds.tex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/real-numbers/real-numbers.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/real-numbers/real-numbers.prelude" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/real-numbers/real-numbers.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/real-numbers/real-numbers.sty" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/real-numbers/real-numbers.tex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sets/sets.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sets/sets.prelude" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sets/sets.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sets/sets.sty" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sets/sets.tex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shared/fuzzlib" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shared/preamble.sty" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shared/references.bib" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/topological-spaces/topological-spaces.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/topological-spaces/topological-spaces.prelude" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/topological-spaces/topological-spaces.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/topological-spaces/topological-spaces.sty" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/topological-spaces/topological-spaces.tex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/type-check-all.sh" beforeDir="false" afterPath="$PROJECT_DIR$/type-check-all.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vector-spaces/vector-spaces.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vector-spaces/vector-spaces.prelude" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vector-spaces/vector-spaces.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vector-spaces/vector-spaces.sty" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vector-spaces/vector-spaces.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/2-sphere-curvature.pdf" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -295,7 +256,7 @@
       <workItem from="1541269895446" duration="17000" />
       <workItem from="1541269929753" duration="240000" />
       <workItem from="1541277610219" duration="610000" />
-      <workItem from="1588170835879" duration="3693000" />
+      <workItem from="1588170835879" duration="4412000" />
     </task>
     <servers />
   </component>
